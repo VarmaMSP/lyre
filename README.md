@@ -1,6 +1,6 @@
-<p align="center"><img width=25% src="https://raw.githubusercontent.com/VarmaMSP/lyre/master/static/github/lyre.jpg?token=AEN7WJX5EG5EHF64KWC7LBC6JEZBQ"></p>
-<p align="center">L Y R E</p>
-
+<p align="center"><img width=25% src="https://library.kissclipart.com/20180831/hq/kissclipart-clip-art-harp-clipart-harp-clip-art-b95815fe4f2fb56f.jpg"></p>
+<h1 align="center">L Y R E</h1>
+<h4 align="center">Phenopod's Frontend / Web Server</h4>
 
 #### Build Instructions
 
