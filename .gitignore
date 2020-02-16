@@ -1,0 +1,9 @@
+dump.rdb
+
+logs/
+/ui-server/next/
+/ui-server/dist/
+/ui-server/node_modules/
+/ui-server/components/icons/
+
+/deployment/hosts/upcloud.yml
