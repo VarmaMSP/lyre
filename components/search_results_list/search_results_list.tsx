@@ -138,7 +138,7 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
         <div className="text-lg font-semibold my-3">Episodes</div>
         {episodeIds.map((id) => (
           <div key={id} className="mb-6">
-            <EpisodePreview episodeId={id} showHighlights />
+            <EpisodePreview episodeId={id} showHighlights small />
           </div>
         ))}
 

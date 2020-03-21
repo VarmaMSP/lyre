@@ -1,7 +1,7 @@
 import ButtonShowMore from 'components/button_show_more'
 import EpisodePreview from 'components/episode_preview'
-import React, { useEffect } from 'react'
 import { Episode, Podcast } from 'models'
+import React, { useEffect } from 'react'
 
 export interface StateToProps {
   isUserSignedIn: boolean
@@ -43,7 +43,7 @@ const ListEpisodes: React.SFC<Props> = ({
     <>
       {episodes.map((episode) => (
         <div key={episode.id} className="mb-4">
-          <EpisodePreview episodeId={episode.id} small showIcon />
+          <EpisodePreview episodeId={episode.id} small />
         </div>
       ))}
       {episodes.length < podcast.totalEpisodes && !receivedAll && (
