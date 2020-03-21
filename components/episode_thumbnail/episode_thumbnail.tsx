@@ -76,13 +76,10 @@ const EpisodeThumbnail: React.FC<Props> = ({
             style={{ background: 'rgba(0, 0, 0, 0.6)' }}
           >
             <PlayIcon
-              className={classnames(
-                'w-7 h-7 ml-2 md:ml-3 fill-current text-white',
-                {
-                  'md:w-8 md:h-8': small,
-                  'md:w-12 md:h-12': large,
-                },
-              )}
+              className={classnames('w-7 h-7 ml-2 fill-current text-white', {
+                'md:w-8 md:h-8 md:ml-2': small,
+                'md:w-12 md:h-12 md:ml-3': large,
+              })}
             />
           </div>
         </div>
