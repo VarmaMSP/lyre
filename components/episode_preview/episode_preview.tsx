@@ -36,26 +36,30 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
       </div>
 
       <div>
-        <EpisodeLink episodeUrlParam={episode.urlParam}>
-          <a
-            className={classnames(
-              'md:text-base text-sm text-black font-semibold tracking-wide line-clamp-2',
-              { 'mb-1': small },
-            )}
-            dangerouslySetInnerHTML={{
-              __html: showHighlights
-                ? episodeSearchResult.title
-                : episode.title,
-            }}
-          />
-        </EpisodeLink>
+        <div
+          className={classnames(
+            'md:text-base text-sm text-black font-semibold tracking-wide line-clamp-2',
+            { 'mb-1': dense },
+          )}
+        >
+          <EpisodeLink episodeUrlParam={episode.urlParam}>
+            <a
+              className="hover:text-blue-700"
+              dangerouslySetInnerHTML={{
+                __html: showHighlights
+                  ? episodeSearchResult.title
+                  : episode.title,
+              }}
+            />
+          </EpisodeLink>
+        </div>
 
         {!dense && (
-          <PodcastLink podcastUrlParam={podcast.urlParam}>
-            <a className="md:text-sm text-xs text-gray-900 font-medium mb-2 tracking-wide md:leading-normal leading-relaxed line-clamp-1">
-              {podcast.title}
-            </a>
-          </PodcastLink>
+          <div className="md:text-sm text-xs text-gray-900 font-medium mb-2 tracking-wide md:leading-normal leading-relaxed line-clamp-1">
+            <PodcastLink podcastUrlParam={podcast.urlParam}>
+              <a className="hover:text-blue-700">{podcast.title}</a>
+            </PodcastLink>
+          </div>
         )}
 
         <div
@@ -67,7 +71,7 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
           )} ago`}</span>
           <span className="mx-2 text-black font-extrabold">&middot;</span>
           <span
-            className="text-xs text-gray-800"
+            className="text-xs text-gray-900"
             style={{ fontWeight: 450 }}
             dangerouslySetInnerHTML={{
               __html: showHighlights

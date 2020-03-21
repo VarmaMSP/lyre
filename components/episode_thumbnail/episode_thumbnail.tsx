@@ -79,7 +79,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
               className={classnames(
                 'w-7 h-7 ml-2 md:ml-3 fill-current text-white',
                 {
-                  'md:w-8 md:h-8': small,
+                  'md:w-7 md:h-7': small,
                   'md:w-12 md:h-12': large,
                 },
               )}
