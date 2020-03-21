@@ -43,7 +43,7 @@ const ListEpisodes: React.SFC<Props> = ({
     <>
       {episodes.map((episode) => (
         <div key={episode.id} className="mb-4">
-          <EpisodePreview episodeId={episode.id} small />
+          <EpisodePreview episodeId={episode.id} small dense />
         </div>
       ))}
       {episodes.length < podcast.totalEpisodes && !receivedAll && (

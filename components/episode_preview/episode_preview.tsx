@@ -15,6 +15,8 @@ export interface StateToProps {
 export interface OwnProps {
   episodeId: string
   small?: boolean
+  large?: boolean
+  dense?: boolean
   showHighlights?: boolean
 }
 
@@ -23,12 +25,14 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
   podcast,
   episodeSearchResult,
   small = false,
+  large = false,
+  dense = false,
   showHighlights = false,
 }) => {
   return (
     <div className="episode-preview flex md:px-1 py-4 md:hover:bg-gray-100 rounded-lg">
       <div className="flex-none md:mr-4 mr-3">
-        <EpisodeThumbnail episodeId={episode.id} small={small} />
+        <EpisodeThumbnail episodeId={episode.id} small={small} large={large} />
       </div>
 
       <div>
@@ -46,7 +50,7 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
           />
         </EpisodeLink>
 
-        {!small && (
+        {!dense && (
           <PodcastLink podcastUrlParam={podcast.urlParam}>
             <a className="md:text-sm text-xs text-gray-900 font-medium mb-2 tracking-wide md:leading-normal leading-relaxed line-clamp-1">
               {podcast.title}
