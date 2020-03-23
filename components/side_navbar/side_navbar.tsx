@@ -17,26 +17,26 @@ const NavbarSide: React.SFC<StateToProps> = ({ userSignedIn }) => {
   const currentUrlPath = useRouter().asPath
 
   return (
-    <div className="fixed left-0 top-0 md:flex hidden flex-col justify-between h-screen w-64 pl-4 pr-2 bg-white">
+    <div className="fixed left-0 top-0 md:flex hidden flex-col justify-between h-screen w-64 bg-gray-100">
       <div>
         <LogoIcon className="w-14 h-14 mx-auto mt-2 mb-3" />
         <div className="mb-6">
           <SearchBar />
         </div>
         <ul className="mb-10">
-          <li className="h-10">
+          <li className="h-10 px-3">
             <MenuItem icon="home" name="home" href="/" />
           </li>
-          <li className="h-10">
+          <li className="h-10 px-3">
             <MenuItem icon="explore" name="explore" href="/explore" />
           </li>
-          <li className="h-10">
+          <li className="h-10 px-3">
             <MenuItem icon="heart" name="subscriptions" href="/subscriptions" />
           </li>
-          <li className="h-10">
+          <li className="h-10 px-3">
             <MenuItem icon="history" name="history" href="/history" />
           </li>
-          <li className="h-10">
+          <li className="h-10 px-3">
             <MenuItem icon="playlist" name="playlists" href="/playlists" />
           </li>
         </ul>
@@ -47,7 +47,7 @@ const NavbarSide: React.SFC<StateToProps> = ({ userSignedIn }) => {
           </div>
         )}
       </div>
-      <div className="px-2 py-6">
+      <div className="px-6 pt-6 pb-3">
         <About />
       </div>
     </div>

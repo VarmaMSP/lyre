@@ -18,10 +18,10 @@ const MenuItem: React.SFC<Props> = ({ icon, name, href }) => {
     <Link href={href} scroll={false}>
       <a
         className={classnames(
-          'flex items-center w-full h-full px-4 my-3 cursor-pointer rounded-full',
+          'flex items-center w-full h-full px-7 my-3 cursor-pointer rounded-full',
           {
             'text-gray-800 hover:bg-gray-200': href !== currentUrlPath,
-            'text-red-600 bg-red-100 rounded-full': href === currentUrlPath,
+            'text-gray-800 bg-gray-300': href === currentUrlPath,
           },
         )}
       >

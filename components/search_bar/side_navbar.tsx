@@ -32,10 +32,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
   )
 
   return (
-    <>
+    <div className="px-4">
       <form
         ref={formRef}
-        className="relative flex items-center px-2 py-1"
+        className="relative flex items-center"
         onSubmit={(e: React.SyntheticEvent<HTMLFormElement>) => {
           if (!!formRef.current) {
             Array.from(formRef.current.children).map((c: any) => c.blur())
@@ -44,13 +44,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
         }}
       >
         <ButtonWithIcon
-          className="absolute inset-y-0 right-0 w-4 h-auto mr-4 text-gray-700"
+          className="absolute inset-y-0 right-0 w-4 h-auto mr-2 text-gray-600"
           icon="search"
           onClick={() => handleTextSubmit()}
         />
         <input
           className={classnames(
-            'w-full h-8 pl-2 pr-6 py-1 text-gray-900 tracking-wide placeholder-gray-700 bg-white border border-gray-600 rounded-lg',
+            'w-full h-9 pl-2 pr-6 py-1 text-gray-900 tracking-wide placeholder-gray-800 bg-white border border-gray-400 rounded-lg',
             'appearance-none focus:outline-none focus:border-2 focus:border-blue-500',
           )}
           type="text"
@@ -77,7 +77,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           </div>
         </Portal>
       )}
-    </>
+    </div>
   )
 }
 

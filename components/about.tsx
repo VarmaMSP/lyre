@@ -3,8 +3,8 @@ import React from 'react'
 
 const About: React.FC<{}> = () => {
   return (
-    <div className="text-sm text-gray-800">
-      <p className="leading-relaxed tracking-wide">
+    <div className="text-xs text-gray-800">
+      <p className="tracking-wide">
         <Link href="/about" prefetch={false}>
           <a className="cursor-pointer">{'about'}</a>
         </Link>{' '}
@@ -20,13 +20,9 @@ const About: React.FC<{}> = () => {
         <span className="font-extrabold">&middot;</span>{' '}
         <a href="https://twitter.com/phenopod" target="_blank">
           {'twitter'}
-        </a>{' '}
-        <span className="font-extrabold">&middot;</span>{' '}
-        <a href="https://www.reddit.com/r/phenopod/" target="_blank">
-          {'reddit'}
         </a>
       </p>
-      <a href="mailto:hello@phenopod.com" className="font-light tracking-wide">
+      <a href="mailto:hello@phenopod.com" className="font-light tracking-wider">
         {'hello@phenopod.com'}
       </a>
     </div>
