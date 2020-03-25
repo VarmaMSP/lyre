@@ -51,10 +51,11 @@ const HistoryFeed: React.FC<StateToProps & DispatchToProps> = ({
         {'History'}
       </h1>
       <hr className="mb-3" />
+
       {/* Feed */}
       {history.map((episode) => (
         <div key={episode.id} className="mb-6">
-          <EpisodePreview episodeId={episode.id} small />
+          <EpisodePreview episodeId={episode.id} t="HISTORY" small />
         </div>
       ))}
 

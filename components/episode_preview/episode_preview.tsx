@@ -18,6 +18,7 @@ export interface OwnProps {
   large?: boolean
   dense?: boolean
   showHighlights?: boolean
+  t?: 'NORMAL' | 'HISTORY'
 }
 
 const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
@@ -28,6 +29,7 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
   large = false,
   dense = false,
   showHighlights = false,
+  t = 'NORMAL',
 }) => {
   return (
     <div className="episode-preview flex md:px-1 py-4 md:hover:bg-gray-100 rounded-lg">
@@ -66,9 +68,17 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
           className="text-xs md:break-normal break-all tracking-normal leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
           style={{ hyphens: 'auto' }}
         >
-          <span className="text-gray-700 font-medium">{`${formatDistanceToNow(
-            parseISO(episode.pubDate),
-          )} ago`}</span>
+          {t == 'NORMAL' && (
+            <span className="text-gray-700 font-medium">{`${formatDistanceToNow(
+              parseISO(episode.pubDate),
+            )} ago`}</span>
+          )}
+          {t == 'HISTORY' && (
+            <span className="text-gray-700 font-medium">{`${formatDistanceToNow(
+              parseISO(episode.lastPlayedAt),
+            )} ago`}</span>
+          )}
+
           <span className="mx-2 text-black font-extrabold">&middot;</span>
           <span
             className="text-xs text-gray-800"

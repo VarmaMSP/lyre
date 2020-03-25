@@ -3,7 +3,7 @@ import { getEpisodeById } from 'selectors/entities/episodes'
 import { getPodcastById } from 'selectors/entities/podcasts'
 import { makeGetEpisodeSearchResultById } from 'selectors/entities/search_results'
 import { AppState } from 'store'
-import EpisodeListItem, { OwnProps, StateToProps } from './episode_preview'
+import EpisodePreview, { OwnProps, StateToProps } from './episode_preview'
 
 function makeMapStateToProps() {
   const getEpisodeSearchResultById = makeGetEpisodeSearchResultById()
@@ -19,4 +19,4 @@ function makeMapStateToProps() {
 
 export default connect<StateToProps, {}, OwnProps, AppState>(
   makeMapStateToProps(),
-)(EpisodeListItem)
+)(EpisodePreview)
