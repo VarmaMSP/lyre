@@ -24,6 +24,14 @@ export function getPodcastPageData(podcastUrlParam: string) {
         order: 'pub_date_desc',
         page: 0,
       })
+
+      if (episodes.length < 15) {
+        dispatch({
+          type: T.PODCAST_EPISODES_LIST_RECEIVED_ALL,
+          podcastId: podcasts[0].id,
+          order: 'pub_date_desc',
+        })
+      }
     },
   )
 }
@@ -57,7 +65,7 @@ export function getPodcastEpisodes(
         podcastId: podcastId,
         episodeIds: episodes.map((x) => x.id),
         order: order,
-        page: Math.floor(offset / 10),
+        page: Math.floor(offset / limit),
       })
 
       if (episodes.length < limit) {

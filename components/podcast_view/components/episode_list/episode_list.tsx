@@ -24,7 +24,6 @@ interface Props extends StateToProps, DispatchToProps, OwnProps {}
 
 const ListEpisodes: React.SFC<Props> = ({
   isUserSignedIn,
-  podcast,
   episodes,
   loadPlaybacks,
   loadEpisodes,
@@ -45,10 +44,10 @@ const ListEpisodes: React.SFC<Props> = ({
     loadPlaybacks(episodes.map((e) => e.id))
   }, [isUserSignedIn])
 
-  receivedAll = receivedAll && episodes.length == podcast.totalEpisodes
+  // receivedAll = receivedAll && episodes.length >= podcast.totalEpisodes
 
   return (
-    <>
+    <div>
       {episodes.map((episode) => (
         <div key={episode.id} className="mb-4">
           <EpisodePreview episodeId={episode.id} small dense />
@@ -71,7 +70,7 @@ const ListEpisodes: React.SFC<Props> = ({
           {'------- END -------'}
         </div>
       )}
-    </>
+    </div>
   )
 }
 
