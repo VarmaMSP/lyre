@@ -65,7 +65,7 @@ export function getPodcastEpisodes(
         podcastId: podcastId,
         episodeIds: episodes.map((x) => x.id),
         order: order,
-        page: Math.floor(offset / limit),
+        page: Math.floor(offset - 15 / limit) + 1,
       })
 
       if (episodes.length < limit) {

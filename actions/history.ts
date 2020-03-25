@@ -1,5 +1,5 @@
-import { doFetch } from 'utils/fetch'
 import * as T from 'types/actions'
+import { doFetch } from 'utils/fetch'
 import * as RequestId from 'utils/request_id'
 import { qs } from 'utils/utils'
 import { requestAction } from './utils'
@@ -44,7 +44,7 @@ export function getHistoryFeed(offset: number, limit: number) {
       dispatch({ type: T.EPISODE_ADD, episodes })
       dispatch({
         type: T.HISTORY_FEED_LOAD_PAGE,
-        page: Math.floor(offset / 10),
+        page: Math.floor(offset - 15 / limit) + 1,
         episodeIds: episodes.map((x) => x.id),
       })
 

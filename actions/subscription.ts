@@ -1,6 +1,6 @@
-import { doFetch } from 'utils/fetch'
 import { getPodcastById } from 'selectors/entities/podcasts'
 import * as T from 'types/actions'
+import { doFetch } from 'utils/fetch'
 import * as gtag from 'utils/gtag'
 import * as RequestId from 'utils/request_id'
 import { qs } from 'utils/utils'
@@ -46,7 +46,7 @@ export function getSubscriptionsFeed(offset: number, limit: number) {
 
       dispatch({
         type: T.SUBSCRIPTIONS_FEED_LOAD_PAGE,
-        page: Math.floor(offset / 10),
+        page: Math.floor(offset - 15 / limit) + 1,
         episodeIds: episodes.map((x) => x.id),
       })
 
