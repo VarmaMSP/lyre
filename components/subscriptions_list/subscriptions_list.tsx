@@ -1,6 +1,7 @@
 import { PodcastLink } from 'components/link'
-import React from 'react'
 import { Podcast } from 'models'
+import React from 'react'
+import Img from 'react-image'
 import { getImageUrl } from 'utils/dom'
 
 export interface StateToProps {
@@ -24,9 +25,15 @@ const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
               className="block mb-4 xl:w-1/5 md:w-1/4 w-1/5"
               style={{ paddingLeft: '2px', paddingRight: '2px' }}
             >
-              <img
+              <Img
                 className="w-full h-auto flex-none object-contain rounded-lg border cursor-pointer"
                 src={getImageUrl(podcast.urlParam)}
+                loader={
+                  <div
+                    className="flex-none bg-gray-300 rounded-lg"
+                    style={{ width: '100%', paddingTop: '100%' }}
+                  />
+                }
               />
             </a>
           </PodcastLink>
