@@ -64,7 +64,9 @@ const SubscriptionsFeed: React.SFC<StateToProps & DispatchToProps> = ({
 
       {/* finished Loading */}
       {receivedAll && (
-        <div className="w-full h-10 my-6 text-center">{'Thats all, Folks'}</div>
+        <div className="w-full h-10 my-6 text-center text-sm text-gray-800 tracking-wider">
+          {'------- END -------'}
+        </div>
       )}
     </div>
   )

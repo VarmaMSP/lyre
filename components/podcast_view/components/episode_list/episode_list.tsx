@@ -1,5 +1,5 @@
-import ButtonShowMore from 'components/button_show_more'
 import EpisodePreview from 'components/episode_preview'
+import useVisible from 'hooks/useVisible'
 import { Episode, Podcast } from 'models'
 import React, { useEffect } from 'react'
 
@@ -31,6 +31,12 @@ const ListEpisodes: React.SFC<Props> = ({
   receivedAll,
   isLoadingMore,
 }) => {
+  const [reference, isVisible] = useVisible()
+
+  useEffect(() => {
+    isVisible && loadEpisodes(episodes.length)
+  }, [isVisible])
+
   useEffect(() => {
     loadPlaybacks(episodes.map((e) => e.id))
   }, [])
@@ -39,6 +45,8 @@ const ListEpisodes: React.SFC<Props> = ({
     loadPlaybacks(episodes.map((e) => e.id))
   }, [isUserSignedIn])
 
+  receivedAll = receivedAll && episodes.length == podcast.totalEpisodes
+
   return (
     <>
       {episodes.map((episode) => (
@@ -46,14 +54,21 @@ const ListEpisodes: React.SFC<Props> = ({
           <EpisodePreview episodeId={episode.id} small dense />
         </div>
       ))}
-      {episodes.length < podcast.totalEpisodes && !receivedAll && (
-        <div className="w-full h-10 mx-auto my-6">
-          <ButtonShowMore
-            isLoading={isLoadingMore}
-            loadMore={() =>
-              episodes.length > 0 && loadEpisodes(episodes.length)
-            }
-          />
+
+      {/* Auto Load */}
+      {!receivedAll && !isLoadingMore && (
+        <div className="w-full h-10" ref={reference} />
+      )}
+
+      {/* Loader */}
+      {!receivedAll && isLoadingMore && (
+        <div className="spinner mx-auto my-8" />
+      )}
+
+      {/* finished Loading */}
+      {receivedAll && (
+        <div className="w-full h-10 my-6 text-center text-sm text-gray-800 tracking-wider">
+          {'------- END -------'}
         </div>
       )}
     </>
