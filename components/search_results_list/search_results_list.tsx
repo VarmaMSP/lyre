@@ -1,7 +1,7 @@
-import ButtonShowMore from 'components/button_show_more'
 import EpisodePreview from 'components/episode_preview'
 import { PodcastLink } from 'components/link'
 import PodcastPreview from 'components/podcast_preview'
+import useVisible from 'hooks/useVisible'
 import { Podcast } from 'models'
 import React, { useEffect } from 'react'
 import { SearchResultType, SearchSortBy } from 'types/search'
@@ -44,6 +44,24 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
   loadMore,
   loadPlaybacks,
 }) => {
+  const [reference, isVisible] = useVisible()
+
+  useEffect(() => {
+    if (!isVisible) {
+      return
+    }
+
+    if (resultType === 'podcast') {
+      loadMore(query, resultType, sortBy, podcastIds.length, 20)
+      return
+    }
+
+    if (resultType === 'episode') {
+      loadMore(query, resultType, sortBy, episodeIds.length, 20)
+      return
+    }
+  }, [isVisible])
+
   useEffect(() => {
     if (resultType === 'episode') {
       loadPlaybacks(episodeIds)
@@ -75,14 +93,20 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
           </div>
         ))}
 
-        {!receivedAll && (
-          <div className="w-full h-10 mx-auto my-6">
-            <ButtonShowMore
-              isLoading={isLoadingMore}
-              loadMore={() =>
-                loadMore(query, resultType, sortBy, podcastIds.length, 20)
-              }
-            />
+        {/* Auto Load */}
+        {!receivedAll && !isLoadingMore && (
+          <div className="w-full h-10" ref={reference} />
+        )}
+
+        {/* Loader */}
+        {!receivedAll && isLoadingMore && (
+          <div className="spinner mx-auto my-8" />
+        )}
+
+        {/* finished Loading */}
+        {receivedAll && (
+          <div className="w-full h-10 my-6 text-center text-sm text-gray-800 tracking-wider">
+            {'------- END -------'}
           </div>
         )}
       </div>
@@ -142,14 +166,20 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
           </div>
         ))}
 
-        {!receivedAll && (
-          <div className="w-full h-10 mx-auto my-6">
-            <ButtonShowMore
-              isLoading={isLoadingMore}
-              loadMore={() =>
-                loadMore(query, resultType, sortBy, episodeIds.length, 20)
-              }
-            />
+        {/* Auto Load */}
+        {!receivedAll && !isLoadingMore && (
+          <div className="w-full h-10" ref={reference} />
+        )}
+
+        {/* Loader */}
+        {!receivedAll && isLoadingMore && (
+          <div className="spinner mx-auto my-8" />
+        )}
+
+        {/* finished Loading */}
+        {receivedAll && (
+          <div className="w-full h-10 my-6 text-center text-sm text-gray-800 tracking-wider">
+            {'------- END -------'}
           </div>
         )}
       </div>
