@@ -87,7 +87,7 @@ function makeServePage(app: NextServer) {
         ctx.set({ 'Cache-Control': cacheControl })
       }
 
-      await app.render(ctx.req, ctx.res, page, (query && query(ctx)) || {})
+      await app.render(ctx.req, ctx.res, page, !!query ? query(ctx) : {})
       ctx.respond = false
     }
   }

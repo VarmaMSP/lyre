@@ -71,7 +71,7 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
           )} ago`}</span>
           <span className="mx-2 text-black font-extrabold">&middot;</span>
           <span
-            className="text-xs text-gray-900"
+            className="text-xs text-gray-800"
             style={{ fontWeight: 450 }}
             dangerouslySetInnerHTML={{
               __html: showHighlights

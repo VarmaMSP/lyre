@@ -90,7 +90,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
         {/* Duration */}
         <div
           className={classnames(
-            'absolute right-0 bottom-0 px-1 text-2xs font-semibold text-gray-100 leading-tight rounded',
+            'absolute right-0 bottom-0 px-1 text-2xs font-semibold text-gray-100 leading-tight tracking-wide rounded',
             {
               'md:text-2xs md:font-semibold': small,
               'md:text-xs md:font-bold': large,
@@ -102,13 +102,13 @@ const EpisodeThumbnail: React.FC<Props> = ({
         </div>
       </div>
 
+      {/* Progress Bar */}
       <div
-        className={classnames(
-          'relative w-full h-1 mt-2 bg-gray-400 rounded-full',
-          {
-            hidden: episode.lastPlayedAt === '',
-          },
-        )}
+        className={classnames('relative w-full h-1 rounded-full', {
+          'mt-1': small,
+          'mt-2': large,
+          'bg-gray-400': episode.lastPlayedAt !== '',
+        })}
       >
         <div
           className="absolute top-0 left-0 h-1 bg-red-700 rounded-full"
@@ -116,7 +116,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
             transition: 'ease-in 0.4s',
             width: `${episode.progress}%`,
           }}
-        ></div>
+        />
       </div>
     </div>
   )

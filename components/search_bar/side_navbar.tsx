@@ -54,7 +54,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             'appearance-none focus:outline-none focus:border-2 focus:border-blue-500',
           )}
           type="text"
-          placeholder="Search..."
+          placeholder="Search"
           value={searchText}
           onChange={handleTextChange}
           ref={reference.ref}
