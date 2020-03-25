@@ -27,16 +27,18 @@ const PodcastPreview: React.FC<StateToProps & OwnProps> = ({
       </div>
 
       <div>
-        <PodcastLink podcastUrlParam={podcast.urlParam}>
-          <a
-            className="md:text-base text-sm font-semibold tracking-wide line-clamp-2"
-            dangerouslySetInnerHTML={{
-              __html: showHighlights
-                ? podcastSearchResult.title
-                : podcast.title,
-            }}
-          />
-        </PodcastLink>
+        <div className="md:text-base text-sm text-black font-semibold tracking-wide line-clamp-2">
+          <PodcastLink podcastUrlParam={podcast.urlParam}>
+            <a
+              className="hover:text-blue-700"
+              dangerouslySetInnerHTML={{
+                __html: showHighlights
+                  ? podcastSearchResult.title
+                  : podcast.title,
+              }}
+            />
+          </PodcastLink>
+        </div>
 
         <div
           className="md:text-sm text-xs text-gray-900 font-medium mb-2 tracking-wide md:leading-normal leading-relaxed line-clamp-1"
