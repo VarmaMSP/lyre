@@ -31,6 +31,8 @@ export default withRedux(makeStore)(
       const { query, asPath: currentUrlPath, store } = ctx
       const { poppedEntry } = store.getState().history
 
+      store.dispatch({ type: T.HISTORY_CLEAR_POPPED_ENTRY })
+
       if (currentUrlPath !== poppedEntry.urlPath && Component.getInitialProps) {
         await Component.getInitialProps(ctx)
       }

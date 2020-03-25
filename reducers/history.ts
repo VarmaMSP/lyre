@@ -25,6 +25,9 @@ const poppedEntry: Reducer<HistoryEntry, T.AppActions> = (
     case T.HISTORY_POP_ENTRY:
       return action.entry
 
+    case T.HISTORY_CLEAR_POPPED_ENTRY:
+      return { urlPath: '', scrollY: 0 }
+
     default:
       return state
   }
