@@ -1,4 +1,5 @@
 import ButtonSubscribe from 'components/button_subscribe'
+import Img from 'components/common/img'
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
 import { Podcast } from 'models'
@@ -12,10 +13,10 @@ export interface OwnProps {
 const PodcastHeader: React.SFC<OwnProps> = ({ podcast }) => {
   return (
     <div className="flex">
-      <img
-        className="lg:h-36 h-24 lg:w-36 w-24 flex-none object-contain object-center rounded-lg border"
-        src={getImageUrl(podcast.urlParam)}
-      />
+      <div className="lg:h-36 lg:w-36 h-24 w-24 flex-none">
+        <Img src={getImageUrl(podcast.urlParam)} />
+      </div>
+
       <div className="flex flex-col flex-auto w-1/2 justify-between lg:px-5 px-3">
         <div className="w-full mb-3">
           <h2 className="md:text-xl text-lg text-black font-medium leading-snug line-clamp-2">

@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import Img from 'components/common/img'
 import { iconMap } from 'components/icon'
 import { SearchSuggestion } from 'models'
 import React, { useEffect } from 'react'
@@ -148,10 +149,10 @@ function renderItemSuggestion(
       onMouseDown={stopEventPropagation}
       onTouchStart={stopEventPropagation}
     >
-      <img
-        src={getImageUrl(s.i)}
-        className="flex-none w-12 h-12 mr-3 border rounded"
-      />
+      <div className="flex-none w-12 h-12 mr-3">
+        <Img src={getImageUrl(s.i)} className="rounded" />
+      </div>
+
       <div>
         <div
           className="text-base text-gray-900 line-clamp-1"

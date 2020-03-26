@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import Img from 'components/common/img'
 import { iconMap } from 'components/icon'
 import { Episode, Podcast } from 'models'
 import { getImageUrl } from 'utils/dom'
@@ -47,13 +48,9 @@ const EpisodeThumbnail: React.FC<Props> = ({
         }}
       >
         {/* Image */}
-        <img
-          className={classnames(
-            'absolute left-0 top-0 right-0 bottom-0 w-full h-full',
-            'object-contain rounded-lg cursor-default',
-          )}
-          src={getImageUrl(podcast.urlParam)}
-        />
+        <div className="absolute inset-0 w-full h-full">
+          <Img src={getImageUrl(podcast.urlParam)} />
+        </div>
 
         {/* Icon */}
         <div

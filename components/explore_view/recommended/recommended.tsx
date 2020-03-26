@@ -1,8 +1,8 @@
+import Img from 'components/common/img'
 import Grid from 'components/grid'
 import { PodcastLink } from 'components/link'
 import { Podcast } from 'models'
 import React from 'react'
-import Img from 'react-image'
 import { getImageUrl } from 'utils/dom'
 
 export interface StateToProps {
@@ -20,17 +20,8 @@ const Recommended: React.FC<StateToProps> = ({ podcasts }) => {
         {podcasts.map((p) => (
           <div key={p.id} className="flex-none px-1 mb-4">
             <PodcastLink podcastUrlParam={p.urlParam}>
-              <a>
-                <Img
-                  className="w-full h-auto mb-2 flex-none object-contain rounded-lg border"
-                  src={getImageUrl(p.urlParam)}
-                  loader={
-                    <div
-                      className="mb-2 bg-gray-300 rounded-lg"
-                      style={{ width: '100%', paddingTop: '100%' }}
-                    />
-                  }
-                />
+              <a className="block flex-none mb-2">
+                <Img src={getImageUrl(p.urlParam)} />
               </a>
             </PodcastLink>
             <PodcastLink podcastUrlParam={p.urlParam}>

@@ -1,3 +1,4 @@
+import Img from 'components/common/img'
 import EpisodePreview from 'components/episode_preview'
 import { PodcastLink } from 'components/link'
 import PodcastPreview from 'components/podcast_preview'
@@ -136,11 +137,8 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
                   className="flex-none md:w-28 w-22 mx-4 mt-3 mb-6"
                 >
                   <PodcastLink podcastUrlParam={p.urlParam}>
-                    <a>
-                      <img
-                        className="w-full h-auto mb-2 flex-none object-contain rounded-lg border"
-                        src={getImageUrl(p.urlParam)}
-                      />
+                    <a className="block mb-2">
+                      <Img src={getImageUrl(p.urlParam)} />
                     </a>
                   </PodcastLink>
                   <PodcastLink podcastUrlParam={p.urlParam}>
