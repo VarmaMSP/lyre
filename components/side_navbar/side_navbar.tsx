@@ -2,11 +2,9 @@ import About from 'components/about'
 import { iconMap } from 'components/icon'
 import SearchBar from 'components/search_bar/side_navbar'
 import SignInButton from 'components/sign_in_button'
-import { useRouter } from 'next/router'
 import React from 'react'
 import { ViewportSize } from 'types/app'
 import MenuItem from './components/menu_item'
-
 export interface StateToProps {
   userSignedIn: boolean
   viewportSize: ViewportSize
@@ -14,7 +12,6 @@ export interface StateToProps {
 
 const NavbarSide: React.SFC<StateToProps> = ({ userSignedIn }) => {
   const LogoIcon = iconMap['phenopod']
-  const currentUrlPath = useRouter().asPath
 
   return (
     <div className="fixed left-0 top-0 md:flex hidden flex-col justify-between h-screen w-64 bg-gray-100">
@@ -46,7 +43,7 @@ const NavbarSide: React.SFC<StateToProps> = ({ userSignedIn }) => {
           )}
         </ul>
 
-        {currentUrlPath !== '/' && !userSignedIn && (
+        {!userSignedIn && (
           <div className="h-10 px-8">
             <SignInButton />
           </div>

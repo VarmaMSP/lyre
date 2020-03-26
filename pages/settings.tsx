@@ -1,6 +1,7 @@
 import PageLayout from 'components/page_layout'
 import { SettingsPageSeo } from 'components/seo'
 import SettingsView from 'components/settings_view'
+import Router from 'next/router'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getIsUserSignedIn } from 'selectors/session'
@@ -11,13 +12,28 @@ interface StateToProps {
 }
 
 class SettingsPage extends Component<StateToProps> {
+  componentDidUpdate() {
+    this.redirect()
+  }
+
+  componentDidMount() {
+    this.redirect()
+  }
+
+  redirect = () => {
+    const { isUserSignedIn } = this.props
+    if (!isUserSignedIn) {
+      Router.replace('/')
+    }
+  }
+
   render() {
     const { isUserSignedIn } = this.props
 
     if (!isUserSignedIn) {
       return (
         <PageLayout>
-          <div>{'Please Sign In'}</div>
+          <div className="mt-64 mx-auto">{'Please Sign In'}</div>
         </PageLayout>
       )
     }
