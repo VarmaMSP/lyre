@@ -1,5 +1,5 @@
 type EpisodeType = 'TRAILER' | 'BONUS' | 'FULL'
-import { mergeNumber, mergeString } from 'utils/utils'
+import { mergeNumber, mergeString, parseDatetime } from 'utils/utils'
 
 export class Episode {
   id: string
@@ -48,7 +48,7 @@ export class Episode {
     this.title = j['title'] || ''
     this.summary = j['summary'] || ''
     this.mediaUrl = j['media_url'] || ''
-    this.pubDate = j['pub_date'] || ''
+    this.pubDate = parseDatetime(j['pub_date'] || '')
     this.description = j['description'] || ''
     this.duration = j['duration'] || 0
     this.explicit = j['explicit'] || false
@@ -56,6 +56,6 @@ export class Episode {
     this.season = j['season'] || 0
     this.type = j['type'] || 'FULL'
     this.progress = j['progress'] || 0
-    this.lastPlayedAt = j['last_played_at'] || ''
+    this.lastPlayedAt = parseDatetime(j['last_played_at'] || '')
   }
 }

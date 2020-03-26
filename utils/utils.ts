@@ -59,3 +59,7 @@ export function encodeQueryParam(s: string): string {
     .replace(/ /g, '+')
     .concat(s[s.length - 1] === ' ' ? '+' : '')
 }
+
+export function parseDatetime(s: string) {
+  return s === '' ? '' : `${s.replace(' ', 'T')}+00:00`
+}
