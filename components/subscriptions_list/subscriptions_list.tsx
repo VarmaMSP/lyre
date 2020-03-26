@@ -15,7 +15,7 @@ const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
 
   return (
     <div className="pt-2 rounded-xl bg-gray-200">
-      <h2 className="mb-2 px-3 text text-gray-900 tracking-wide">
+      <h2 className="mb-3 px-3 text text-gray-900 tracking-wide">
         {"You're subscribed to"}
       </h2>
       <div className="px-3 overflow-y-auto" style={{ height: '22rem' }}>

@@ -39,6 +39,11 @@ const NavbarSide: React.SFC<StateToProps> = ({ userSignedIn }) => {
           <li className="h-10 px-3">
             <MenuItem icon="playlist" name="playlists" href="/playlists" />
           </li>
+          {userSignedIn && (
+            <li className="h-10 px-3">
+              <MenuItem icon="settings" name="settings" href="/settings" />
+            </li>
+          )}
         </ul>
 
         {currentUrlPath !== '/' && !userSignedIn && (
