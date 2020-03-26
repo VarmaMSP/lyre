@@ -57,39 +57,33 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
         </div>
 
         {!dense && (
-          <div className="md:text-sm text-xs text-gray-900 font-medium mb-2 tracking-wide md:leading-normal leading-relaxed line-clamp-1">
+          <div className="mb-1 md:text-sm text-xs text-gray-900 font-medium tracking-wide md:leading-normal leading-relaxed line-clamp-1">
             <PodcastLink podcastUrlParam={podcast.urlParam}>
               <a className="hover:text-blue-700">{podcast.title}</a>
             </PodcastLink>
           </div>
         )}
 
-        <div
-          className="text-xs md:break-normal break-all tracking-normal leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
-          style={{ hyphens: 'auto' }}
-        >
-          {t == 'NORMAL' && (
-            <span className="text-gray-700 font-medium">{`${formatDistanceToNow(
+        <div className="mb-2 text-2xs text-gray-700 tracking-wide font-medium">
+          {t == 'NORMAL' &&
+            `published ${formatDistanceToNow(
               parseISO(episode.pubDate),
-            )} ago`}</span>
-          )}
-          {t == 'HISTORY' && (
-            <span className="text-gray-700 font-medium">{`${formatDistanceToNow(
+            )} ago`.replace('about ', '')}
+          {t == 'HISTORY' &&
+            `listened ${formatDistanceToNow(
               parseISO(episode.lastPlayedAt),
-            )} ago`}</span>
-          )}
-
-          <span className="mx-2 text-black font-extrabold">&middot;</span>
-          <span
-            className="text-xs text-gray-800"
-            style={{ fontWeight: 450 }}
-            dangerouslySetInnerHTML={{
-              __html: showHighlights
-                ? episodeSearchResult.description
-                : episode.summary,
-            }}
-          />
+            )} ago`.replace('about ', '')}
         </div>
+
+        <div
+          className="text-xs text-gray-800 font-medium md:break-normal break-all tracking-normal leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
+          style={{ hyphens: 'auto' }}
+          dangerouslySetInnerHTML={{
+            __html: showHighlights
+              ? episodeSearchResult.description
+              : episode.summary,
+          }}
+        />
       </div>
     </div>
   )
