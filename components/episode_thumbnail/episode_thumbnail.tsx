@@ -34,13 +34,10 @@ const EpisodeThumbnail: React.FC<Props> = ({
   return (
     <div>
       <div
-        className={classnames(
-          'relative w-22 h-22 rounded-lg border cursor-pointer',
-          {
-            'md:w-25 md:h-25': small,
-            'md:h-36 md:w-36': large,
-          },
-        )}
+        className={classnames('relative w-22 h-22 rounded-lg cursor-pointer', {
+          'md:w-25 md:h-25': small,
+          'md:h-36 md:w-36': large,
+        })}
         onClick={() => {
           episode.progress >= 95
             ? playEpisode(0)
@@ -48,9 +45,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
         }}
       >
         {/* Image */}
-        <div className="absolute inset-0 w-full h-full">
-          <Img src={getImageUrl(podcast.urlParam)} />
-        </div>
+        <Img src={getImageUrl(podcast.urlParam)} />
 
         {/* Icon */}
         <div
@@ -87,7 +82,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
         {/* Duration */}
         <div
           className={classnames(
-            'absolute right-0 bottom-0 px-1 text-2xs font-semibold text-gray-100 leading-tight tracking-wide rounded',
+            'absolute right-0 bottom-0 px-1 text-2xs font-semibold text-gray-100 leading-tight tracking-wide border-b border-r rounded',
             {
               'md:text-2xs md:font-semibold': small,
               'md:text-xs md:font-bold': large,
