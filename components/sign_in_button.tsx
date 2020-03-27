@@ -20,7 +20,7 @@ const ButtonSignin: React.SFC<DispatchToProps & OwnProps> = ({
   return (
     <button
       className={classnames(
-        'w-full h-full text-orange-700 tracking-wide border-2 border-orange-700 leading-sung rounded-lg',
+        'w-full h-full text-teal-800 tracking-wider bg-teal-300 leading-sung rounded-lg',
         'tracking-wide focus:outline-none focus:shadow-outline',
       )}
       onClick={showSignInModal}
@@ -30,8 +30,6 @@ const ButtonSignin: React.SFC<DispatchToProps & OwnProps> = ({
       ) : (
         <div className="text-sm font-bold">
           <span>{'SIGN IN'}</span>
-          <span className="font-normal mx-1">{'/'}</span>
-          <span>{'SIGN UP'}</span>
         </div>
       )}
     </button>

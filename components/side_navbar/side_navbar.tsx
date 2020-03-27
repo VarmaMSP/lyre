@@ -5,6 +5,7 @@ import SignInButton from 'components/sign_in_button'
 import React from 'react'
 import { ViewportSize } from 'types/app'
 import MenuItem from './components/menu_item'
+
 export interface StateToProps {
   userSignedIn: boolean
   viewportSize: ViewportSize
@@ -44,7 +45,7 @@ const NavbarSide: React.SFC<StateToProps> = ({ userSignedIn }) => {
         </ul>
 
         {!userSignedIn && (
-          <div className="h-10 px-8">
+          <div className="h-9 px-8">
             <SignInButton />
           </div>
         )}

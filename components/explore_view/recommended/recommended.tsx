@@ -21,7 +21,7 @@ const Recommended: React.FC<StateToProps> = ({ podcasts }) => {
         {podcasts.map((p) => (
           <div
             key={p.id}
-            className="flex-none px-2 py-2 mb-4 hover:bg-gray-100 rounded-lg"
+            className="flex-none p-1 md:p-2 mb-4 hover:bg-gray-100 rounded-lg"
           >
             <PodcastLink podcastUrlParam={p.urlParam}>
               <a className="block w-full h-full text-gray-900 hover:text-blue-700">
