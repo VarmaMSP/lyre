@@ -16,16 +16,37 @@
     width: 100%;
 }
 
-@media screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) {
     .page-layout {
-        padding: 0 1.5rem 6rem 18.5rem;
+        padding: 0 3.5rem 6rem 20.5rem;
     }
 
     .page-layout-split {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 0 1.5rem 8rem 18.5rem;
+        padding: 0 3.5rem 8rem 20.5rem;
+    }
+    
+    .page-layout-split .first {
+        width: 65%;
+    }
+    
+    .page-layout-split .second {
+        width: 31%;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .page-layout {
+        padding: 0 9.5rem 6rem 27.5rem ;
+    }
+
+    .page-layout-split {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 9.5rem 8rem 27.5rem;
     }
     
     .page-layout-split .first {
@@ -36,6 +57,4 @@
         width: 28%;
     }
 }
-
-
 
