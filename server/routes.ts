@@ -10,6 +10,9 @@ export function registerRoutes(app: NextServer, router: Router) {
   // Index page
   router.get('/', servePage('/', 'public,max-age=7200,must-revalidate'))
 
+  // Explore Page
+  router.get('/explore', (ctx) => ctx.redirect('/'))
+
   // Subscriptions Feed Page
   router.get(
     '/subscriptions',
