@@ -10,6 +10,7 @@ import { RequestActionTypes } from './request'
 import { SessionActionTypes } from './session'
 import { AudioPlayerActionTypes } from './ui/audio_player'
 import { HistoryFeedActionTypes } from './ui/history_feed'
+import { HomeActionTypes } from './ui/home'
 import { ModalManagerActionTypes } from './ui/modal_manager'
 import { PodcastEpisodesListActionTypes } from './ui/podcast_episodes_list'
 import { SearchBarActionTypes } from './ui/search_bar'
@@ -41,6 +42,7 @@ export type AppActions =
   | RequestActionTypes
   | CategoryActionTypes
   | ContinueAction
+  | HomeActionTypes
 
 export * from './entities/category'
 export * from './entities/curation'
@@ -55,6 +57,7 @@ export * from './request'
 export * from './session'
 export * from './ui/audio_player'
 export * from './ui/history_feed'
+export * from './ui/home'
 export * from './ui/modal_manager'
 export * from './ui/podcast_episodes_list'
 export * from './ui/search_bar'

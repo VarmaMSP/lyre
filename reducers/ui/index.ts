@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import audioPlayer from './audio_player'
 import historyFeed from './history_feed'
+import home from './home'
 import modalManager from './modal_manager'
 import podcastEpisodeList from './podcast_episode_list'
 import searchBar from './search_bar'
@@ -15,4 +16,5 @@ export default combineReducers({
   podcastEpisodeList,
   resultsList,
   searchBar,
+  home,
 })
