@@ -1,14 +1,23 @@
 import { connect } from 'react-redux'
+import { makeGetPrimaryCategories } from 'selectors/entities/categories'
 import { getIsUserSignedIn } from 'selectors/session'
+import { makeGetHomePageCurations } from 'selectors/ui/home'
 import { AppState } from 'store'
 import HomeView, { StateToProps } from './home_view'
 
-function mapStateToProps(state: AppState): StateToProps {
-  return {
-    isUserSignedIn: getIsUserSignedIn(state),
+function makeMapStateToProps() {
+  const getHomePageCurations = makeGetHomePageCurations()
+  const getPrimaryCategories = makeGetPrimaryCategories()
+
+  return (state: AppState): StateToProps => {
+    return {
+      isUserSignedIn: getIsUserSignedIn(state),
+      curations: getHomePageCurations(state),
+      categories: getPrimaryCategories(state),
+    }
   }
 }
 
-export default connect<StateToProps, {}, {}, AppState>(mapStateToProps)(
+export default connect<StateToProps, {}, {}, AppState>(makeMapStateToProps())(
   HomeView,
 )

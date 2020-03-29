@@ -20,15 +20,15 @@ const ButtonSignin: React.SFC<DispatchToProps & OwnProps> = ({
   return (
     <button
       className={classnames(
-        'w-full h-full text-teal-800 tracking-wider bg-teal-300 leading-sung rounded-lg',
+        'w-full h-full text-blue-900 tracking-wider bg-blue-200 border-2 border-blue-300 leading-sung rounded-lg',
         'tracking-wide focus:outline-none focus:shadow-outline',
       )}
       onClick={showSignInModal}
     >
       {small ? (
-        <p className="text-sm font-bold">{'SIGN IN'}</p>
+        <p className="text-sm font-semibold">{'SIGN IN'}</p>
       ) : (
-        <div className="text-sm font-bold">
+        <div className="text-sm font-semibold">
           <span>{'SIGN IN'}</span>
         </div>
       )}
