@@ -1,6 +1,7 @@
+import Img from 'components/common/img'
 import { PodcastLink } from 'components/link'
-import React from 'react'
 import { Category, Podcast } from 'models'
+import React from 'react'
 import { getImageUrl } from 'utils/dom'
 
 export interface StateToProps {
@@ -21,18 +22,21 @@ const ChartView: React.FC<StateToProps & OwnProps> = ({
         {category.name}
       </h1>
       <hr className="mb-3" />
-      <ol>
+      <div>
         {podcasts.map((p, i) => (
           <PodcastLink key={p.id} podcastUrlParam={p.urlParam}>
             <a className="block py-4 md:px-2 my-4 md:hover:bg-gray-100 rounded-lg">
-              <li className="flex">
-                <div className="md:block hidden flex-none w-6 ml-1 mr-4 pt-1 text-gray-700">
-                  {`${i + 1}.`}
+              <div className="flex">
+                <div className="relative md:w-28 md:h-28 w-20 h-20 md:mr-4 mr-3 flex-none">
+                  <Img src={getImageUrl(p.urlParam)} />
+                  <div
+                    className="absolute w-8 bottom-0 left-0 text-xs font-bold text-center text-gray-100 tracking-wide leading-relaxed rounded-bl-lg border-b border-l "
+                    style={{ background: 'rgba(0, 0, 0, 0.8)' }}
+                  >
+                    {i + 1}
+                  </div>
                 </div>
-                <img
-                  className="md:w-22 md:h-22 w-18 h-18 md:mr-4 mr-3 flex-none object-contain rounded-lg border"
-                  src={getImageUrl(p.urlParam)}
-                />
+
                 <div>
                   <div className="md:mb-0 mb-1 md:text-base text-sm font-medium tracking-wide line-clamp-1">
                     {p.title}
@@ -47,11 +51,11 @@ const ChartView: React.FC<StateToProps & OwnProps> = ({
                     {p.summary}
                   </div>
                 </div>
-              </li>
+              </div>
             </a>
           </PodcastLink>
         ))}
-      </ol>
+      </div>
     </div>
   )
 }
