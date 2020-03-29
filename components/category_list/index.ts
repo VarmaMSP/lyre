@@ -1,11 +1,20 @@
 import { connect } from 'react-redux'
-import { getAllCategories } from 'selectors/entities/categories'
+import {
+  makeGetPrimaryCategories,
+  makeGetSubCategories,
+} from 'selectors/entities/categories'
 import { AppState } from 'store'
 import CategoryList, { OwnProps, StateToProps } from './category_list'
 
-function mapStateToProps(state: AppState): StateToProps {
-  return {
-    categories: getAllCategories(state),
+function mapStateToProps() {
+  const getPrimaryCategories = makeGetPrimaryCategories()
+  const getSubCategories = makeGetSubCategories()
+
+  return (state: AppState, { activeCategoryId }: OwnProps): StateToProps => {
+    return {
+      categories: getPrimaryCategories(state),
+      subCategories: getSubCategories(state, activeCategoryId),
+    }
   }
 }
 
