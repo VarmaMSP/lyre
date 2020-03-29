@@ -45,7 +45,7 @@ const ChartView: React.FC<StateToProps & OwnProps> = ({
                     {p.author}
                   </div>
                   <div
-                    className="md:break-normal break-all md:text-xs text-2xs md:text-gray-700 text-gray-800 tracking-wide leading-snug md:line-clamp-2 line-clamp-3"
+                    className="md:break-normal break-all md:text-xs text-2xs md:text-gray-900 text-gray-900 tracking-wide leading-snug line-clamp-3"
                     style={{ hyphens: 'auto' }}
                   >
                     {p.summary}
