@@ -15,6 +15,7 @@ interface SuccessAction {
 interface FailureAction {
   type: typeof REQUEST_FAILURE
   requestId: string
+  message: string
 }
 
 export type RequestActionTypes =

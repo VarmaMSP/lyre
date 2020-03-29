@@ -1,6 +1,6 @@
+import { Category } from 'models'
 import { combineReducers, Reducer } from 'redux'
 import * as T from 'types/actions'
-import { Category } from 'models'
 
 const merge = (c1: Category, c2: Category): Category => ({
   id: c2.id,
@@ -17,7 +17,7 @@ const byId: Reducer<{ [categoryId: string]: Category }, T.AppActions> = (
   switch (action.type) {
     case T.CATEGORY_ADD:
       return action.categories.reduce<{ [categoryId: string]: Category }>(
-        (acc, c) => ({ ...acc, [c.id]: merge(acc[c.id] || {}, c)}),
+        (acc, c) => ({ ...acc, [c.id]: merge(acc[c.id] || {}, c) }),
         state,
       )
 
@@ -35,6 +35,28 @@ const byId: Reducer<{ [categoryId: string]: Category }, T.AppActions> = (
   }
 }
 
+const byParentId: Reducer<{ [categoryId: string]: string[] }, T.AppActions> = (
+  state = {},
+  action,
+) => {
+  switch (action.type) {
+    case T.CATEGORY_ADD:
+      return action.categories
+        .filter((c) => !!c.parentId)
+        .reduce<{ [categoryId: string]: string[] }>(
+          (acc, c) => ({
+            ...acc,
+            [c.parentId!]: [...(acc[c.parentId!] || []), c.id],
+          }),
+          state,
+        )
+
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   byId,
+  byParentId,
 })
