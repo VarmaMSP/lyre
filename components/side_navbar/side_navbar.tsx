@@ -21,12 +21,9 @@ const NavbarSide: React.SFC<StateToProps> = ({ userSignedIn }) => {
         <div className="mb-6">
           <SearchBar />
         </div>
-        <ul className="mb-10">
+        <ul className="mt-5 mb-20">
           <li className="h-10 px-3">
             <MenuItem icon="home" name="home" href="/" />
-          </li>
-          <li className="h-10 px-3">
-            <MenuItem icon="explore" name="explore" href="/explore" />
           </li>
           <li className="h-10 px-3">
             <MenuItem icon="heart" name="subscriptions" href="/subscriptions" />
