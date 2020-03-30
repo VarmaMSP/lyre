@@ -16,13 +16,28 @@ export interface AppContext extends App {
   }
 }
 
-//
-// types with phantom inputs to better type selectors and keep my sanity
-//
+// Phantom Types
+
+// For Entities
 export type $Id<_E> = string
+
+export type $HashId<_E> = string
 
 export type MapById<E> = { [id: string]: E }
 
 export type MapOneToOne<_E1, E2> = { [id: string]: E2 }
 
 export type MapOneToMany<_E1, E2> = { [id: string]: $Id<E2>[] }
+
+// For generic values
+export type Obj<_K, V> = {
+  [key: string]: V
+}
+
+export type Hash1<_T1> = string
+
+export type Hash2<_T1, _T2> = string
+
+export type Hash3<_T1, _T2, _T3> = string
+
+export type Hash4<_T1, _T2, _T3, _T4> = string
