@@ -40,8 +40,7 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
       <div>
         <div
           className={classnames(
-            'md:text-base text-sm text-black font-semibold tracking-wide line-clamp-2',
-            { 'mb-1': dense },
+            'mb-1 md:text-base text-sm text-black font-semibold tracking-wide leading-tight line-clamp-2',
           )}
         >
           <EpisodeLink episodeUrlParam={episode.urlParam}>

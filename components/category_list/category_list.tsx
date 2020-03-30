@@ -19,11 +19,11 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({
     <div>
       {subCategories.length > 0 && (
         <>
-          <h4 className="mb-2 tracking-wide">{'Sub Categories'}</h4>
+          <h4 className="mb-4 tracking-wide">{'Sub Categories'}</h4>
           <div className="flex flex-wrap mb-4">
             {subCategories.map((c) => (
               <ChartLink key={c.id} chartUrlParam={c.urlParam}>
-                <a className="block mx-1 my-2 px-3 text-2xs text-gray-900 tracking-wide leading-loose bg-blue-100 hover:bg-blue-200 border border-blue-600 rounded-full">
+                <a className="block mx-1 mb-3 px-3 text-2xs text-gray-900 tracking-wide leading-loose bg-blue-100 hover:bg-blue-200 border border-blue-600 rounded-full">
                   {c.name}
                 </a>
               </ChartLink>
@@ -33,11 +33,11 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({
       )}
 
       <div>
-        <h4 className="mb-2 tracking-wide">{'All Categories'}</h4>
+        <h4 className="mb-4 tracking-wide">{'All Categories'}</h4>
         <div className="flex flex-wrap mb-4">
           {categories.map((c) => (
             <ChartLink key={c.id} chartUrlParam={c.urlParam}>
-              <a className="block mx-1 my-2 px-3 text-2xs text-gray-900 tracking-wide leading-loose bg-green-100 hover:bg-green-200 border border-green-600 rounded-full">
+              <a className="block mx-1 mb-3 px-3 text-2xs text-gray-900 tracking-wide leading-loose bg-green-100 hover:bg-green-200 border border-green-600 rounded-full">
                 {c.name}
               </a>
             </ChartLink>
