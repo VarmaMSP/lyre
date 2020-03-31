@@ -1,47 +1,40 @@
 import { getEpisodePlaybacks } from 'actions/playback'
 import { getResults } from 'actions/results'
+import { EpisodeSearchResult, PodcastSearchResult } from 'models'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { getPodcastsByIds } from 'selectors/entities/podcasts'
+import { getByHashIds } from 'selectors/entities/search_results'
 import { getResultsStatus } from 'selectors/request'
 import { getIsUserSignedIn } from 'selectors/session'
-import { getText } from 'selectors/ui/search_bar'
 import {
-  getQuery,
-  getResultType,
-  getSortBy,
-  makeGetEpisodes,
-  makeGetPodcasts,
-  makeGetPodcastsBestMatch,
-} from 'selectors/ui/search_results_list'
+  getReceivedAll,
+  makeGetEpisodeHashIds,
+  makeGetPodcastHashIds,
+} from 'selectors/ui/global_search_results'
 import { AppState } from 'store'
 import { AppActions } from 'types/actions'
 import SearchResultsList, {
   DispatchToProps,
+  OwnProps,
   StateToProps,
 } from './search_results_list'
 
 function makeMapStateToProps() {
-  const getPodcasts = makeGetPodcasts()
-  const getPodcastsBestMatch = makeGetPodcastsBestMatch()
-  const getEpisodes = makeGetEpisodes()
+  const getPodcastHashIds = makeGetPodcastHashIds()
+  const getEpisodeHashIds = makeGetEpisodeHashIds()
 
-  return (state: AppState): StateToProps => {
-    const [podcastIds, receivedAll] = getPodcasts(state)
-    const [episodeIds, receivedAll_] = getEpisodes(state)
-    const resultType = getResultType(state)
-    const podcastIdsBestMatch = getPodcastsBestMatch(state)
-
+  return (state: AppState, { searchParams }: OwnProps): StateToProps => {
     return {
       isUserSignedIn: getIsUserSignedIn(state),
-      searchBarText: getText(state),
-      query: getQuery(state),
-      resultType,
-      sortBy: getSortBy(state),
-      podcastIds,
-      podcastsBestMatch: getPodcastsByIds(state, podcastIdsBestMatch),
-      episodeIds,
-      receivedAll: resultType === 'podcast' ? receivedAll : receivedAll_,
+      podcastSearchResults: getByHashIds(
+        state,
+        getPodcastHashIds(state, searchParams),
+      ) as PodcastSearchResult[],
+      episodeSearchResults: getByHashIds(
+        state,
+        getEpisodeHashIds(state, searchParams),
+      ) as EpisodeSearchResult[],
+      receivedAll: getReceivedAll(state, searchParams),
       isLoadingMore: getResultsStatus(state) === 'IN_PROGRESS',
     }
   }
@@ -54,7 +47,7 @@ function mapDispatchToProps(dispatch: Dispatch<AppActions>): DispatchToProps {
   }
 }
 
-export default connect<StateToProps, DispatchToProps, {}, AppState>(
+export default connect<StateToProps, DispatchToProps, OwnProps, AppState>(
   makeMapStateToProps(),
   mapDispatchToProps,
 )(SearchResultsList)

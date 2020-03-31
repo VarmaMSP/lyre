@@ -9,26 +9,24 @@ import React from 'react'
 export interface StateToProps {
   episode: Episode
   podcast: Podcast
-  episodeSearchResult: EpisodeSearchResult
 }
 
 export interface OwnProps {
   episodeId: string
+  searchResult?: EpisodeSearchResult
   small?: boolean
   large?: boolean
   dense?: boolean
-  showHighlights?: boolean
   t?: 'NORMAL' | 'HISTORY'
 }
 
 const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
   episode,
   podcast,
-  episodeSearchResult,
+  searchResult,
   small = false,
   large = false,
   dense = false,
-  showHighlights = false,
   t = 'NORMAL',
 }) => {
   return (
@@ -47,9 +45,7 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
             <a
               className="hover:text-blue-700"
               dangerouslySetInnerHTML={{
-                __html: showHighlights
-                  ? episodeSearchResult.title
-                  : episode.title,
+                __html: !!searchResult ? searchResult.title : episode.title,
               }}
             />
           </EpisodeLink>
@@ -78,9 +74,7 @@ const EpisodePreview: React.FC<StateToProps & OwnProps> = ({
           className="text-xs text-gray-800 font-medium md:break-normal break-all tracking-normal leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
           style={{ hyphens: 'auto' }}
           dangerouslySetInnerHTML={{
-            __html: showHighlights
-              ? episodeSearchResult.description
-              : episode.summary,
+            __html: !!searchResult ? searchResult.description : episode.summary,
           }}
         />
       </div>

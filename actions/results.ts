@@ -1,7 +1,6 @@
 import Router from 'next/router'
 import { Dispatch } from 'redux'
 import * as T from 'types/actions'
-import { SearchResultType, SearchSortBy } from 'types/search'
 import { GlobalSearchParams } from 'types/ui/search'
 import { doFetch } from 'utils/fetch'
 import * as gtag from 'utils/gtag'
@@ -57,19 +56,15 @@ export function loadPodcastPage(podcastUrlParam: string) {
   }
 }
 
-export function getResultsPageData(
-  query: string,
-  type_: 'podcast' | 'episode',
-  sortBy: 'relevance' | 'publish_date',
-) {
+export function getResultsPageData(searchParams: GlobalSearchParams) {
   return requestAction(
     () =>
       doFetch({
         method: 'GET',
         urlPath: `/results?${qs({
-          query: query,
-          type: type_,
-          sort_by: sortBy,
+          query: searchParams.query,
+          type: searchParams.type,
+          sort_by: searchParams.sortBy,
         })}`,
       }),
     (
@@ -77,24 +72,18 @@ export function getResultsPageData(
       _,
       { podcasts, episodes, podcastSearchResults, episodeSearchResults },
     ) => {
-      const params: GlobalSearchParams = {
-        query,
-        type: type_,
-        sortBy,
-      }
-
       // entities
       dispatch({ type: T.PODCAST_ADD, podcasts })
       dispatch({ type: T.EPISODE_ADD, episodes })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
-        params,
+        params: searchParams,
         resultType: 'podcast',
         results: podcastSearchResults,
       })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
-        params,
+        params: searchParams,
         resultType: 'episode',
         results: episodeSearchResults,
       })
@@ -102,30 +91,30 @@ export function getResultsPageData(
       // UI
       dispatch({
         type: T.GLOBAL_SEARCH_RESULTS_LOAD,
-        params,
+        params: searchParams,
         resultType: 'podcast',
         page: 0,
         resultIds: podcastSearchResults.map((x) => x.id),
       })
       dispatch({
         type: T.GLOBAL_SEARCH_RESULTS_LOAD,
-        params,
+        params: searchParams,
         resultType: 'episode',
         page: 0,
         resultIds: episodeSearchResults.map((x) => x.id),
       })
 
-      if (params.type === 'podcast' && podcastSearchResults.length < 25) {
+      if (searchParams.type === 'podcast' && podcastSearchResults.length < 25) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
-          params,
+          params: searchParams,
         })
       }
 
-      if (params.type === 'episode' && episodeSearchResults.length < 25) {
+      if (searchParams.type === 'episode' && episodeSearchResults.length < 25) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
-          params,
+          params: searchParams,
         })
       }
     },
@@ -134,9 +123,7 @@ export function getResultsPageData(
 }
 
 export function getResults(
-  query: string,
-  type_: SearchResultType,
-  sortBy: SearchSortBy,
+  searchParams: GlobalSearchParams,
   offset: number,
   limit: number,
 ) {
@@ -146,9 +133,9 @@ export function getResults(
         method: 'GET',
         urlPath: `/ajax/browse?${qs({
           endpoint: 'search_results',
-          query: query,
-          type: type_,
-          sort_by: sortBy,
+          query: searchParams.query,
+          type: searchParams.type,
+          sort_by: searchParams.sortBy,
           offset: offset,
           limit: limit,
         })}`,
@@ -158,24 +145,18 @@ export function getResults(
       _,
       { podcasts, episodes, podcastSearchResults, episodeSearchResults },
     ) => {
-      const params: GlobalSearchParams = {
-        query,
-        type: type_,
-        sortBy,
-      }
-
       // entities
       dispatch({ type: T.PODCAST_ADD, podcasts })
       dispatch({ type: T.EPISODE_ADD, episodes })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
-        params,
+        params: searchParams,
         resultType: 'podcast',
         results: podcastSearchResults,
       })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
-        params,
+        params: searchParams,
         resultType: 'episode',
         results: episodeSearchResults,
       })
@@ -183,30 +164,30 @@ export function getResults(
       // UI
       dispatch({
         type: T.GLOBAL_SEARCH_RESULTS_LOAD,
-        params,
+        params: searchParams,
         resultType: 'podcast',
         page: Math.floor(offset - 25 / limit) + 1,
         resultIds: podcastSearchResults.map((x) => x.id),
       })
       dispatch({
         type: T.GLOBAL_SEARCH_RESULTS_LOAD,
-        params,
+        params: searchParams,
         resultType: 'episode',
         page: Math.floor(offset - 25 / limit) + 1,
         resultIds: episodeSearchResults.map((x) => x.id),
       })
 
-      if (params.type === 'podcast' && podcastSearchResults.length < 25) {
+      if (searchParams.type === 'podcast' && podcastSearchResults.length < 25) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
-          params,
+          params: searchParams,
         })
       }
 
-      if (params.type === 'episode' && episodeSearchResults.length < 25) {
+      if (searchParams.type === 'episode' && episodeSearchResults.length < 25) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
-          params,
+          params: searchParams,
         })
       }
     },

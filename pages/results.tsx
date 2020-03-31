@@ -6,11 +6,7 @@ import { ResultsPageSeo } from 'components/seo'
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { SearchResultType, SearchSortBy } from 'types/search'
-import {
-  GlobalSearchParams,
-  SearchFilterSortBy,
-  SearchFilterType,
-} from 'types/ui/search'
+import { GlobalSearchParams, SearchFilterSortBy, SearchFilterType } from 'types/ui/search'
 import { PageContext } from 'types/utilities'
 import * as gtag from 'utils/gtag'
 
@@ -25,11 +21,14 @@ export default class ResultsPage extends Component<OwnProps> {
   static async getInitialProps(ctx: PageContext): Promise<void> {
     const { store, query } = ctx
 
-    await bindActionCreators(getResultsPageData, store.dispatch)(
-      query['query'] as string,
-      query['type'] as SearchResultType,
-      query['sortBy'] as SearchSortBy,
-    )
+    await bindActionCreators(
+      getResultsPageData,
+      store.dispatch,
+    )({
+      query: query['query'] as string,
+      type: (query['type']  || 'episode') as SearchResultType,
+      sortBy: (query['sortBy']|| 'relevance')  as SearchSortBy ,
+    })
   }
 
   componentDidUpdate(prevProps: OwnProps) {
@@ -57,7 +56,7 @@ export default class ResultsPage extends Component<OwnProps> {
         <PageLayout>
           <div className="pt-4">
             <SearchResultsFilter searchParams={searchParams} />
-            <SearchResultsList />
+            <SearchResultsList searchParams={searchParams} />
           </div>
           <div />
         </PageLayout>

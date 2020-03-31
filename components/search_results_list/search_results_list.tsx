@@ -3,43 +3,39 @@ import EpisodePreview from 'components/episode_preview'
 import { PodcastLink } from 'components/link'
 import PodcastPreview from 'components/podcast_preview'
 import useVisible from 'hooks/useVisible'
-import { Podcast } from 'models'
+import { EpisodeSearchResult, PodcastSearchResult } from 'models'
 import React, { useEffect } from 'react'
-import { SearchResultType, SearchSortBy } from 'types/search'
+import { GlobalSearchParams } from 'types/ui/search'
 import { getImageUrl } from 'utils/dom'
 
 export interface StateToProps {
   isUserSignedIn: boolean
-  searchBarText: string
-  query: string
-  resultType: SearchResultType
-  sortBy: SearchSortBy
-  podcastIds: string[]
-  podcastsBestMatch: Podcast[]
-  episodeIds: string[]
+  podcastSearchResults: PodcastSearchResult[]
+  episodeSearchResults: EpisodeSearchResult[]
   receivedAll: boolean
   isLoadingMore: boolean
 }
 
 export interface DispatchToProps {
   loadMore: (
-    a: string,
-    b: SearchResultType,
-    c: SearchSortBy,
-    d: number,
-    e: number,
+    searchParams: GlobalSearchParams,
+    offset: number,
+    limit: number,
   ) => void
   loadPlaybacks: (episodeIds: string[]) => void
 }
 
-const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
+export interface OwnProps {
+  searchParams: GlobalSearchParams
+}
+
+type Props = StateToProps & DispatchToProps & OwnProps
+
+const SearchResultsList: React.FC<Props> = ({
+  searchParams,
   isUserSignedIn,
-  query,
-  resultType,
-  sortBy,
-  podcastIds,
-  podcastsBestMatch,
-  episodeIds,
+  podcastSearchResults,
+  episodeSearchResults,
   receivedAll,
   isLoadingMore,
   loadMore,
@@ -52,31 +48,36 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
       return
     }
 
-    if (resultType === 'podcast') {
-      loadMore(query, resultType, sortBy, podcastIds.length, 20)
+    if (searchParams.type === 'podcast') {
+      loadMore(searchParams, podcastSearchResults.length, 20)
       return
     }
 
-    if (resultType === 'episode') {
-      loadMore(query, resultType, sortBy, episodeIds.length, 20)
+    if (searchParams.type === 'episode') {
+      loadMore(searchParams, episodeSearchResults.length, 20)
       return
     }
   }, [isVisible])
 
   useEffect(() => {
-    if (resultType === 'episode') {
-      loadPlaybacks(episodeIds)
+    if (searchParams.type === 'episode') {
+      loadPlaybacks(episodeSearchResults.map((x) => x.id))
     }
   }, [])
 
   useEffect(() => {
-    if (resultType === 'episode') {
-      loadPlaybacks(episodeIds)
+    if (searchParams.type === 'episode') {
+      loadPlaybacks(episodeSearchResults.map((x) => x.id))
     }
-  }, [isUserSignedIn, query, resultType, sortBy])
+  }, [
+    isUserSignedIn,
+    searchParams.query,
+    searchParams.type,
+    searchParams.sortBy,
+  ])
 
-  if (resultType === 'podcast') {
-    if (podcastIds.length === 0) {
+  if (searchParams.type === 'podcast') {
+    if (podcastSearchResults.length === 0) {
       return isLoadingMore ? (
         <></>
       ) : (
@@ -88,9 +89,9 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
 
     return (
       <div>
-        {podcastIds.map((id) => (
-          <div key={id} className="mb-6">
-            <PodcastPreview podcastId={id} showHighlights />
+        {podcastSearchResults.map((p) => (
+          <div key={p.id} className="mb-6">
+            <PodcastPreview podcastId={p.id} searchResult={p} />
           </div>
         ))}
 
@@ -114,8 +115,8 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
     )
   }
 
-  if (resultType === 'episode') {
-    if (episodeIds.length === 0) {
+  if (searchParams.type === 'episode') {
+    if (episodeSearchResults.length === 0) {
       return isLoadingMore ? (
         <></>
       ) : (
@@ -127,11 +128,11 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
 
     return (
       <div>
-        {podcastsBestMatch.length > 0 && (
+        {podcastSearchResults.length > 0 && (
           <>
             <div className="text-lg font-semibold my-3">Podcasts</div>
             <div className="flex overflow-x-auto">
-              {podcastsBestMatch.map((p) => (
+              {podcastSearchResults.map((p) => (
                 <div
                   key={p.id}
                   className="flex-none md:w-28 w-22 mx-4 mt-3 mb-6"
@@ -158,9 +159,9 @@ const SearchResultsList: React.FC<StateToProps & DispatchToProps> = ({
         )}
 
         <div className="text-lg font-semibold my-3">Episodes</div>
-        {episodeIds.map((id) => (
-          <div key={id} className="mb-6">
-            <EpisodePreview episodeId={id} showHighlights small />
+        {episodeSearchResults.map((e) => (
+          <div key={e.id} className="mb-6">
+            <EpisodePreview episodeId={e.id} searchResult={e} small />
           </div>
         ))}
 
