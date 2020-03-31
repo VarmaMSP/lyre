@@ -41,3 +41,7 @@ export type Hash2<_T1, _T2> = string
 export type Hash3<_T1, _T2, _T3> = string
 
 export type Hash4<_T1, _T2, _T3, _T4> = string
+
+export type Hash5<_T1, _T2, _T3, _T4, _T5> = string
+
+export type Hash6<_T1, _T2, _T3, _T4, _T5, _T6> = string
