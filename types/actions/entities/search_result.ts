@@ -1,5 +1,5 @@
 import { EpisodeSearchResult, PodcastSearchResult } from 'models'
-import { GlobalSearchParams } from 'types/ui/search'
+import { GlobalSearchParams, SearchResultType } from 'types/ui/search'
 
 export const SEARCH_RESULT_ADD_PODCAST = 'search_result/add_podcast'
 export const SEARCH_RESULT_ADD_EPISODE = 'search_result/add_epiosde'
@@ -22,6 +22,7 @@ interface AddEpisodeAction {
 interface AddGlobalSearchResult {
   type: typeof SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS
   params: GlobalSearchParams
+  resultType: SearchResultType
   results: (PodcastSearchResult | EpisodeSearchResult)[]
 }
 

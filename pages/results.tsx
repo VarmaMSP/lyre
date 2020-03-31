@@ -5,52 +5,29 @@ import SearchResultsList from 'components/search_results_list'
 import { ResultsPageSeo } from 'components/seo'
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import * as T from 'types/actions'
 import { SearchResultType, SearchSortBy } from 'types/search'
+import {
+  GlobalSearchParams,
+  SearchFilterSortBy,
+  SearchFilterType,
+} from 'types/ui/search'
 import { PageContext } from 'types/utilities'
 import * as gtag from 'utils/gtag'
 
 interface OwnProps {
   query: string
-  sortBy: SearchSortBy
-  resultType: SearchResultType
+  sortBy?: SearchFilterSortBy
+  type?: SearchFilterType
   scrollY: number
 }
 
 export default class ResultsPage extends Component<OwnProps> {
-  static loadPropsIntoStore(ctx: PageContext) {
-    const { store, query } = ctx
-    const q = query['query'] as string
-    const sortBy = query['sortBy'] as SearchSortBy
-    const resultType = query['resultType'] as SearchResultType
-
-    store.dispatch({
-      type: T.SEARCH_RESULTS_QUERY,
-      query: q,
-    })
-
-    store.dispatch({
-      type: T.SEARCH_BAR_UPDATE_TEXT,
-      text: q,
-    })
-
-    store.dispatch({
-      type: T.SEARCH_RESULTS_RESULT_TYPE,
-      resultType,
-    })
-
-    store.dispatch({
-      type: T.SEARCH_RESULTS_SORT_BY,
-      sortBy,
-    })
-  }
-
   static async getInitialProps(ctx: PageContext): Promise<void> {
     const { store, query } = ctx
 
     await bindActionCreators(getResultsPageData, store.dispatch)(
       query['query'] as string,
-      query['resultType'] as SearchResultType,
+      query['type'] as SearchResultType,
       query['sortBy'] as SearchSortBy,
     )
   }
@@ -68,12 +45,18 @@ export default class ResultsPage extends Component<OwnProps> {
   }
 
   render() {
+    const searchParams: GlobalSearchParams = {
+      query: this.props.query,
+      type: this.props.type || 'episode',
+      sortBy: this.props.sortBy || 'relevance',
+    }
+
     return (
       <>
         <ResultsPageSeo query={this.props.query} />
         <PageLayout>
           <div className="pt-4">
-            <SearchResultsFilter />
+            <SearchResultsFilter searchParams={searchParams} />
             <SearchResultsList />
           </div>
           <div />

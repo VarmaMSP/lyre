@@ -1,7 +1,7 @@
-import { GlobalSearchParams } from 'types/ui/search'
+import { GlobalSearchParams, SearchResultType } from 'types/ui/search'
 
 export const GLOBAL_SEARCH_RESULTS_PARAMS = 'gloabal_search_results/query'
-export const GLOBAL_SEARCH_RESULTS_LOAD_PAGE = 'global_search_results/load_page'
+export const GLOBAL_SEARCH_RESULTS_LOAD = 'global_search_results/load'
 export const GLOBAL_SEARCH_RESULTS_RECEIVED_ALL =
   'global_search_results/received_all'
 
@@ -10,9 +10,10 @@ interface ParamsAction {
   params: GlobalSearchParams
 }
 
-interface LoadPageAction {
-  type: typeof GLOBAL_SEARCH_RESULTS_LOAD_PAGE
+interface LoadAction {
+  type: typeof GLOBAL_SEARCH_RESULTS_LOAD
   params: GlobalSearchParams
+  resultType: SearchResultType
   page: number
   resultIds: string[]
 }
@@ -24,5 +25,5 @@ interface ReceivedAllAction {
 
 export type GlobalSearchResultsActionTypes =
   | ParamsAction
-  | LoadPageAction
+  | LoadAction
   | ReceivedAllAction

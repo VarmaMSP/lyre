@@ -1,7 +1,9 @@
 export interface GlobalSearchParams {
   query: string
-  resultType: SearchResultType
-  sortBy: SearchSortBy
+  // publishDate: string
+  type: SearchFilterType
+  // duration: number
+  sortBy: SearchFilterSortBy
 }
 
 export interface PodcastSearchParams {
@@ -11,6 +13,12 @@ export interface PodcastSearchParams {
 
 export type SearchQuery = string
 
-export type SearchResultType = 'episode' | 'podcast' | 'podcast_best_match'
+export type SearchFilterType = 'episode' | 'podcast' | 'playlist'
 
-export type SearchSortBy = 'relevance' | 'publish_date'
+export type SearchFilterSortBy = 'relevance' | 'publish_date'
+
+export type SearchResultType =
+  | 'episode'
+  | 'podcast'
+  | 'playlist'
+  | 'search_suggestion'

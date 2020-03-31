@@ -6,7 +6,7 @@ import { GlobalSearchParams } from 'types/ui/search'
 const params: Reducer<GlobalSearchParams, T.AppActions> = (
   state = {
     query: '',
-    resultType: 'episode',
+    type: 'episode',
     sortBy: 'relevance',
   },
   action,
@@ -23,20 +23,20 @@ const params: Reducer<GlobalSearchParams, T.AppActions> = (
 const results: Reducer<
   {
     [hash: string]: {
-      [page: number]: string[]
+      [page: string]: string[]
     }
   },
   T.AppActions
 > = (state = {}, action) => {
   switch (action.type) {
-    case T.GLOBAL_SEARCH_RESULTS_LOAD_PAGE: {
-      const k = hashSum(action.params)
+    case T.GLOBAL_SEARCH_RESULTS_LOAD: {
+      const k = hashSum([action.params, action.resultType])
 
       return {
         ...state,
         [k]: {
           ...(state[k] || {}),
-          [action.page]: action.resultIds.map((id) => hashSum([k, id])),
+          [action.page]: action.resultIds.map((id) => hashSum(['g', k, id])),
         },
       }
     }

@@ -9,11 +9,11 @@ const byHashId: Reducer<
 > = (state = {}, action) => {
   switch (action.type) {
     case T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS: {
-      const k = hashSum(action.params)
+      const k = hashSum([action.params, action.resultType])
 
       return action.results.reduce<{
         [hashId: string]: PodcastSearchResult | EpisodeSearchResult
-      }>((acc, r) => ({ ...acc, [hashSum([k, r.id])]: r }), state)
+      }>((acc, r) => ({ ...acc, [hashSum(['g', k, r.id])]: r }), state)
     }
 
     default:

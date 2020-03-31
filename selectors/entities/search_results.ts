@@ -1,13 +1,13 @@
+import { Episode, EpisodeSearchResult, Podcast, PodcastSearchResult } from 'models'
 import { createSelector } from 'reselect'
 import { getQuery } from 'selectors/ui/search_results_list'
 import { AppState } from 'store'
-import {
-  Episode,
-  EpisodeSearchResult,
-  Podcast,
-  PodcastSearchResult,
-} from 'models'
 import { $Id } from 'types/utilities'
+
+export function getbyHashIds(state: AppState, hashIds: string[]) {
+  const obj = state.entities.results.byHashId
+  return hashIds.map((id) => obj[id]).filter((x) => !!x)
+}
 
 export function makeGetPodcastSearchResultById() {
   return createSelector<

@@ -3,49 +3,40 @@ import React, { createElement } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { getText } from 'selectors/ui/search_bar'
-import { getResultType, getSortBy } from 'selectors/ui/search_results_list'
 import { AppState } from 'store'
 import * as T from 'types/actions'
-import { SearchResultType, SearchSortBy } from 'types/search'
+import { GlobalSearchParams } from 'types/ui/search'
 
 export interface SearchBarProps {
   searchText: string
-  showSuggestions: boolean
   handleTextChange: (e: React.FormEvent<HTMLInputElement>) => void
   handleTextSubmit: (e?: React.FormEvent<HTMLFormElement>) => void
   collapseSearchBar: () => void
+  showSuggestions: boolean
   setShowSuggestions: (e: boolean) => void
 }
 
 interface StateToProps {
   searchText: string
-  resultType: SearchResultType
-  sortBy: SearchSortBy
   showSuggestions: boolean
 }
 
 interface DispatchToProps {
   setCursor: (c: number) => void
   collapseSearchBar: () => void
-  changeSearchText: (text: string) => void
-  loadResultsPage: (
-    query: string,
-    resultType: SearchResultType,
-    sortBy: SearchSortBy,
-  ) => void
+  loadResultsPage: (searchParams: GlobalSearchParams) => void
+  setSearchText: (text: string) => void
   setShowSuggestions: (e: boolean) => void
 }
 
 const withProps = (
   child: React.FC<SearchBarProps>,
 ): React.FC<StateToProps & DispatchToProps> => ({
-  searchText,
-  resultType,
-  sortBy,
   collapseSearchBar,
-  changeSearchText,
   loadResultsPage,
+  searchText,
   showSuggestions,
+  setSearchText,
   setShowSuggestions,
   setCursor,
 }) => {
@@ -53,7 +44,7 @@ const withProps = (
     e.preventDefault()
 
     setCursor(0)
-    changeSearchText(e.currentTarget.value)
+    setSearchText(e.currentTarget.value)
   }
 
   const handleTextSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
@@ -61,7 +52,11 @@ const withProps = (
 
     setCursor(0)
     collapseSearchBar()
-    loadResultsPage(searchText, resultType, sortBy)
+    loadResultsPage({
+      query: searchText,
+      type: 'episode',
+      sortBy: 'relevance',
+    })
   }
 
   return createElement(child, {
@@ -76,18 +71,16 @@ const withProps = (
 
 const mapStateToProps = (state: AppState): StateToProps => ({
   searchText: getText(state),
-  resultType: getResultType(state),
-  sortBy: getSortBy(state),
   showSuggestions: state.ui.searchBar.showSuggestions,
 })
 
 const mapDispatchToProps = (
   dispatch: Dispatch<T.AppActions>,
 ): DispatchToProps => ({
-  changeSearchText: (text: string) =>
-    dispatch({ type: T.SEARCH_BAR_UPDATE_TEXT, text }),
   loadResultsPage: bindActionCreators(loadResultsPage, dispatch),
   collapseSearchBar: () => dispatch({ type: T.SEARCH_BAR_COLLAPSE }),
+  setSearchText: (text: string) =>
+    dispatch({ type: T.SEARCH_BAR_UPDATE_TEXT, text }),
   setShowSuggestions: (e: boolean) =>
     dispatch({ type: T.SEARCH_BAR_SET_SHOW_SUGGESTIONS, value: e }),
   setCursor: (c: number) =>
