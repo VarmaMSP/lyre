@@ -129,7 +129,7 @@ export function getResultsPageData(
         })
 
         dispatch({
-          type: T.SEARCH_RESULTS_LIST_LOAD_PODcAST_BEST_MATCH,
+          type: T.SEARCH_RESULTS_LIST_LOAD_PODCAST_BEST_MATCH,
           searchQuery: query,
           podcastIds: podcastSearchResults.map((x) => x.id),
         })

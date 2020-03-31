@@ -73,7 +73,7 @@ const podcastsBestMatch: Reducer<
   T.AppActions
 > = (state = {}, action) => {
   switch (action.type) {
-    case T.SEARCH_RESULTS_LIST_LOAD_PODcAST_BEST_MATCH:
+    case T.SEARCH_RESULTS_LIST_LOAD_PODCAST_BEST_MATCH:
       return {
         ...state,
         [action.searchQuery]: action.podcastIds,
