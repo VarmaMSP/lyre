@@ -1,7 +1,12 @@
-export interface SearchInput {
-  query: SearchQuery
+export interface GlobalSearchParams {
+  query: string
   resultType: SearchResultType
   sortBy: SearchSortBy
+}
+
+export interface PodcastSearchParams {
+  query: string
+  podcastId: string
 }
 
 export type SearchQuery = string
