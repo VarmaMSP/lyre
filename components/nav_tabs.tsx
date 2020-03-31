@@ -31,9 +31,12 @@ const NavTabs: React.FC<OwnProps> = ({ tabs, active, defaultTab }) => {
                 {
                   'cursor-default': t.name === active,
                   'cursor-pointer': t.name !== active,
-                  'text-green-800 font-bold':
+                  'text-green-800 font-semibold':
                     (active !== undefined && t.name === active) ||
                     (active === undefined && t.name === defaultTab),
+                  'text-gray-600 font-semibold':
+                    !(active !== undefined && t.name === active) &&
+                    !(active === undefined && t.name === defaultTab),
                 },
               )}
             >
@@ -41,7 +44,7 @@ const NavTabs: React.FC<OwnProps> = ({ tabs, active, defaultTab }) => {
             </a>
           </Link>
           <div
-            className={classNames('w-20 rounded-full', {
+            className={classNames('w-20 rounded-t-full', {
               'bg-green-800':
                 (active !== undefined && t.name === active) ||
                 (active === undefined && t.name === defaultTab),
