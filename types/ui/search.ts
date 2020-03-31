@@ -6,6 +6,6 @@ export interface SearchInput {
 
 export type SearchQuery = string
 
-export type SearchResultType = 'episode' | 'podcast'
+export type SearchResultType = 'episode' | 'podcast' | 'podcast_best_match'
 
 export type SearchSortBy = 'relevance' | 'publish_date'

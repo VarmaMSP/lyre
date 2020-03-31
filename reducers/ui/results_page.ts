@@ -1,8 +1,8 @@
-import { EpisodeSearchResult, PodcastSearchResult } from 'models'
 import { combineReducers, Reducer } from 'redux'
 import * as T from 'types/actions'
 import { SearchQuery, SearchResultType, SearchSortBy } from 'types/ui/search'
-import { $HashId, Hash1, Hash2, Hash3, Obj } from 'types/utilities'
+import { Hash3, Obj } from 'types/utilities'
+import { makeHash } from 'utils/hash'
 
 const query: Reducer<string, T.AppActions> = (state = '', action) => {
   switch (action.type) {
@@ -40,47 +40,65 @@ const sortBy: Reducer<SearchSortBy, T.AppActions> = (
   }
 }
 
-const episodes: Reducer<
+const resultsList: Reducer<
   Obj<
-    Hash2<SearchQuery, SearchSortBy>,
-    { [page: number]: $HashId<EpisodeSearchResult>[] }
+    Hash3<SearchQuery, SearchResultType, SearchSortBy>,
+    { [page: number]: string[] }
   >,
   T.AppActions
 > = (state = {}, action) => {
   switch (action.type) {
-    default:
-      return state
-  }
-}
+    case T.SEARCH_RESULTS_LIST_LOAD_EPISODE_PAGE:
+      return {
+        ...state,
+        [makeHash(action.searchQuery, 'episode', action.sortBy)]: {
+          ...(state[makeHash(action.searchQuery, 'episode', action.sortBy)] ||
+            {}),
+          [action.page]: action.episodeIds.map((id) =>
+            makeHash(action.searchQuery, 'episode', action.sortBy, id),
+          ),
+        },
+      }
 
-const podcasts: Reducer<
-  Obj<
-    Hash2<SearchQuery, SearchSortBy>,
-    { [page: number]: $HashId<PodcastSearchResult>[] }
-  >,
-  T.AppActions
-> = (state = {}, action) => {
-  switch (action.type) {
-    default:
-      return state
-  }
-}
+    case T.SEARCH_RESULTS_LIST_LOAD_PODCAST_PAGE:
+      return {
+        ...state,
+        [makeHash(action.searchQuery, 'podcast', action.sortBy)]: {
+          ...(state[makeHash(action.searchQuery, 'podcast', action.sortBy)] ||
+            {}),
+          [action.page]: action.podcastIds.map((id) =>
+            makeHash(action.searchQuery, 'podcast', action.sortBy, id),
+          ),
+        },
+      }
 
-const podcastsBestMatch: Reducer<
-  Obj<Hash1<SearchQuery>, $HashId<PodcastSearchResult>[]>,
-  T.AppActions
-> = (state = {}, action) => {
-  switch (action.type) {
+    case T.SEARCH_RESULTS_LIST_LOAD_PODCAST_BEST_MATCH:
+      return {
+        ...state,
+        [makeHash(action.searchQuery, 'podcast_best_match')]: {
+          ...(state[makeHash(action.searchQuery, 'podcast_best_match')] || {}),
+          [0]: action.podcastIds.map((id) =>
+            makeHash(action.searchQuery, 'podcast_best_match', id),
+          ),
+        },
+      }
+
     default:
       return state
   }
 }
 
 const receivedAll: Reducer<
-  Hash3<SearchQuery, SearchSortBy, SearchResultType>[],
+  Hash3<SearchQuery, SearchResultType, SearchSortBy>[],
   T.AppActions
 > = (state = [], action) => {
   switch (action.type) {
+    case T.SEARCH_RESULTS_LIST_RECEIVED_ALL:
+      return [
+        ...state,
+        makeHash(action.searchQuery, action.resultType, action.sortBy),
+      ]
+
     default:
       return state
   }
@@ -90,8 +108,6 @@ export default combineReducers({
   query,
   resultType,
   sortBy,
-  podcasts,
-  podcastsBestMatch,
-  episodes,
+  resultsList,
   receivedAll,
 })

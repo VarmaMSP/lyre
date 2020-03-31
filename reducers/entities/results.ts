@@ -2,18 +2,8 @@ import { EpisodeSearchResult, PodcastSearchResult } from 'models'
 import { combineReducers, Reducer } from 'redux'
 import * as T from 'types/actions'
 
-const byPodcastHashId: Reducer<
-  { [hashId: string]: PodcastSearchResult },
-  T.AppActions
-> = (state = {}, action) => {
-  switch (action.type) {
-    default:
-      return state
-  }
-}
-
-const byEpisodeHashId: Reducer<
-  { [hashId: string]: EpisodeSearchResult },
+const byHashId: Reducer<
+  { [hashId: string]: PodcastSearchResult | EpisodeSearchResult },
   T.AppActions
 > = (state = {}, action) => {
   switch (action.type) {
@@ -23,6 +13,5 @@ const byEpisodeHashId: Reducer<
 }
 
 export default combineReducers({
-  byPodcastHashId,
-  byEpisodeHashId,
+  byHashId,
 })
