@@ -1,43 +1,20 @@
+import hashSum from 'hash-sum'
 import { EpisodeSearchResult, PodcastSearchResult } from 'models'
 import { combineReducers, Reducer } from 'redux'
 import * as T from 'types/actions'
 
-const byPodcastId: Reducer<
-  { [searchQuery: string]: { [podcastId: string]: PodcastSearchResult } },
+const byHashId: Reducer<
+  { [hashId: string]: PodcastSearchResult | EpisodeSearchResult },
   T.AppActions
 > = (state = {}, action) => {
   switch (action.type) {
-    case T.SEARCH_RESULT_ADD_PODCAST:
-      return {
-        ...state,
-        [action.searchQuery]: action.podcastSearchResults.reduce<{
-          [podcastId: string]: PodcastSearchResult
-        }>(
-          (acc, p) => ({ ...acc, [p.id]: p }),
-          state[action.searchQuery] || {},
-        ),
-      }
+    case T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS: {
+      const k = hashSum([action.params, action.resultType])
 
-    default:
-      return state
-  }
-}
-
-const byEpisodeId: Reducer<
-  { [searchQuery: string]: { [episodeId: string]: EpisodeSearchResult } },
-  T.AppActions
-> = (state = {}, action) => {
-  switch (action.type) {
-    case T.SEARCH_RESULT_ADD_EPISODE:
-      return {
-        ...state,
-        [action.searchQuery]: action.episodeSearchResults.reduce<{
-          [episodeId: string]: EpisodeSearchResult
-        }>(
-          (acc, e) => ({ ...acc, [e.id]: e }),
-          state[action.searchQuery] || {},
-        ),
-      }
+      return action.results.reduce<{
+        [hashId: string]: PodcastSearchResult | EpisodeSearchResult
+      }>((acc, r) => ({ ...acc, [hashSum(['g', k, r.id])]: r }), state)
+    }
 
     default:
       return state
@@ -45,6 +22,5 @@ const byEpisodeId: Reducer<
 }
 
 export default combineReducers({
-  byPodcastId,
-  byEpisodeId,
+  byHashId,
 })

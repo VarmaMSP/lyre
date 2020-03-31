@@ -15,7 +15,6 @@ import { HomeActionTypes } from './ui/home'
 import { ModalManagerActionTypes } from './ui/modal_manager'
 import { PodcastEpisodesListActionTypes } from './ui/podcast_episodes_list'
 import { SearchBarActionTypes } from './ui/search_bar'
-import { SearchResultsListActionTypes } from './ui/search_results_list'
 import { SubscriptionsFeedActionTypes } from './ui/subscriptions_feed'
 import { WindowActionTypes } from './window'
 
@@ -31,11 +30,11 @@ export type AppActions =
   | SessionActionTypes
   | CurationActionTypes
   | AudioPlayerActionTypes
+  | GlobalSearchResultsActionTypes
   | HistoryFeedActionTypes
   | SubscriptionsFeedActionTypes
   | ModalManagerActionTypes
   | PodcastEpisodesListActionTypes
-  | SearchResultsListActionTypes
   | SearchResultActionTypes
   | SearchBarActionTypes
   | HistoryActionTypes
@@ -44,7 +43,6 @@ export type AppActions =
   | CategoryActionTypes
   | ContinueAction
   | HomeActionTypes
-  | GlobalSearchResultsActionTypes
 
 export * from './entities/category'
 export * from './entities/curation'
@@ -64,6 +62,5 @@ export * from './ui/home'
 export * from './ui/modal_manager'
 export * from './ui/podcast_episodes_list'
 export * from './ui/search_bar'
-export * from './ui/search_results_list'
 export * from './ui/subscriptions_feed'
 export * from './window'

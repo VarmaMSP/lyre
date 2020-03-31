@@ -39,7 +39,7 @@ const PodcastPreview: React.FC<StateToProps & OwnProps> = ({
             __html: !!searchResult ? searchResult.author : podcast.author,
           }}
         />
-        s
+
         <div
           className="text-xs text-gray-900 md:break-normal break-all leading-normal tracking-normal md:line-clamp-2 line-clamp-3 cursor-default"
           style={{ hyphens: 'auto' }}

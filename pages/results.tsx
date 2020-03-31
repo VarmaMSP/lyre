@@ -5,8 +5,11 @@ import SearchResultsList from 'components/search_results_list'
 import { ResultsPageSeo } from 'components/seo'
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import { SearchResultType, SearchSortBy } from 'types/search'
-import { GlobalSearchParams, SearchFilterSortBy, SearchFilterType } from 'types/ui/search'
+import {
+  GlobalSearchParams,
+  SearchFilterSortBy,
+  SearchFilterType,
+} from 'types/ui/search'
 import { PageContext } from 'types/utilities'
 import * as gtag from 'utils/gtag'
 
@@ -26,8 +29,8 @@ export default class ResultsPage extends Component<OwnProps> {
       store.dispatch,
     )({
       query: query['query'] as string,
-      type: (query['type']  || 'episode') as SearchResultType,
-      sortBy: (query['sortBy']|| 'relevance')  as SearchSortBy ,
+      type: (query['type'] || 'episode') as SearchFilterType,
+      sortBy: (query['sortBy'] || 'relevance') as SearchFilterSortBy,
     })
   }
 

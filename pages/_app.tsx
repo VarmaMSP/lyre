@@ -37,10 +37,6 @@ export default withRedux(makeStore)(
         await Component.getInitialProps(ctx)
       }
 
-      if (Component.loadPropsIntoStore) {
-        Component.loadPropsIntoStore(ctx)
-      }
-
       return {
         pageProps: {
           ...query,
