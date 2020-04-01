@@ -177,14 +177,20 @@ export function getResults(
         resultIds: episodeSearchResults.map((x) => x.id),
       })
 
-      if (searchParams.type === 'podcast' && podcastSearchResults.length < 25) {
+      if (
+        searchParams.type === 'podcast' &&
+        podcastSearchResults.length < limit
+      ) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
           params: searchParams,
         })
       }
 
-      if (searchParams.type === 'episode' && episodeSearchResults.length < 25) {
+      if (
+        searchParams.type === 'episode' &&
+        episodeSearchResults.length < limit
+      ) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
           params: searchParams,
