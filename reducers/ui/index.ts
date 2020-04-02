@@ -5,6 +5,7 @@ import historyFeed from './history_feed'
 import home from './home'
 import modalManager from './modal_manager'
 import podcastEpisodeList from './podcast_episode_list'
+import popupManager from './popup_manager'
 import searchBar from './search_bar'
 import subscriptionsFeed from './subscriptions_feed'
 
@@ -17,4 +18,5 @@ export default combineReducers({
   searchBar,
   home,
   globalSearchResults,
+  popupManager,
 })

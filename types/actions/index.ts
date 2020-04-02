@@ -14,6 +14,7 @@ import { HistoryFeedActionTypes } from './ui/history_feed'
 import { HomeActionTypes } from './ui/home'
 import { ModalManagerActionTypes } from './ui/modal_manager'
 import { PodcastEpisodesListActionTypes } from './ui/podcast_episodes_list'
+import { PopupManagerActionTypes } from './ui/popup_manager'
 import { SearchBarActionTypes } from './ui/search_bar'
 import { SubscriptionsFeedActionTypes } from './ui/subscriptions_feed'
 import { WindowActionTypes } from './window'
@@ -43,6 +44,7 @@ export type AppActions =
   | CategoryActionTypes
   | ContinueAction
   | HomeActionTypes
+  | PopupManagerActionTypes
 
 export * from './entities/category'
 export * from './entities/curation'
@@ -61,6 +63,7 @@ export * from './ui/history_feed'
 export * from './ui/home'
 export * from './ui/modal_manager'
 export * from './ui/podcast_episodes_list'
+export * from './ui/popup_manager'
 export * from './ui/search_bar'
 export * from './ui/subscriptions_feed'
 export * from './window'
