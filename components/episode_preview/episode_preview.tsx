@@ -79,8 +79,9 @@ const EpisodePreview: React.FC<Props> = ({
           <div className="flex-1">
             <div
               className={classnames(
-                'mb-1 md:text-base text-sm text-black font-semibold tracking-wide leading-snug line-clamp-2',
+                '-mt-1 mb-1 md:mb-0 text-black font-semibold tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
               )}
+              style={{ fontSize: '15px' }}
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
                 <a
@@ -93,13 +94,25 @@ const EpisodePreview: React.FC<Props> = ({
             </div>
 
             {!dense && (
-              <div className="mb-1 md:text-sm text-xs text-gray-900 font-medium tracking-wide md:leading-normal leading-relaxed line-clamp-1">
+              <div className="text-xs text-gray-700 font-semibold tracking-wide leading-relaxed line-clamp-1">
                 <PodcastLink podcastUrlParam={podcast.urlParam}>
-                  <a className="hover:text-blue-700">{podcast.title}</a>
+                  <a className="hover:text-blue-800">{podcast.title}</a>
                 </PodcastLink>
               </div>
             )}
+
+            <div className="mb-2 text-2xs text-gray-700 font-medium tracking-wide leading-relaxed">
+              {t == 'NORMAL' &&
+                `published ${formatDistanceToNow(
+                  parseISO(episode.pubDate),
+                )} ago`.replace('about ', '')}
+              {t == 'HISTORY' &&
+                `listened ${formatDistanceToNow(
+                  parseISO(episode.lastPlayedAt),
+                )} ago`.replace('about ', '')}
+            </div>
           </div>
+
           <div className="flex-none pl-3 pr-1">
             <div
               ref={reference.ref}
@@ -111,26 +124,15 @@ const EpisodePreview: React.FC<Props> = ({
               onPointerDown={stopEventPropagation}
               onMouseDown={stopEventPropagation}
               onTouchStart={stopEventPropagation}
-              className="py-1 text-gray-700 hover-text-gray-900 cursor-pointer"
+              className="text-gray-600 hover:text-gray-800 cursor-pointer"
             >
               <AddIcon className="options fill-current w-5 h-5" />
             </div>
           </div>
         </div>
 
-        <div className="mb-2 text-2xs text-gray-700 tracking-wide font-medium">
-          {t == 'NORMAL' &&
-            `published ${formatDistanceToNow(
-              parseISO(episode.pubDate),
-            )} ago`.replace('about ', '')}
-          {t == 'HISTORY' &&
-            `listened ${formatDistanceToNow(
-              parseISO(episode.lastPlayedAt),
-            )} ago`.replace('about ', '')}
-        </div>
-
         <div
-          className="text-xs text-gray-800 font-medium md:break-normal break-all tracking-normal leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
+          className="md:pr-2 text-xs text-gray-800 font-medium md:break-normal break-all tracking-normal leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
           style={{ hyphens: 'auto' }}
           dangerouslySetInnerHTML={{
             __html: !!searchResult ? searchResult.description : episode.summary,
