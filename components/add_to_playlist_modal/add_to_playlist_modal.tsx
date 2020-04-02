@@ -1,7 +1,7 @@
 import ModalContainer from 'components/modal/modal_container'
 import Overlay from 'components/modal/overlay'
-import React from 'react'
 import { Playlist } from 'models'
+import React, { useEffect } from 'react'
 import PlaylistsListItem from './playlists_list_item'
 
 export interface StateToProps {
@@ -10,6 +10,7 @@ export interface StateToProps {
 
 export interface DispatchToProps {
   showCreatePlaylistModal: () => void
+  closeAllPopups: () => void
 }
 
 export interface OwnProps {
@@ -22,8 +23,13 @@ type Props = StateToProps & DispatchToProps & OwnProps
 const AddToPlaylistModal: React.FC<Props> = ({
   playlists,
   episodeId,
+  closeAllPopups,
   showCreatePlaylistModal,
 }) => {
+  useEffect(() => {
+    closeAllPopups()
+  }, [])
+
   return (
     <Overlay background="rgba(0, 0, 0, 0.65)">
       <ModalContainer className="modal-slim" header="Add to Playlist">

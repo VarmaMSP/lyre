@@ -3,7 +3,6 @@ import React from 'react'
 
 export interface DispatchToProps {
   showAddToPlaylistModal: () => void
-  closeAllPopups: () => void
 }
 
 export interface OwnProps {
@@ -12,7 +11,6 @@ export interface OwnProps {
 
 const EpisodeActions: React.FC<DispatchToProps & OwnProps> = ({
   showAddToPlaylistModal,
-  closeAllPopups,
 }) => {
   const AddToPlaylistIcon = iconMap['playlist-add']
 
@@ -20,10 +18,7 @@ const EpisodeActions: React.FC<DispatchToProps & OwnProps> = ({
     <div className="w-56 py-2 bg-white border border-gray-400 shadow-md rounded">
       <div
         className="flex items-center px-4 py-2 hover:bg-gray-200 cursor-pointer"
-        onClick={() => {
-          closeAllPopups()
-          showAddToPlaylistModal()
-        }}
+        onClick={() => showAddToPlaylistModal()}
       >
         <div className="pr-3">
           <AddToPlaylistIcon className="text-gray-800 fill-current w-4 h-4" />

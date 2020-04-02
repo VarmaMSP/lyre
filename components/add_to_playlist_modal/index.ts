@@ -3,8 +3,12 @@ import { Dispatch } from 'redux'
 import { makeGetPlaylistsByUser } from 'selectors/entities/playlists'
 import { getSignedInUserId } from 'selectors/session'
 import { AppState } from 'store'
-import { AppActions, MODAL_MANAGER_SHOW_CREATE_PLAYLIST_MODAL } from 'types/actions'
-import AddToPlaylistModal, { DispatchToProps, OwnProps, StateToProps } from './add_to_playlist_modal'
+import * as T from 'types/actions'
+import AddToPlaylistModal, {
+  DispatchToProps,
+  OwnProps,
+  StateToProps,
+} from './add_to_playlist_modal'
 
 function makeMapStateToProps() {
   const getPlaylistsByUser = makeGetPlaylistsByUser()
@@ -15,14 +19,18 @@ function makeMapStateToProps() {
 }
 
 function mapDispatchToProps(
-  dispatch: Dispatch<AppActions>,
+  dispatch: Dispatch<T.AppActions>,
   { episodeId }: OwnProps,
 ): DispatchToProps {
   return {
     showCreatePlaylistModal: () =>
       dispatch({
-        type: MODAL_MANAGER_SHOW_CREATE_PLAYLIST_MODAL,
+        type: T.MODAL_MANAGER_SHOW_CREATE_PLAYLIST_MODAL,
         episodeId,
+      }),
+    closeAllPopups: () =>
+      dispatch({
+        type: T.POPUP_MANAGER_CLOSE_ALL,
       }),
   }
 }
