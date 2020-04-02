@@ -8,9 +8,24 @@
     align-items: center;
 }
 
+.episode-preview .options {
+    visibility: hidden;
+}
+
+.episode-preview:hover .options,
+.episode-preview-active .options
+{
+    visibility: visible;
+}
+
 @media screen and (max-width: 768px) {
     .episode-preview .overlay-on-hover {
         display: flex;
         align-items: center;
+    }
+
+    .episode-preview .options,
+    .episode-preview-active .options {
+        visibility: hidden;
     }
 }

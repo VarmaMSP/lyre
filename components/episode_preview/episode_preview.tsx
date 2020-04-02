@@ -64,7 +64,15 @@ const EpisodePreview: React.FC<Props> = ({
   const AddIcon = iconMap['dots-horizontal']
 
   return (
-    <div className="episode-preview flex md:px-1 py-4 md:hover:bg-gray-100 rounded-lg">
+    <div
+      className={classnames(
+        'episode-preview flex md:px-1 py-4 md:hover:bg-gray-100 rounded-lg',
+        {
+          'episode-preview': activeActionsPopup !== episode.id,
+          'episode-preview-active': activeActionsPopup === episode.id,
+        },
+      )}
+    >
       <div className="flex-none md:mr-4 mr-3">
         <EpisodeThumbnail episodeId={episode.id} small={small} large={large} />
       </div>
@@ -97,10 +105,9 @@ const EpisodePreview: React.FC<Props> = ({
               </div>
             )}
           </div>
-          <div className="flex-none pl-4 pr-2">
+          <div className="flex-none pl-3 pr-1">
             <div
               ref={reference.ref}
-              className="cursor-pointer text-gray-700 hover-text-gray-900"
               onClick={() =>
                 activeActionsPopup !== episode.id
                   ? showActionsPopup()
@@ -109,8 +116,9 @@ const EpisodePreview: React.FC<Props> = ({
               onPointerDown={stopEventPropagation}
               onMouseDown={stopEventPropagation}
               onTouchStart={stopEventPropagation}
+              className="py-1 text-gray-700 hover-text-gray-900 cursor-pointer"
             >
-              <AddIcon className="fill-current w-5 h-5" />
+              <AddIcon className="options fill-current w-5 h-5" />
             </div>
           </div>
         </div>
