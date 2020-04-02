@@ -86,9 +86,7 @@ const EpisodePreview: React.FC<Props> = ({
                 <a
                   className="hover:text-blue-700"
                   dangerouslySetInnerHTML={{
-                    __html: !!searchResult
-                      ? searchResult.title
-                      : episode.title + episode.title,
+                    __html: !!searchResult ? searchResult.title : episode.title,
                   }}
                 />
               </EpisodeLink>
