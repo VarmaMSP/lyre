@@ -65,13 +65,10 @@ const EpisodePreview: React.FC<Props> = ({
 
   return (
     <div
-      className={classnames(
-        'episode-preview flex md:px-1 py-4 md:hover:bg-gray-100 rounded-lg',
-        {
-          'episode-preview': activeActionsPopup !== episode.id,
-          'episode-preview-active': activeActionsPopup === episode.id,
-        },
-      )}
+      className={classnames('flex md:px-1 py-4 rounded-lg', {
+        'episode-preview': activeActionsPopup !== episode.id,
+        'episode-preview-active': activeActionsPopup === episode.id,
+      })}
     >
       <div className="flex-none md:mr-4 mr-3">
         <EpisodeThumbnail episodeId={episode.id} small={small} large={large} />

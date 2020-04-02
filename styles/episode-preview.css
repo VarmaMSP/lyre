@@ -8,14 +8,19 @@
     align-items: center;
 }
 
-.episode-preview .options {
-    visibility: hidden;
+.episode-preview:hover,
+.episode-preview-active {
+    background-color: #f7fafc;
 }
 
 .episode-preview:hover .options,
 .episode-preview-active .options
 {
     visibility: visible;
+}
+
+.episode-preview .options {
+    visibility: hidden;
 }
 
 @media screen and (max-width: 768px) {
@@ -26,6 +31,6 @@
 
     .episode-preview .options,
     .episode-preview-active .options {
-        visibility: hidden;
+        visibility: visible;
     }
 }
