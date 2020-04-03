@@ -26,7 +26,7 @@ function useDisableScroll(disableScroll: boolean) {
 
     const fn2: EventListener = (e) => {
       const k: number = (e as any).keyCode
-      if (k === 32 || k === 37 || k === 38 || k === 39 || k === 40) {
+      if (k === 37 || k === 38 || k === 39 || k === 40) {
         e.preventDefault()
         return false
       }
