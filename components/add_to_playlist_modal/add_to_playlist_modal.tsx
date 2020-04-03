@@ -1,8 +1,9 @@
 import ModalContainer from 'components/modal/modal_container'
 import Overlay from 'components/modal/overlay'
+import useCallbackRef from 'hooks/useCallbackRef'
 import useDisableScroll from 'hooks/useDisableScroll'
 import { Playlist } from 'models'
-import React, { useEffect } from 'react'
+import React, { ReactEventHandler, useEffect } from 'react'
 import { stopEventPropagation } from 'utils/dom'
 import PlaylistsListItem from './playlists_list_item'
 
@@ -28,20 +29,32 @@ const AddToPlaylistModal: React.FC<Props> = ({
   closeAllPopups,
   showCreatePlaylistModal,
 }) => {
+  const [elem, ref] = useCallbackRef<HTMLDivElement>()
+
   useEffect(() => {
     closeAllPopups()
   }, [])
 
   useDisableScroll(true)
 
+  const fn: ReactEventHandler<HTMLDivElement> = (e) => {
+    if (
+      (!!elem && elem.offsetHeight < elem.scrollHeight) ||
+      (!!elem && elem.offsetWidth < elem.scrollWidth)
+    ) {
+      stopEventPropagation(e)
+    }
+  }
+
   return (
     <Overlay background="rgba(0, 0, 0, 0.65)">
       <ModalContainer className="modal-slim" header="Add to Playlist">
         <div
+          ref={ref}
           className="h-full flex flex-col justify-between"
-          onWheel={stopEventPropagation}
-          onTouchMove={stopEventPropagation}
-          onKeyDown={stopEventPropagation}
+          onWheel={fn}
+          onTouchMove={fn}
+          onKeyDown={fn}
         >
           {playlists.length === 0 ? (
             <div className="mt-5 text-center tracking-wider text-gray-800">
