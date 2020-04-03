@@ -17,12 +17,20 @@
         margin-left: -11rem;
         margin-top: -18rem;
     }
+
+    .modal .playlists-list {
+        height: 10rem;
+    }
 }
 
 @media (min-width: 414px) {
     .modal {
         width: 24rem;
         margin-left: -12rem;
+    }
+
+    .modal .playlists-list {
+        height: 10rem;
     }
 }
 
@@ -32,6 +40,10 @@
         margin-left: -22rem;
         height: 34rem;
         margin-top: -18rem;
+    }
+
+    .modal .playlists-list {
+        height: 26rem;
     }
 
     .modal-slim {
