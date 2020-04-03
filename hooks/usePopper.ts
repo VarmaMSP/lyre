@@ -2,6 +2,8 @@ import { createPopper } from '@popperjs/core'
 import * as PopperJS from '@popperjs/core/lib/types'
 import { useEffect, useRef, useState } from 'react'
 import useCallbackRef from './useCallbackRef'
+import useClickOutside from './useClickOutside'
+import useDisableScroll from './useDisableScroll'
 
 function usePopper(
   options: PopperJS.Options,
@@ -14,6 +16,13 @@ function usePopper(
     [key: string]: Partial<CSSStyleDeclaration>
   }>({})
 
+  // Disable scroll
+  useDisableScroll(popper)
+
+  // Click Outside
+  useClickOutside(popper, () => onPopperClickOutside && onPopperClickOutside())
+
+  // Init Popper
   useEffect(() => {
     const cleanUp = () => {
       setStyles({})
@@ -39,35 +48,6 @@ function usePopper(
       return cleanUp
     }
   }, [reference, popper, options.placement])
-
-  useEffect(() => {
-    const fn: EventListener = (e) => {
-      if (!!popper && !popper.contains(e.target as any)) {
-        onPopperClickOutside && onPopperClickOutside()
-      }
-    }
-
-    const cleanUp = () => {
-      if (window.PointerEvent) {
-        document.removeEventListener('pointerdown', fn)
-      } else {
-        document.removeEventListener('mousedown', fn)
-        document.removeEventListener('touchstart', fn)
-      }
-    }
-
-    cleanUp()
-    if (!!popper) {
-      if (window.PointerEvent) {
-        document.addEventListener('pointerdown', fn)
-      } else {
-        document.addEventListener('mousedown', fn)
-        document.addEventListener('touchstart', fn)
-      }
-
-      return cleanUp
-    }
-  }, [popper])
 
   return [
     {
