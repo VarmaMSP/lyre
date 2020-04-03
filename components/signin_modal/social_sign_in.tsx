@@ -1,4 +1,5 @@
 import { Icon, iconMap } from 'components/icon'
+import useDisableScroll from 'hooks/useDisableScroll'
 import React from 'react'
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
 const SocialSignIn: React.SFC<Props> = (props) => {
   const { icon, text, onClick } = props
   const SocialMediaIcon = iconMap[icon]
+
+  useDisableScroll(true)
 
   return (
     <button

@@ -1,7 +1,9 @@
 import ModalContainer from 'components/modal/modal_container'
 import Overlay from 'components/modal/overlay'
+import useDisableScroll from 'hooks/useDisableScroll'
 import { Playlist } from 'models'
 import React, { useEffect } from 'react'
+import { stopEventPropagation } from 'utils/dom'
 import PlaylistsListItem from './playlists_list_item'
 
 export interface StateToProps {
@@ -30,16 +32,23 @@ const AddToPlaylistModal: React.FC<Props> = ({
     closeAllPopups()
   }, [])
 
+  useDisableScroll(true)
+
   return (
     <Overlay background="rgba(0, 0, 0, 0.65)">
       <ModalContainer className="modal-slim" header="Add to Playlist">
-        <div className="h-full flex flex-col">
+        <div
+          className="h-full flex flex-col justify-between"
+          onWheel={stopEventPropagation}
+          onTouchMove={stopEventPropagation}
+          onKeyDown={stopEventPropagation}
+        >
           {playlists.length === 0 ? (
-            <div className="flex-1 mt-5 text-center tracking-wider text-gray-800">
+            <div className="mt-5 text-center tracking-wider text-gray-800">
               {'No playlists found, create one.'}
             </div>
           ) : (
-            <div className="flex-1 overflow-y-auto">
+            <div className="overflow-auto" style={{ height: '26rem' }}>
               {playlists.map((playlist) => (
                 <PlaylistsListItem
                   key={playlist.id}

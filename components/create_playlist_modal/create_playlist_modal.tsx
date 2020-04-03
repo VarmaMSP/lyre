@@ -1,8 +1,9 @@
 import ModalContainer from 'components/modal/modal_container'
 import Overlay from 'components/modal/overlay'
 import { Formik } from 'formik'
-import React from 'react'
+import useDisableScroll from 'hooks/useDisableScroll'
 import { PlaylistPrivacy } from 'models'
+import React from 'react'
 
 export interface StateToProps {
   isLoading: boolean
@@ -23,6 +24,8 @@ export interface OwnProps {
 type Props = StateToProps & DispatchToProps & OwnProps
 
 const CreatePlaylistModal: React.FC<Props> = ({ createPlaylist }) => {
+  useDisableScroll(true)
+
   return (
     <Overlay background="rgba(0, 0, 0, 0.65)">
       <ModalContainer className="modal-slim" header="Create Playlist">
