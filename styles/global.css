@@ -1,6 +1,7 @@
 * { 
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -moz-tap-highlight-color: rgba(0, 0, 0, 0);
+    overscroll-behavior: contain;
 }
 
 html {
@@ -8,7 +9,7 @@ html {
 }
 
 body {
-    overscroll-behavior-x: none;
+    overscroll-behavior: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
