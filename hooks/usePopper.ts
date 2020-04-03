@@ -17,7 +17,7 @@ function usePopper(
   }>({})
 
   // Disable scroll
-  useDisableScroll(popper)
+  useDisableScroll(!!popper)
 
   // Click Outside
   useClickOutside(popper, () => onPopperClickOutside && onPopperClickOutside())

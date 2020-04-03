@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-function useDisableScroll(reference: HTMLElement | null) {
+function useDisableScroll(disableScroll: boolean) {
   useEffect(() => {
     const fn: EventListener = (() => {
       const winX = window.scrollX
@@ -14,11 +14,11 @@ function useDisableScroll(reference: HTMLElement | null) {
     }
 
     cleanUp()
-    if (!!reference) {
+    if (disableScroll) {
       window.addEventListener('scroll', fn)
       return cleanUp
     }
-  }, [reference])
+  }, [disableScroll])
 }
 
 export default useDisableScroll
