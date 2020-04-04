@@ -63,15 +63,30 @@ const AddToPlaylistModal: React.FC<Props> = ({
               {'No playlists found, create one.'}
             </div>
           ) : (
-            <div ref={ref} className="playlists-list overflow-auto">
-              {playlists.map((playlist) => (
-                <PlaylistsListItem
-                  key={playlist.id}
-                  playlist={playlist}
-                  episodeId={episodeId}
-                />
-              ))}
-            </div>
+            <>
+              <div ref={ref} className="list">
+                {playlists.map((playlist) => (
+                  <PlaylistsListItem
+                    key={playlist.id}
+                    playlist={playlist}
+                    episodeId={episodeId}
+                  />
+                ))}
+              </div>
+
+              <style jsx>{`
+                .list {
+                  height: 22rem;
+                  overflow: auto;
+                }
+
+                @media (min-width: 768px) {
+                  .list {
+                    height: 26rem;
+                  }
+                }
+              `}</style>
+            </>
           )}
 
           <button
