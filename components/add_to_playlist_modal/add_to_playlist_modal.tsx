@@ -39,8 +39,8 @@ const AddToPlaylistModal: React.FC<Props> = ({
 
   const fn: ReactEventHandler<HTMLDivElement> = (e) => {
     if (
-      (!!elem && elem.offsetHeight < elem.scrollHeight) ||
-      (!!elem && elem.offsetWidth < elem.scrollWidth)
+      (!!elem && elem.scrollHeight > elem.clientHeight) ||
+      (!!elem && elem.scrollWidth > elem.clientWidth)
     ) {
       stopEventPropagation(e)
     }
