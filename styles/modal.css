@@ -18,7 +18,8 @@
         margin-top: -18rem;
     }
 
-    .modal .playlists-list {
+    .modal .playlists-list
+    .modal-slim .playlist-list {
         height: 10rem;
     }
 }
@@ -29,7 +30,8 @@
         margin-left: -12rem;
     }
 
-    .modal .playlists-list {
+    .modal .playlists-list
+    .modal-slim .playlist-list {
         height: 10rem;
     }
 }
@@ -42,7 +44,8 @@
         margin-top: -18rem;
     }
 
-    .modal .playlists-list {
+    .modal .playlists-list
+    .modal-slim .playlist-list {
         height: 26rem;
     }
 

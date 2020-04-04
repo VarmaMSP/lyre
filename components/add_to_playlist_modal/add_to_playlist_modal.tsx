@@ -39,8 +39,11 @@ const AddToPlaylistModal: React.FC<Props> = ({
 
   const fn: ReactEventHandler<HTMLDivElement> = (e) => {
     if (
-      (!!elem && elem.scrollHeight > elem.clientHeight) ||
-      (!!elem && elem.scrollWidth > elem.clientWidth)
+      !!elem &&
+      (elem.scrollHeight > elem.clientHeight ||
+        elem.scrollWidth > elem.clientWidth ||
+        elem.scrollHeight > elem.offsetHeight ||
+        elem.scrollWidth > elem.offsetWidth)
     ) {
       stopEventPropagation(e)
     }
@@ -50,7 +53,6 @@ const AddToPlaylistModal: React.FC<Props> = ({
     <Overlay background="rgba(0, 0, 0, 0.65)">
       <ModalContainer className="modal-slim" header="Add to Playlist">
         <div
-          ref={ref}
           className="h-full flex flex-col justify-between"
           onWheel={fn}
           onTouchMove={fn}
@@ -61,7 +63,7 @@ const AddToPlaylistModal: React.FC<Props> = ({
               {'No playlists found, create one.'}
             </div>
           ) : (
-            <div className="playlists-list overflow-auto">
+            <div ref={ref} className="playlists-list overflow-auto">
               {playlists.map((playlist) => (
                 <PlaylistsListItem
                   key={playlist.id}
