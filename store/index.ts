@@ -11,7 +11,10 @@ export interface AppState extends ReturnType<typeof rootReducer> {}
 
 export const makeStore = (initalState?: AppState) => {
   const composeEnhancers =
-    (window as any)?.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+    typeof window != 'undefined' &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      : compose
 
   const epicMiddleware = createEpicMiddleware<
     AppActions,
