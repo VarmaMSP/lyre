@@ -10,8 +10,9 @@ html {
 
 body {
     overscroll-behavior: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /* -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: antialiased; */
+    text-rendering: optimizeLegibility; 
 }
 
 .result-highlight {
