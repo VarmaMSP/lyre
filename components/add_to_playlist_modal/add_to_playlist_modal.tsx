@@ -1,6 +1,5 @@
 import ModalContainer from 'components/modal/modal_container'
 import Overlay from 'components/modal/overlay'
-import useDisableScroll from 'hooks/useDisableScroll'
 import { Playlist } from 'models'
 import React, { useEffect } from 'react'
 import PlaylistsListItem from './playlists_list_item'
@@ -27,8 +26,6 @@ const AddToPlaylistModal: React.FC<Props> = ({
   closeAllPopups,
   showCreatePlaylistModal,
 }) => {
-  const scrollableRef = useDisableScroll(true)
-
   useEffect(() => {
     closeAllPopups()
   }, [])
@@ -43,7 +40,7 @@ const AddToPlaylistModal: React.FC<Props> = ({
             </div>
           ) : (
             <>
-              <div ref={scrollableRef} className="list">
+              <div className="list">
                 {playlists.map((playlist) => (
                   <PlaylistsListItem
                     key={playlist.id}

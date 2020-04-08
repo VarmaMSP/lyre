@@ -1,26 +1,6 @@
 import { useEffect, useMemo } from 'react'
-import useCallbackRef from './useCallbackRef'
 
-function useDisableScroll(
-  disableScroll: boolean,
-): (elem: HTMLElement | null) => void {
-  const [, scrollableRef] = useCallbackRef<HTMLElement>((elem) => {
-    const fn: EventListener = (e) => {
-      if (
-        elem.scrollHeight > elem.clientHeight ||
-        elem.scrollWidth > elem.clientWidth ||
-        elem.scrollHeight > elem.offsetHeight ||
-        elem.scrollWidth > elem.offsetWidth
-      ) {
-        e.stopPropagation()
-      }
-    }
-
-    elem.onwheel = fn
-    elem.ontouchmove = fn
-    elem.onkeydown = fn
-  })
-
+function useDisableScroll(disableScroll: boolean) {
   const passiveSupported = useMemo(() => {
     let res: boolean = false
     let fn: EventListener = () => {}
@@ -46,7 +26,7 @@ function useDisableScroll(
 
     const fn2: EventListener = (e) => {
       const k: number = (e as any).keyCode
-      if (k === 37 || k === 38 || k === 39 || k === 40) {
+      if (k === 38 || k === 40) {
         e.preventDefault()
         return false
       }
@@ -73,8 +53,6 @@ function useDisableScroll(
       return cleanUp
     }
   }, [disableScroll])
-
-  return scrollableRef
 }
 
 export default useDisableScroll
