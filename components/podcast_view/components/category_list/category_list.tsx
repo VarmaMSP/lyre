@@ -39,10 +39,11 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({ categories }) => {
           childIds.map((childId) => (
             <div
               key={`${parentId}${childId}`}
-              className="bg-green-100 mr-4 my-2 px-3 text-2xs tracking-wide leading-loose border border-green-600 rounded-full"
+              className="bg-green-100 mr-4 px-3 text-2xs tracking-wide border border-green-500 rounded-full"
+              style={{ paddingBottom: '0.11rem', paddingTop: '0.11rem' }}
             >
               <ChartLink chartUrlParam={parent.urlParam}>
-                <a className="font-medium hover:text-blue-800 hover:underline">{`${parent.name}`}</a>
+                <a className="hover:text-blue-800 hover:underline">{`${parent.name}`}</a>
               </ChartLink>
               <span style={{ marginLeft: '0.35rem', marginRight: '0.35rem' }}>
                 &rsaquo;
@@ -55,10 +56,11 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({ categories }) => {
         ) : (
           <div
             key={`${parentId}`}
-            className="bg-green-100 mr-4 my-2 px-3 text-2xs font-medium tracking-wide leading-loose border border-green-600 rounded-full"
+            className="bg-green-100 mr-4 px-3 text-2xs tracking-wide border border-green-500 rounded-full"
+            style={{ paddingBottom: '0.11rem', paddingTop: '0.11rem' }}
           >
             <ChartLink chartUrlParam={parent.urlParam}>
-              <a className="font-medium hover:text-blue-800 hover:underline">{`${parent.name}`}</a>
+              <a className="hover:text-blue-800 hover:underline">{`${parent.name}`}</a>
             </ChartLink>
           </div>
         )

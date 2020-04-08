@@ -24,7 +24,7 @@ const EpisodeActions: React.FC<DispatchToProps & OwnProps> = ({
           <AddToPlaylistIcon className="text-gray-800 fill-current w-4 h-4" />
         </div>
 
-        <div className="text-sm text-gray-800 font-medium tracking-wide">
+        <div className="text-sm text-gray-800 tracking-wide">
           {'Add to playlist'}
         </div>
       </div>

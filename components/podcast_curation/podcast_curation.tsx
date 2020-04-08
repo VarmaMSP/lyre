@@ -27,7 +27,7 @@ const PodcastGrid: React.FC<StateToProps & OwnProps> = ({
         {podcasts.map((p) => (
           <div
             key={p.id}
-            className="flex-none py-2 px-1 mb-4 hover:bg-gray-100 rounded-lg"
+            className="flex-none py-2 px-1 mb-4 hover:bg-gray-150 rounded-lg"
           >
             <PodcastLink podcastUrlParam={p.urlParam}>
               <a className="block w-full h-full text-gray-900 hover:text-blue-700">

@@ -65,7 +65,7 @@ const EpisodePreview: React.FC<Props> = ({
 
   return (
     <div
-      className={classnames('flex md:px-1 py-4 rounded-lg', {
+      className={classnames('flex md:px-1 pt-4 pb-2 rounded-lg', {
         'episode-preview': activeActionsPopup !== episode.id,
         'episode-preview-active': activeActionsPopup === episode.id,
       })}
@@ -74,18 +74,18 @@ const EpisodePreview: React.FC<Props> = ({
         <EpisodeThumbnail episodeId={episode.id} small={small} large={large} />
       </div>
 
-      <div className="w-full">
+      <div className="flex-1">
         <div className="flex justify-between">
           <div className="flex-1">
             <div
               className={classnames(
-                '-mt-1 mb-1 md:mb-0 text-black font-semibold tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
+                '-mt-1 mb-1 md:mb-0 text-black font-medium tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
               )}
               style={{ fontSize: '15px' }}
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
                 <a
-                  className="hover:text-blue-700"
+                  className="hover:text-blue-800 hover:border"
                   dangerouslySetInnerHTML={{
                     __html: !!searchResult ? searchResult.title : episode.title,
                   }}
@@ -94,20 +94,20 @@ const EpisodePreview: React.FC<Props> = ({
             </div>
 
             {!dense && (
-              <div className="text-xs text-gray-700 font-semibold tracking-wide leading-relaxed line-clamp-1">
+              <div className="text-xs text-gray-900 font-normal tracking-wide leading-relaxed line-clamp-1">
                 <PodcastLink podcastUrlParam={podcast.urlParam}>
                   <a className="hover:text-blue-800">{podcast.title}</a>
                 </PodcastLink>
               </div>
             )}
 
-            <div className="mb-2 text-2xs text-gray-700 font-medium tracking-wide leading-relaxed">
+            <div className="mb-2 text-2xs text-gray-800 font-normal tracking-wide leading-relaxed">
               {t == 'NORMAL' &&
-                `published ${formatDistanceToNow(
+                `Published ${formatDistanceToNow(
                   parseISO(episode.pubDate),
                 )} ago`.replace('about ', '')}
               {t == 'HISTORY' &&
-                `listened ${formatDistanceToNow(
+                `Listened ${formatDistanceToNow(
                   parseISO(episode.lastPlayedAt),
                 )} ago`.replace('about ', '')}
             </div>
@@ -132,10 +132,10 @@ const EpisodePreview: React.FC<Props> = ({
         </div>
 
         <div
-          className="md:pr-2 text-xs text-gray-800 font-medium md:break-normal break-all tracking-normal leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
+          className="md:pr-2 text-xs text-gray-900 md:break-normal break-all tracking-wide leading-normal md:line-clamp-2 line-clamp-3 cursor-default"
           style={{ hyphens: 'auto' }}
           dangerouslySetInnerHTML={{
-            __html: !!searchResult ? searchResult.description : episode.summary,
+            __html: searchResult?.description || episode.summary,
           }}
         />
       </div>

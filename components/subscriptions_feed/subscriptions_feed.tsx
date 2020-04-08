@@ -47,7 +47,7 @@ const SubscriptionsFeed: React.SFC<StateToProps & DispatchToProps> = ({
 
       {/* Feed */}
       {feed.map((episode) => (
-        <div key={episode.id} className="mb-6">
+        <div key={episode.id} className="mb-7">
           <EpisodePreview episodeId={episode.id} small />
         </div>
       ))}
@@ -59,7 +59,7 @@ const SubscriptionsFeed: React.SFC<StateToProps & DispatchToProps> = ({
 
       {/* Loader */}
       {!receivedAll && isLoadingMore && (
-        <div className="spinner mx-auto my-8" />
+        <div className="spinner mx-auto my-12" />
       )}
 
       {/* finished Loading */}
