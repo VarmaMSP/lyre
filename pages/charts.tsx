@@ -44,11 +44,7 @@ class ChartPage extends Component<StateToProps & OwnProps> {
         <PageLayout>
           <ChartView category={category} />
           <div className="pt-8">
-            <div className="py-4 px-4 bg-gray-200 rounded-lg">
-              <CategoryList
-                activeCategoryId={getIdFromUrlParam(chartUrlParam)}
-              />
-            </div>
+            <CategoryList activeCategoryId={getIdFromUrlParam(chartUrlParam)} />
           </div>
         </PageLayout>
       </>

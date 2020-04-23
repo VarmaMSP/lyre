@@ -16,7 +16,7 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({
   subCategories,
 }) => {
   return (
-    <div>
+    <div className="py-4 px-4 bg-gray-150 rounded-lg">
       {subCategories.length > 0 && (
         <>
           <h4 className="mb-4 tracking-wide">{'Sub Categories'}</h4>
