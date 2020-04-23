@@ -8,9 +8,12 @@
     align-items: center;
 }
 
-.episode-preview:hover,
-.episode-preview-active {
+.episode-preview:hover {
     background-color: #f3f8fb;
+}
+
+.episode-preview-active {
+    background-color: #f7fafc;
 }
 
 .episode-preview:hover .options,

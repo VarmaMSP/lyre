@@ -65,7 +65,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
                 'md:w-16 md:h-16': large,
               },
             )}
-            style={{ background: 'rgba(0, 0, 0, 0.6)' }}
+            style={{ background: 'rgba(0, 0, 0, 0.45)' }}
           >
             <PlayIcon
               className={classnames(
@@ -96,7 +96,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
 
       {/* Progress Bar */}
       <div
-        className={classnames('relative w-full h-1 mt-2 rounded-full', {
+        className={classnames('relative w-full h-1 mt-1 rounded-full', {
           'bg-gray-400': episode.lastPlayedAt !== '',
         })}
       >

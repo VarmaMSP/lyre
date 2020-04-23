@@ -17,7 +17,7 @@ interface OwnProps {
 
 const NavTabs: React.FC<OwnProps> = ({ tabs, active, defaultTab }) => {
   return (
-    <div className="flex border-b">
+    <div className="flex border-b border-gray-400">
       {tabs.map((t) => (
         <div key={t.name} className="w-20 mr-2">
           <Link

@@ -2,12 +2,12 @@ import { getPodcastPageData } from 'actions/podcast'
 import PageLayout from 'components/page_layout'
 import PodcastView from 'components/podcast_view'
 import { PodcastPageSeo } from 'components/seo'
+import { Podcast } from 'models'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { getPodcastById } from 'selectors/entities/podcasts'
 import { AppState } from 'store'
-import { Podcast } from 'models'
 import { PageContext } from 'types/utilities'
 import { getIdFromUrlParam } from 'utils/utils'
 
@@ -18,6 +18,7 @@ interface StateToProps {
 interface OwnProps {
   podcastUrlParam: string
   activeTab?: string
+  query?: string
   scrollY: number
 }
 
@@ -41,7 +42,7 @@ class PodcastPage extends Component<StateToProps & OwnProps> {
         <PodcastPageSeo podcast={podcast} />
         <PageLayout>
           <PodcastView podcast={podcast} activeTab={activeTab} />
-          <div></div>
+          <div />
         </PageLayout>
       </>
     )

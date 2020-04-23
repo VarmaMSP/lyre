@@ -13,8 +13,13 @@ export function getSubscriptionsPageData() {
         method: 'GET',
         urlPath: `/subscriptions`,
       }),
-    (dispatch, _, { episodes }) => {
+    (dispatch, _, { episodes, podcasts }) => {
       dispatch({ type: T.EPISODE_ADD, episodes })
+      dispatch({ type: T.PODCAST_ADD, podcasts })
+      dispatch({
+        type: T.SESSION_LOAD_SUBSCRIPTIONS,
+        podcastIds: podcasts.map((x) => x.id),
+      })
 
       dispatch({
         type: T.SUBSCRIPTIONS_FEED_LOAD_PAGE,

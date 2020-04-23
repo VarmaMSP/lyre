@@ -265,7 +265,7 @@ module.exports = {
       ],
     },
     fontSize: {
-      '2xs': '0.75rem',
+      '2xs': '0.77rem',
       xs: '0.82rem',
       sm: '0.875rem',
       base: '1rem',
@@ -283,7 +283,7 @@ module.exports = {
       light: '300',
       normal: '400',
       medium: '450',
-      semibold: '600',
+      semibold: '570',
       bold: '700',
       extrabold: '800',
       black: '900',

@@ -37,6 +37,7 @@ export function registerRoutes(app: NextServer, router: Router) {
     servePage('/podcasts', 'public,max-age=3600,must-revalidate', (ctx) => ({
       podcastUrlParam: ctx.params['podcastUrlParam'],
       activeTab: ctx.params['activeTab'],
+      query: ctx.request.query['query'],
     })),
   )
 

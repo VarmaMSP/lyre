@@ -39,28 +39,31 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({ categories }) => {
           childIds.map((childId) => (
             <div
               key={`${parentId}${childId}`}
-              className="bg-green-100 mr-4 px-3 text-2xs tracking-wide border border-green-500 rounded-full"
-              style={{ paddingBottom: '0.11rem', paddingTop: '0.11rem' }}
+              className="bg-green-100 mr-4 mb-2 px-3 text-2xs text-green-900 font-medium tracking-wide border border-green-500 rounded-full"
+              style={{ paddingBottom: '0.08rem', paddingTop: '0.08rem' }}
             >
               <ChartLink chartUrlParam={parent.urlParam}>
-                <a className="hover:text-blue-800 hover:underline">{`${parent.name}`}</a>
+                <a className="hover:text-blue-800">{`${parent.name}`}</a>
               </ChartLink>
-              <span style={{ marginLeft: '0.35rem', marginRight: '0.35rem' }}>
+              <span
+                className="font-bold"
+                style={{ marginLeft: '0.35rem', marginRight: '0.35rem' }}
+              >
                 &rsaquo;
               </span>
               <ChartLink chartUrlParam={byId[childId].urlParam}>
-                <a className="hover:text-blue-800 hover:underline">{`${byId[childId].name}`}</a>
+                <a className="hover:text-blue-800">{`${byId[childId].name}`}</a>
               </ChartLink>
             </div>
           ))
         ) : (
           <div
             key={`${parentId}`}
-            className="bg-green-100 mr-4 px-3 text-2xs tracking-wide border border-green-500 rounded-full"
-            style={{ paddingBottom: '0.11rem', paddingTop: '0.11rem' }}
+            className="bg-green-100 mr-4 mb-2 px-3 text-2xs text-green-900 font-medium tracking-wide border border-green-500 rounded-full"
+            // style={{ paddingBottom: '0.11rem', paddingTop: '0.11rem' }}
           >
             <ChartLink chartUrlParam={parent.urlParam}>
-              <a className="hover:text-blue-800 hover:underline">{`${parent.name}`}</a>
+              <a className="hover:text-blue-800">{`${parent.name}`}</a>
             </ChartLink>
           </div>
         )

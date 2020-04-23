@@ -17,6 +17,9 @@ const userId: Reducer<string, T.AppActions> = (state = '', action) => {
 
 const subscriptions: Reducer<string[], T.AppActions> = (state = [], action) => {
   switch (action.type) {
+    case T.SESSION_LOAD_SUBSCRIPTIONS:
+      return action.podcastIds
+
     case T.SESSION_SUBSCRIBE_PODCASTS:
       return addKeysToArr(action.podcastIds, state)
 
