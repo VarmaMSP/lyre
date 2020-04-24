@@ -67,7 +67,7 @@ export function getResultsPageData(searchParams: GlobalSearchParams) {
           sort_by: searchParams.sortBy,
         })}`,
       }),
-    (dispatch, _, { podcasts, episodes, globalSearchResults }) => {
+    (dispatch, _, { podcasts, episodes, searchResults }) => {
       // entities
       dispatch({ type: T.PODCAST_ADD, podcasts })
       dispatch({ type: T.EPISODE_ADD, episodes })
@@ -75,13 +75,13 @@ export function getResultsPageData(searchParams: GlobalSearchParams) {
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
         params: searchParams,
         resultType: 'podcast',
-        results: globalSearchResults.podcasts,
+        results: searchResults.podcasts,
       })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
         params: searchParams,
         resultType: 'episode',
-        results: globalSearchResults.episodes,
+        results: searchResults.episodes,
       })
 
       // UI
@@ -90,24 +90,30 @@ export function getResultsPageData(searchParams: GlobalSearchParams) {
         params: searchParams,
         resultType: 'podcast',
         page: 0,
-        resultIds: globalSearchResults.podcasts.map((x) => x.id),
+        resultIds: searchResults.podcasts.map((x) => x.id),
       })
       dispatch({
         type: T.GLOBAL_SEARCH_RESULTS_LOAD,
         params: searchParams,
         resultType: 'episode',
         page: 0,
-        resultIds: globalSearchResults.episodes.map((x) => x.id),
+        resultIds: searchResults.episodes.map((x) => x.id),
       })
 
-      if (searchParams.type === 'podcast' && globalSearchResults.podcasts.length < 25) {
+      if (
+        searchParams.type === 'podcast' &&
+        searchResults.podcasts.length < 25
+      ) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
           params: searchParams,
         })
       }
 
-      if (searchParams.type === 'episode' && globalSearchResults.episodes.length < 25) {
+      if (
+        searchParams.type === 'episode' &&
+        searchResults.episodes.length < 25
+      ) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
           params: searchParams,
@@ -136,11 +142,7 @@ export function getResults(
           limit: limit,
         })}`,
       }),
-    (
-      dispatch,
-      _,
-      { podcasts, episodes, globalSearchResults },
-    ) => {
+    (dispatch, _, { podcasts, episodes, searchResults }) => {
       // entities
       dispatch({ type: T.PODCAST_ADD, podcasts })
       dispatch({ type: T.EPISODE_ADD, episodes })
@@ -148,13 +150,13 @@ export function getResults(
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
         params: searchParams,
         resultType: 'podcast',
-        results: globalSearchResults.podcasts,
+        results: searchResults.podcasts,
       })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
         params: searchParams,
         resultType: 'episode',
-        results: globalSearchResults.episodes,
+        results: searchResults.episodes,
       })
 
       // UI
@@ -163,19 +165,19 @@ export function getResults(
         params: searchParams,
         resultType: 'podcast',
         page: Math.floor(offset - 25 / limit) + 1,
-        resultIds: globalSearchResults.podcasts.map((x) => x.id),
+        resultIds: searchResults.podcasts.map((x) => x.id),
       })
       dispatch({
         type: T.GLOBAL_SEARCH_RESULTS_LOAD,
         params: searchParams,
         resultType: 'episode',
         page: Math.floor(offset - 25 / limit) + 1,
-        resultIds: globalSearchResults.episodes.map((x) => x.id),
+        resultIds: searchResults.episodes.map((x) => x.id),
       })
 
       if (
         searchParams.type === 'podcast' &&
-        globalSearchResults.podcasts.length < limit
+        searchResults.podcasts.length < limit
       ) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,
@@ -185,7 +187,7 @@ export function getResults(
 
       if (
         searchParams.type === 'episode' &&
-        globalSearchResults.episodes.length < limit
+        searchResults.episodes.length < limit
       ) {
         dispatch({
           type: T.GLOBAL_SEARCH_RESULTS_RECEIVED_ALL,

@@ -6,7 +6,7 @@ import { Podcast } from './podcast'
 import { SearchSuggestion } from './search_suggestions'
 import { User } from './user'
 
-export class GlobalSearchResults {
+export class SearchResults {
   podcasts: Podcast[]
   episodes: Episode[]
 
@@ -25,7 +25,7 @@ export class ApiResponse {
   searchSuggestions: SearchSuggestion[]
   categories: Category[]
   raw: any
-  globalSearchResults: GlobalSearchResults
+  searchResults: SearchResults
 
   constructor(j: any) {
     const data = (j['data'] || {}) as any
@@ -38,9 +38,7 @@ export class ApiResponse {
     this.searchSuggestions = (data['search_suggestions'] || []).map(
       (o: any) => new SearchSuggestion(o),
     )
-    this.globalSearchResults = new GlobalSearchResults(
-      data['global_search_results'] || {},
-    )
+    this.searchResults = new SearchResults(data['search_results'] || {})
     this.categories = (data['categories'] || []).map(
       (o: any) => new Category(o),
     )

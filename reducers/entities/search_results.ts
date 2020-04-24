@@ -16,6 +16,14 @@ const byHashId: Reducer<
       }>((acc, r) => ({ ...acc, [hashSum(['g', k, r.id])]: r }), state)
     }
 
+    case T.SEARCH_RESULT_ADD_PODCAST_SEARCH_RESULTS: {
+      const k = hashSum(action.params)
+
+      return action.results.reduce<{
+        [hashId: string]: Podcast | Episode
+      }>((acc, r) => ({ ...acc, [hashSum([k, r.id])]: r }), state)
+    }
+
     default:
       return state
   }
