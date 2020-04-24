@@ -48,7 +48,6 @@ const CreatePlaylistModal: React.FC<Props> = ({ createPlaylist }) => {
             return errors
           }}
           onSubmit={(values) => {
-            console.log(values)
             createPlaylist(
               values.title,
               values.privacy as PlaylistPrivacy,

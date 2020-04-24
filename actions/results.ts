@@ -8,6 +8,30 @@ import * as RequestId from 'utils/request_id'
 import { encodeQueryParam, qs } from 'utils/utils'
 import { requestAction } from './utils'
 
+export function loadPodcastSearchPage(podcastUrlParam: string, query: string) {
+  return (dispatch: Dispatch<T.AppActions>) => {
+    dispatch({
+      type: T.HISTORY_PUSH_ENTRY,
+      entry: {
+        urlPath: Router.asPath,
+        scrollY: window.scrollY,
+      },
+    })
+
+    Router.push(
+      {
+        pathname: '/podcasts',
+        query: {
+          podcastUrlParam: podcastUrlParam,
+          activeTab: 'search',
+          query: query,
+        },
+      },
+      `/podcasts/${podcastUrlParam}/search?query=${query}`,
+    )
+  }
+}
+
 export function loadResultsPage(searchParams: GlobalSearchParams) {
   return (dispatch: Dispatch<T.AppActions>) => {
     gtag.search(searchParams.query)

@@ -36,7 +36,7 @@ const PodcastView: React.FC<OwnProps> = ({ podcast, activeTab, query }) => {
         />
       </div>
       {activeTab === undefined && <HomeTab podcast={podcast} />}
-      {activeTab === 'search' && <SearchTab query={query} />}
+      {activeTab === 'search' && <SearchTab query={query} podcast={podcast} />}
     </div>
   )
 }
