@@ -17,15 +17,18 @@ const PodcastHeader: React.SFC<OwnProps> = ({ podcast }) => {
         <Img src={getImageUrl(podcast.urlParam)} />
       </div>
 
-      <div className="flex flex-col flex-auto w-1/2 justify-between lg:px-5 px-3">
+      <div
+        className="flex flex-col flex-auto w-1/2 justify-between lg:px-5 px-3"
+        style={{ marginTop: '-3px' }}
+      >
         <div className="w-full mb-3">
-          <h2 className="text-lg text-gray-900 font-medium leading-snug tracking-wide line-clamp-2">
+          <h2 className="text-lg text-gray-900 font-medium leading-tight tracking-wide line-clamp-2">
             {podcast.title}
           </h2>
-          <h3 className="text-sm text-gray-800 font-medium leading-loose tracking-wide line-clamp-1">
+          <h3 className="text-sm text-gray-700 font-medium leading-loose tracking-wide line-clamp-1">
             {podcast.author}
           </h3>
-          <h4 className="text-2xs font-medium text-gray-700 leading-relaxed tracking-wide">
+          <h4 className="text-xs font-medium text-gray-700 leading-relaxed tracking-wide">
             {`Since ${format(
               parseISO(`${podcast.earliestEpisodePubDate} +0000`),
               'MMM yyyy',

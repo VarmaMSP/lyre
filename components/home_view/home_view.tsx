@@ -28,7 +28,7 @@ const HomeView: React.FC<StateToProps> = ({
       <div className="flex flex-wrap mb-4">
         {categories.map((c) => (
           <ChartLink key={c.id} chartUrlParam={c.urlParam}>
-            <a className="block mx-2 my-2 px-4 py-1 text-gray-900 text-sm tracking-wide bg-green-100 hover:bg-green-200 border border-green-600 rounded-full">
+            <a className="block mx-2 my-2 px-4 py-1 text-gray-900 text-sm font-medium tracking-wide bg-green-100 hover:bg-green-200 border border-green-600 rounded-full">
               {c.name}
             </a>
           </ChartLink>

@@ -12,7 +12,7 @@ const PodcastTab: React.FC<OwnProps> = ({ podcast }) => {
   return (
     <div>
       <div className="mt-6 cursor-default" style={{ hyphens: 'auto' }}>
-        <div className="font-medium text-gray-900 text-sm leading-relaxed tracking-wide">
+        <div className="text-gray-900 text-sm leading-relaxed">
           {podcast.description}
         </div>
         <div className="mt-6">

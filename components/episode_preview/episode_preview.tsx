@@ -64,12 +64,7 @@ const EpisodePreview: React.FC<Props> = ({
   const AddIcon = iconMap['dots-horizontal']
 
   return (
-    <div
-      className={classnames('flex md:px-1 pt-5 pb-3 rounded-lg', {
-        // 'episode-preview': activeActionsPopup !== episode.id,
-        // 'episode-preview-active': activeActionsPopup === episode.id,
-      })}
-    >
+    <div className="flex md:px-1 pt-5 pb-3 rounded-lg">
       <div className="flex-none md:mr-4 mr-3">
         <EpisodeThumbnail episodeId={episode.id} small={small} large={large} />
       </div>
@@ -79,9 +74,8 @@ const EpisodePreview: React.FC<Props> = ({
           <div className="flex-1">
             <div
               className={classnames(
-                'mb-1 md:mb-0 text-black font-semibold tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
+                'mb-1 md:mb-0 -mt-1 text-black text-sm md:text-lg font-medium md:font-semibold tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
               )}
-              style={{ fontSize: '17px', marginTop: '-5px' }}
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
                 <a
@@ -91,50 +85,6 @@ const EpisodePreview: React.FC<Props> = ({
                   }}
                 />
               </EpisodeLink>
-            </div>
-
-            {!dense && (
-              <div className="text-xs text-gray-900 font-medium tracking-wide leading-relaxed line-clamp-1">
-                <PodcastLink podcastUrlParam={podcast.urlParam}>
-                  <a className="hover:text-blue-800">{podcast.title}</a>
-                </PodcastLink>
-              </div>
-            )}
-
-            <div className="mb-1 text-xs text-gray-900 font-medium tracking-wide leading-relaxed">
-              {dense && (
-                <>
-                  {episode.type === 'FULL' &&
-                    episode.episode > 0 &&
-                    (episode.season > 0 ? (
-                      <span className="bg-gray-700 text-white text-2xs px-2 mr-3 font-medium tracking-wide leading-loose rounded-sm">
-                        {`S${episode.season} E${episode.episode}`}
-                      </span>
-                    ) : (
-                      <span className="bg-gray-700 text-white text-2xs px-2 mr-3 font-medium tracking-wide leading-loose rounded-sm">
-                        {`E${episode.episode}`}
-                      </span>
-                    ))}
-                  {episode.type === 'BONUS' && (
-                    <span className="bg-orange-700 text-white text-2xs px-2 mr-3 font-medium tracking-wide leading-loose rounded-sm">
-                      {'BONUS'}
-                    </span>
-                  )}
-                  {episode.type === 'TRAILER' && (
-                    <span className="bg-red-700 text-white text-2xs px-2 mr-3 font-medium tracking-wide leading-loose rounded-sm">
-                      {'TRAILER'}
-                    </span>
-                  )}
-                </>
-              )}
-              {t == 'NORMAL' &&
-                `Published ${formatDistanceToNow(
-                  parseISO(episode.pubDate),
-                )} ago`.replace('about ', '')}
-              {t == 'HISTORY' &&
-                `Listened ${formatDistanceToNow(
-                  parseISO(episode.lastPlayedAt),
-                )} ago`.replace('about ', '')}
             </div>
           </div>
 
@@ -156,8 +106,23 @@ const EpisodePreview: React.FC<Props> = ({
           </div>
         </div>
 
+        <div className="mb-2 text-xs text-gray-800 font-medium tracking-wide leading-relaxed line-clamp-1">
+          {dense && episodeNumber(episode)}
+          {episodeTime(episode, t)}
+          {!dense && (
+            <>
+              <span className="font-extrabold" style={{ margin: '0 0.4rem' }}>
+                &middot;
+              </span>
+              <PodcastLink podcastUrlParam={podcast.urlParam}>
+                <a className="hover:text-black">{podcast.title}</a>
+              </PodcastLink>
+            </>
+          )}
+        </div>
+
         <div
-          className="md:pr-2 text-2xs text-gray-700 font-medium md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default"
+          className="md:pr-2 text-xs text-gray-800 font-normal md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default"
           style={{ hyphens: 'auto' }}
           dangerouslySetInnerHTML={{
             __html: searchResult?.description || episode.summary,
@@ -173,6 +138,58 @@ const EpisodePreview: React.FC<Props> = ({
         </Portal>
       )}
     </div>
+  )
+}
+
+const episodeNumber = (episode: Episode): JSX.Element | null => {
+  if (episode.type == 'FULL' && episode.episode > 0) {
+    if (episode.season > 0) {
+      return (
+        <span className="bg-gray-700 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+          {`S${episode.season} E${episode.episode}`}
+        </span>
+      )
+    } else {
+      return (
+        <span className="bg-teal-600 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+          {`E${episode.episode}`}
+        </span>
+      )
+    }
+  }
+
+  if (episode.type == 'BONUS') {
+    return (
+      <span className="bg-yellow-700 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+        {'BONUS'}
+      </span>
+    )
+  }
+
+  if (episode.type == 'TRAILER') {
+    return (
+      <span className="bg-red-600 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+        {'TRAILER'}
+      </span>
+    )
+  }
+
+  return null
+}
+
+const episodeTime = (episode: Episode, t: string) => {
+  return (
+    <span>
+      {t == 'HISTORY'
+        ? `${formatDistanceToNow(parseISO(episode.lastPlayedAt))} ago`.replace(
+            'about ',
+            '',
+          )
+        : `${formatDistanceToNow(parseISO(episode.pubDate))} ago`.replace(
+            'about ',
+            '',
+          )}
+    </span>
   )
 }
 

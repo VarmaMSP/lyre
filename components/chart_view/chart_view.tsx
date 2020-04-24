@@ -1,4 +1,5 @@
 import Img from 'components/common/img'
+import Grid from 'components/grid'
 import { PodcastLink } from 'components/link'
 import { Category, Podcast } from 'models'
 import React from 'react'
@@ -22,40 +23,22 @@ const ChartView: React.FC<StateToProps & OwnProps> = ({
         {category.name}
       </h1>
       <hr className="mb-3" />
-      <div>
-        {podcasts.map((p, i) => (
-          <PodcastLink key={p.id} podcastUrlParam={p.urlParam}>
-            <a className="block py-4 md:px-2 my-4 md:hover:bg-gray-100 rounded-lg">
-              <div className="flex">
-                <div className="relative md:w-28 md:h-28 w-20 h-20 md:mr-4 mr-3 flex-none">
-                  <Img src={getImageUrl(p.urlParam)} />
-                  <div
-                    className="absolute w-8 bottom-0 left-0 text-xs font-bold text-center text-gray-100 tracking-wide leading-relaxed rounded-bl-lg border-b border-l "
-                    style={{ background: 'rgba(0, 0, 0, 0.8)' }}
-                  >
-                    {i + 1}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="md:mb-0 mb-1 md:text-base text-sm font-medium tracking-wide line-clamp-1">
-                    {p.title}
-                  </div>
-                  <div className="hidden md:text-sm text-xs text-grey-800 mb-2 tracking-wide md:leading-normal leading-relaxed md:line-clamp-1">
-                    {p.author}
-                  </div>
-                  <div
-                    className="md:break-normal break-all md:text-xs text-2xs md:text-gray-900 text-gray-900 tracking-wide leading-snug line-clamp-3"
-                    style={{ hyphens: 'auto' }}
-                  >
-                    {p.summary}
-                  </div>
-                </div>
-              </div>
-            </a>
-          </PodcastLink>
+      <Grid cols={{ LG: 5, MD: 4, SM: 3 }}>
+        {podcasts.map((p) => (
+          <div key={p.id} className="p-2 mb-4 md:hover:bg-gray-100">
+            <PodcastLink key={p.id} podcastUrlParam={p.urlParam}>
+              <a>
+                <Img src={getImageUrl(p.urlParam)} />
+              </a>
+            </PodcastLink>
+            <PodcastLink key={p.id} podcastUrlParam={p.urlParam}>
+              <a className="line-clamp-2 mt-2 text-2xs text-gray-800 hover:text-black">
+                {p.title}
+              </a>
+            </PodcastLink>
+          </div>
         ))}
-      </div>
+      </Grid>
     </div>
   )
 }
