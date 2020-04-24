@@ -1,17 +1,17 @@
 import Img from 'components/common/img'
-import EpisodePreview from 'components/episode_preview'
+import EpisodePreview from 'components/episode_preview/highlighted'
 import { PodcastLink } from 'components/link'
 import PodcastPreview from 'components/podcast_preview'
 import useVisible from 'hooks/useVisible'
-import { EpisodeSearchResult, PodcastSearchResult } from 'models'
+import { Episode, Podcast } from 'models'
 import React, { useEffect } from 'react'
 import { GlobalSearchParams } from 'types/ui/search'
 import { getImageUrl } from 'utils/dom'
 
 export interface StateToProps {
   isUserSignedIn: boolean
-  podcastSearchResults: PodcastSearchResult[]
-  episodeSearchResults: EpisodeSearchResult[]
+  podcastSearchResults: Podcast[]
+  episodeSearchResults: Episode[]
   receivedAll: boolean
   isLoadingMore: boolean
 }
@@ -161,7 +161,7 @@ const SearchResultsList: React.FC<Props> = ({
         <div className="text-lg font-semibold my-3">Episodes</div>
         {episodeSearchResults.map((e) => (
           <div key={e.id} className="mb-6">
-            <EpisodePreview episodeId={e.id} searchResult={e} small />
+            <EpisodePreview episode={e} small />
           </div>
         ))}
 

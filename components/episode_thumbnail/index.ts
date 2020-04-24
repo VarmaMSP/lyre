@@ -1,7 +1,6 @@
 import { startPlayback } from 'actions/playback'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
-import { getEpisodeById } from 'selectors/entities/episodes'
 import { getPodcastById } from 'selectors/entities/podcasts'
 import { AppState } from 'store'
 import * as T from 'types/actions'
@@ -11,23 +10,17 @@ import EpisodeThumbnail, {
   StateToProps,
 } from './episode_thumbnail'
 
-function mapStateToProps(
-  state: AppState,
-  { episodeId }: OwnProps,
-): StateToProps {
-  const episode = getEpisodeById(state, episodeId)
-  const podcast = getPodcastById(state, episode.podcastId)
-
-  return { episode, podcast }
+function mapStateToProps(state: AppState, { episode }: OwnProps): StateToProps {
+  return { podcast: getPodcastById(state, episode.podcastId) }
 }
 
 function mapDispatchToProps(
   dispatch: Dispatch<T.AppActions>,
-  { episodeId }: OwnProps,
+  { episode }: OwnProps,
 ): DispatchToProps {
   return {
     playEpisode: (beginAt: number) =>
-      bindActionCreators(startPlayback, dispatch)(episodeId, beginAt),
+      bindActionCreators(startPlayback, dispatch)(episode.id, beginAt),
   }
 }
 

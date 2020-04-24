@@ -6,7 +6,7 @@ import { EpisodeLink, PodcastLink } from 'components/link'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import parseISO from 'date-fns/parseISO'
 import usePopper from 'hooks/usePopper'
-import { Episode, EpisodeSearchResult, Podcast } from 'models'
+import { Episode, Podcast } from 'models'
 import React from 'react'
 import { Portal } from 'react-portal'
 import { stopEventPropagation } from 'utils/dom'
@@ -24,7 +24,6 @@ export interface DispatchToProps {
 
 export interface OwnProps {
   episodeId: string
-  searchResult?: EpisodeSearchResult
   small?: boolean
   large?: boolean
   dense?: boolean
@@ -39,7 +38,6 @@ const EpisodePreview: React.FC<Props> = ({
   activeActionsPopup,
   showActionsPopup,
   closeAllPopups,
-  searchResult,
   small = false,
   large = false,
   dense = false,
@@ -66,7 +64,7 @@ const EpisodePreview: React.FC<Props> = ({
   return (
     <div className="flex md:px-1 pt-5 pb-3 rounded-lg">
       <div className="flex-none md:mr-4 mr-3">
-        <EpisodeThumbnail episodeId={episode.id} small={small} large={large} />
+        <EpisodeThumbnail episode={episode} small={small} large={large} />
       </div>
 
       <div className="flex-1">
@@ -81,7 +79,7 @@ const EpisodePreview: React.FC<Props> = ({
                 <a
                   className="hover:text-blue-800 hover:border"
                   dangerouslySetInnerHTML={{
-                    __html: !!searchResult ? searchResult.title : episode.title,
+                    __html: episode.titleHighlighed || episode.title,
                   }}
                 />
               </EpisodeLink>
@@ -125,7 +123,7 @@ const EpisodePreview: React.FC<Props> = ({
           className="md:pr-2 text-xs text-gray-800 font-normal md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default"
           style={{ hyphens: 'auto' }}
           dangerouslySetInnerHTML={{
-            __html: searchResult?.description || episode.summary,
+            __html: episode.descriptionHighlighted || episode.summary,
           }}
         />
       </div>

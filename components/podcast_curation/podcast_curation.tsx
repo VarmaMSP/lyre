@@ -30,7 +30,7 @@ const PodcastGrid: React.FC<StateToProps & OwnProps> = ({
             className="flex-none py-2 px-1 mb-4 hover:bg-gray-150 rounded-lg"
           >
             <PodcastLink podcastUrlParam={p.urlParam}>
-              <a className="block w-full h-full text-gray-900 hover:text-blue-700">
+              <a className="block w-full h-full text-gray-900 hover:text-black">
                 <div className="mb-2">
                   <Img src={getImageUrl(p.urlParam)} />
                 </div>

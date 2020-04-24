@@ -25,6 +25,9 @@ export class Podcast {
   earliestEpisodePubDate: string
   copyright: string
   categories: PodcastCategory[]
+  titleHighlighted: string
+  authorHighlighted: string
+  descriptionHighlighted: string
 
   static merge(p1: Podcast, p2: Podcast): Podcast {
     return {
@@ -45,6 +48,15 @@ export class Podcast {
       ),
       copyright: mergeString(p1.copyright, p2.copyright),
       categories: mergeArray(p1.categories, p2.categories),
+      titleHighlighted: mergeString(p1.titleHighlighted, p2.titleHighlighted),
+      authorHighlighted: mergeString(
+        p1.authorHighlighted,
+        p2.authorHighlighted,
+      ),
+      descriptionHighlighted: mergeString(
+        p1.descriptionHighlighted,
+        p2.descriptionHighlighted,
+      ),
     }
   }
 
@@ -65,5 +77,8 @@ export class Podcast {
     this.categories = (j['categories'] || []).map(
       (o: any) => new PodcastCategory(o),
     )
+    this.titleHighlighted = j['title_highlighted'] || ''
+    this.authorHighlighted = j['author_highlighted'] || ''
+    this.descriptionHighlighted = j['description_highlighted'] || ''
   }
 }

@@ -1,6 +1,6 @@
 import { getEpisodePlaybacks } from 'actions/playback'
 import { getResults } from 'actions/results'
-import { EpisodeSearchResult, PodcastSearchResult } from 'models'
+import { Episode, Podcast } from 'models'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { getByHashIds } from 'selectors/entities/search_results'
@@ -29,11 +29,11 @@ function makeMapStateToProps() {
       podcastSearchResults: getByHashIds(
         state,
         getPodcastHashIds(state, searchParams),
-      ) as PodcastSearchResult[],
+      ) as Podcast[],
       episodeSearchResults: getByHashIds(
         state,
         getEpisodeHashIds(state, searchParams),
-      ) as EpisodeSearchResult[],
+      ) as Episode[],
       receivedAll: getReceivedAll(state, searchParams),
       isLoadingMore: getResultsStatus(state) === 'IN_PROGRESS',
     }

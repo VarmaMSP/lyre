@@ -1,12 +1,20 @@
 import { Category } from './category'
 import { Episode } from './episode'
-import { EpisodeSearchResult } from './episode_search_result'
 import { Playback } from './playback'
 import { Playlist } from './playlist'
 import { Podcast } from './podcast'
-import { PodcastSearchResult } from './podcast_search_result'
 import { SearchSuggestion } from './search_suggestions'
 import { User } from './user'
+
+export class GlobalSearchResults {
+  podcasts: Podcast[]
+  episodes: Episode[]
+
+  constructor(j: any) {
+    this.podcasts = (j['podcasts'] || []).map((o: any) => new Podcast(o))
+    this.episodes = (j['episodes'] || []).map((o: any) => new Episode(o))
+  }
+}
 
 export class ApiResponse {
   users: User[]
@@ -15,10 +23,9 @@ export class ApiResponse {
   playbacks: Playback[]
   playlists: Playlist[]
   searchSuggestions: SearchSuggestion[]
-  podcastSearchResults: PodcastSearchResult[]
-  episodeSearchResults: EpisodeSearchResult[]
   categories: Category[]
   raw: any
+  globalSearchResults: GlobalSearchResults
 
   constructor(j: any) {
     const data = (j['data'] || {}) as any
@@ -31,11 +38,8 @@ export class ApiResponse {
     this.searchSuggestions = (data['search_suggestions'] || []).map(
       (o: any) => new SearchSuggestion(o),
     )
-    this.podcastSearchResults = (data['podcast_search_results'] || []).map(
-      (o: any) => new PodcastSearchResult(o),
-    )
-    this.episodeSearchResults = (data['episode_search_results'] || []).map(
-      (o: any) => new EpisodeSearchResult(o),
+    this.globalSearchResults = new GlobalSearchResults(
+      data['global_search_results'] || {},
     )
     this.categories = (data['categories'] || []).map(
       (o: any) => new Category(o),

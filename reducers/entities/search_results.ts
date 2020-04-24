@@ -1,10 +1,10 @@
 import hashSum from 'hash-sum'
-import { EpisodeSearchResult, PodcastSearchResult } from 'models'
+import { Episode, Podcast } from 'models'
 import { combineReducers, Reducer } from 'redux'
 import * as T from 'types/actions'
 
 const byHashId: Reducer<
-  { [hashId: string]: PodcastSearchResult | EpisodeSearchResult },
+  { [hashId: string]: Podcast | Episode },
   T.AppActions
 > = (state = {}, action) => {
   switch (action.type) {
@@ -12,7 +12,7 @@ const byHashId: Reducer<
       const k = hashSum([action.params, action.resultType])
 
       return action.results.reduce<{
-        [hashId: string]: PodcastSearchResult | EpisodeSearchResult
+        [hashId: string]: Podcast | Episode
       }>((acc, r) => ({ ...acc, [hashSum(['g', k, r.id])]: r }), state)
     }
 

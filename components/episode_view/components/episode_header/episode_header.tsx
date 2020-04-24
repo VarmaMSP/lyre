@@ -31,7 +31,7 @@ const EpisodeHeader: React.FC<Props> = ({
 
   return (
     <div className="flex">
-      <EpisodeThumbnail episodeId={episode.id} large />
+      <EpisodeThumbnail episode={episode} large />
       <div className="flex flex-col flex-auto w-1/2 justify-between lg:px-5 px-3">
         <div className="w-full mb-3">
           <h2 className="text-lg text-gray-900 font-medium leading-snug tracking-wide line-clamp-2">

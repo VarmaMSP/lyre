@@ -6,7 +6,6 @@ import { getImageUrl } from 'utils/dom'
 import { formatDuration } from 'utils/format'
 
 export interface StateToProps {
-  episode: Episode
   podcast: Podcast
 }
 
@@ -15,7 +14,7 @@ export interface DispatchToProps {
 }
 
 export interface OwnProps {
-  episodeId: string
+  episode: Episode
   small?: boolean
   large?: boolean
 }

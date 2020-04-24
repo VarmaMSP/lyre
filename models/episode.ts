@@ -17,6 +17,8 @@ export class Episode {
   type: EpisodeType
   progress: number
   lastPlayedAt: string
+  titleHighlighed: string
+  descriptionHighlighted: string
 
   static merge(e1: Episode, e2: Episode): Episode {
     return {
@@ -38,6 +40,11 @@ export class Episode {
           ? e2.progress
           : e1.progress) || 0,
       lastPlayedAt: mergeString(e1.lastPlayedAt, e2.lastPlayedAt),
+      titleHighlighed: mergeString(e1.titleHighlighed, e2.titleHighlighed),
+      descriptionHighlighted: mergeString(
+        e1.descriptionHighlighted,
+        e2.descriptionHighlighted,
+      ),
     }
   }
 
@@ -57,5 +64,7 @@ export class Episode {
     this.type = j['type'] || 'FULL'
     this.progress = j['progress'] || 0
     this.lastPlayedAt = parseDatetime(j['last_played_at'] || '')
+    this.titleHighlighed = j['title_highlighted'] || ''
+    this.descriptionHighlighted = j['description_highlighted'] || ''
   }
 }
