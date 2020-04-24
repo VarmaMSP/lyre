@@ -77,7 +77,6 @@ const EpisodePreview: React.FC<Props> = ({
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
                 <a
-                  className="hover:text-blue-800 hover:border"
                   dangerouslySetInnerHTML={{
                     __html: episode.titleHighlighed || episode.title,
                   }}
@@ -143,13 +142,13 @@ const episodeNumber = (episode: Episode): JSX.Element | null => {
   if (episode.type == 'FULL' && episode.episode > 0) {
     if (episode.season > 0) {
       return (
-        <span className="bg-gray-700 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+        <span className="bg-orange-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
           {`S${episode.season} E${episode.episode}`}
         </span>
       )
     } else {
       return (
-        <span className="bg-teal-600 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+        <span className="bg-orange-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
           {`E${episode.episode}`}
         </span>
       )
@@ -158,7 +157,7 @@ const episodeNumber = (episode: Episode): JSX.Element | null => {
 
   if (episode.type == 'BONUS') {
     return (
-      <span className="bg-yellow-700 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+      <span className="bg-orange-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
         {'BONUS'}
       </span>
     )
@@ -166,7 +165,7 @@ const episodeNumber = (episode: Episode): JSX.Element | null => {
 
   if (episode.type == 'TRAILER') {
     return (
-      <span className="bg-red-600 text-white text-2xs px-2 mr-3 leading-loose rounded-sm">
+      <span className="bg-red-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
         {'TRAILER'}
       </span>
     )

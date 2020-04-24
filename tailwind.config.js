@@ -283,7 +283,7 @@ module.exports = {
       light: '300',
       normal: '400',
       medium: '450',
-      semibold: '560',
+      semibold: '500',
       bold: '700',
       extrabold: '800',
       black: '900',

@@ -60,7 +60,7 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({ categories }) => {
           <div
             key={`${parentId}`}
             className="bg-green-100 mr-4 mb-2 px-3 text-2xs text-green-900 font-medium tracking-wide border border-green-500 rounded-full"
-            // style={{ paddingBottom: '0.11rem', paddingTop: '0.11rem' }}
+            style={{ paddingBottom: '0.08rem', paddingTop: '0.08rem' }}
           >
             <ChartLink chartUrlParam={parent.urlParam}>
               <a className="hover:text-blue-800">{`${parent.name}`}</a>

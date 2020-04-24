@@ -95,7 +95,7 @@ const EpisodeThumbnail: React.FC<Props> = ({
 
       {/* Progress Bar */}
       <div
-        className={classnames('relative w-full h-1 mt-1 rounded-full', {
+        className={classnames('relative w-full h-1 mt-2 rounded-full', {
           'bg-gray-400': episode.lastPlayedAt !== '',
         })}
       >
