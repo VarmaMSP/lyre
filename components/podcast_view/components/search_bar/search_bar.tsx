@@ -9,12 +9,16 @@ export interface DispatchToProps {
 
 export interface OwnProps {
   podcastUrlParam: string
+  initVal?: string
 }
 
-const SearchBar: React.FC<DispatchToProps & OwnProps> = ({ submitQuery }) => {
+const SearchBar: React.FC<DispatchToProps & OwnProps> = ({
+  submitQuery,
+  initVal = '',
+}) => {
   return (
     <Formik
-      initialValues={{ query: '' }}
+      initialValues={{ query: initVal }}
       validate={(values) => {
         const errors: Partial<{ query: string }> = {}
         if (values.query.trim().length == 0) {

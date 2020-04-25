@@ -1,4 +1,4 @@
-import { getPodcastPageData } from 'actions/podcast'
+import { getPodcastPageData, getPodcastSearchPageData } from 'actions/podcast'
 import PageLayout from 'components/page_layout'
 import PodcastView from 'components/podcast_view'
 import { PodcastPageSeo } from 'components/seo'
@@ -24,10 +24,19 @@ interface OwnProps {
 
 class PodcastPage extends Component<StateToProps & OwnProps> {
   static async getInitialProps({ query, store }: PageContext): Promise<void> {
-    await bindActionCreators(
-      getPodcastPageData,
-      store.dispatch,
-    )(query['podcastUrlParam'] as string)
+    if (query['activeTab'] === undefined) {
+      await bindActionCreators(
+        getPodcastPageData,
+        store.dispatch,
+      )(query['podcastUrlParam'] as string)
+    }
+
+    if (query['activeTab'] === 'search' && query['query'] !== undefined) {
+      await bindActionCreators(getPodcastSearchPageData, store.dispatch)(
+        query['podcastUrlParam'] as string,
+        query['query'] as string,
+      )
+    }
   }
 
   componentDidMount() {
@@ -35,13 +44,13 @@ class PodcastPage extends Component<StateToProps & OwnProps> {
   }
 
   render() {
-    const { podcast, activeTab } = this.props
+    const { podcast, activeTab, query } = this.props
 
     return (
       <>
         <PodcastPageSeo podcast={podcast} />
         <PageLayout>
-          <PodcastView podcast={podcast} activeTab={activeTab} />
+          <PodcastView podcast={podcast} activeTab={activeTab} query={query} />
           <div />
         </PageLayout>
       </>

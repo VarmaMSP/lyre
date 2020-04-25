@@ -110,7 +110,7 @@ export function getPodcastEpisodes(
         podcastId: podcastId,
         episodeIds: episodes.map((x) => x.id),
         order: order,
-        page: Math.floor(offset - 15 / limit) + 1,
+        page: Math.floor((offset - 15) / limit) + 1,
       })
 
       if (episodes.length < limit) {
@@ -126,8 +126,7 @@ export function getPodcastEpisodes(
 }
 
 export function getPodcastSearchResults(
-  podcastId: string,
-  query: string,
+  searchParams: PodcastSearchParams,
   offset: number,
   limit: number,
 ) {
@@ -137,18 +136,13 @@ export function getPodcastSearchResults(
         method: 'GET',
         urlPath: `/ajax/browse?${qs({
           endpoint: 'podcast_search_results',
-          podcast_id: podcastId,
-          query: query,
+          podcast_id: searchParams.podcastId,
+          query: searchParams.query,
           offset: offset,
           limit: limit,
         })}`,
       }),
     (dispatch, _, { searchResults }) => {
-      const searchParams = <PodcastSearchParams>{
-        query: query,
-        podcastId: podcastId,
-      }
-
       dispatch({
         type: T.SEARCH_RESULT_ADD_PODCAST_SEARCH_RESULTS,
         params: searchParams,
@@ -157,9 +151,11 @@ export function getPodcastSearchResults(
       dispatch({
         type: T.PODCAST_SEARCH_RESULTS_LOAD_PAGE,
         params: searchParams,
-        page: Math.floor(offset - 25 / limit) + 1,
+        page: Math.floor((offset - 25) / limit) + 1,
         resultIds: searchResults.episodes.map((x) => x.id),
       })
+
+      console.log(searchResults.episodes.length, limit)
 
       if (searchResults.episodes.length < limit) {
         dispatch({
@@ -168,5 +164,6 @@ export function getPodcastSearchResults(
         })
       }
     },
+    { requestId: RequestId.getPodcastSearchResults(searchParams.podcastId) },
   )
 }

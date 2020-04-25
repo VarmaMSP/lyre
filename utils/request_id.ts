@@ -2,6 +2,10 @@ export function getPodcastEpisodes(podcastId: string) {
   return `0_${podcastId}`
 }
 
+export function getPodcastSearchResults(podcastId: string) {
+  return `0_${podcastId}_1`
+}
+
 export function getHomePageData() {
   return '1'
 }
