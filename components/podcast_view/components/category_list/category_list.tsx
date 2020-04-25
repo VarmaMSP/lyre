@@ -39,7 +39,7 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({ categories }) => {
           childIds.map((childId) => (
             <div
               key={`${parentId}${childId}`}
-              className="bg-green-100 mr-4 mb-2 px-3 text-2xs text-green-900 font-medium tracking-wide border border-green-300 rounded-full"
+              className="bg-gray-100 mr-4 mb-2 px-3 text-2xs text-green-900 font-medium tracking-wide border border-gray-400 rounded-full"
               style={{ paddingBottom: '0.08rem', paddingTop: '0.08rem' }}
             >
               <ChartLink chartUrlParam={parent.urlParam}>
@@ -59,7 +59,7 @@ const CategoryList: React.FC<StateToProps & OwnProps> = ({ categories }) => {
         ) : (
           <div
             key={`${parentId}`}
-            className="bg-green-100 mr-4 mb-2 px-3 text-2xs text-green-900 font-medium tracking-wide border border-green-500 rounded-full"
+            className="bg-gray-100 mr-4 mb-2 px-3 text-2xs text-green-900 font-medium tracking-wide border border-gray-400 rounded-full"
             style={{ paddingBottom: '0.08rem', paddingTop: '0.08rem' }}
           >
             <ChartLink chartUrlParam={parent.urlParam}>

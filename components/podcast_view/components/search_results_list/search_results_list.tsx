@@ -50,7 +50,7 @@ const SearchResultsList: React.FC<Props> = ({
   return (
     <div>
       {episodes.map((e) => (
-        <div key={e.id} className="mb-6">
+        <div key={e.id} className="mb-5">
           <EpisodePreview episode={e} small />
         </div>
       ))}

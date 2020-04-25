@@ -22,7 +22,7 @@ const PodcastHeader: React.SFC<OwnProps> = ({ podcast }) => {
         style={{ marginTop: '-3px' }}
       >
         <div className="w-full mb-3">
-          <h2 className="text-lg text-gray-900 font-medium leading-tight tracking-wide line-clamp-2">
+          <h2 className="text-lg text-gray-900 font-medium md:font-semibold leading-tight tracking-wide line-clamp-2">
             {podcast.title}
           </h2>
           <h3 className="text-sm text-gray-700 font-medium leading-loose tracking-wide line-clamp-1">

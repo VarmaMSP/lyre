@@ -36,7 +36,7 @@ const SearchBar: React.FC<DispatchToProps & OwnProps> = ({
           />
           <input
             className={classnames(
-              'w-full h-7 pl-2 pr-6 text-xs text-gray-900 tracking-wide placeholder-gray-800 border border-gray-500 rounded-lg',
+              'w-full h-7 pl-2 pr-6 text-xs text-gray-900 tracking-wide placeholder-gray-900 border border-gray-500 rounded-lg',
               'appearance-none focus:outline-none focus:border-2 focus:border-blue-500',
             )}
             type="text"

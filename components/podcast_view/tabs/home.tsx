@@ -25,7 +25,7 @@ const PodcastTab: React.FC<OwnProps> = ({ podcast }) => {
       <hr className="mt-9 mb-6" />
 
       <div className="mb-4 px-1">
-        <EpisodeListHeader />
+        <EpisodeListHeader podcastUrlParam={podcast.urlParam} />
       </div>
 
       <EpisodeList podcastId={podcast.id} />
