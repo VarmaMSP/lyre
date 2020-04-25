@@ -29,12 +29,14 @@ const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
             <PodcastLink podcastUrlParam={p.urlParam}>
               <a
                 className="block flex hover:bg-gray-200 items-center text-gray-700 hover:text-gray-900"
-                style={{ padding: '0.3rem 1rem' }}
+                style={{ padding: '0.2rem 1rem' }}
               >
                 <div className="flex-none w-9 h-9">
                   <Img src={getImageUrl(p.urlParam)} className="rounded" />
                 </div>
-                <span className="w-7/10 truncate pl-3 text-sm">{p.title}</span>
+                <span className="w-7/10 truncate pl-3 text-xs font-medium">
+                  {p.title}
+                </span>
               </a>
             </PodcastLink>
           </div>

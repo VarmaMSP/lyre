@@ -25,7 +25,7 @@ const ChartView: React.FC<StateToProps & OwnProps> = ({
       <hr className="mb-3" />
       <Grid cols={{ LG: 5, MD: 4, SM: 3 }}>
         {podcasts.map((p) => (
-          <div key={p.id} className="p-2 mb-4 md:hover:bg-gray-100">
+          <div key={p.id} className="p-2 mb-4 md:hover:bg-gray-150">
             <PodcastLink key={p.id} podcastUrlParam={p.urlParam}>
               <a>
                 <Img src={getImageUrl(p.urlParam)} />
