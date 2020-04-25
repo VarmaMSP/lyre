@@ -72,8 +72,9 @@ const EpisodePreview: React.FC<Props> = ({
           <div className="flex-1">
             <div
               className={classnames(
-                'mb-1 md:mb-0 -mt-1 text-black text-sm md:text-lg font-medium md:font-semibold tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
+                '-mt-1 text-black text-sm md:text-lg font-medium md:font-semibold tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
               )}
+              style={{ marginBottom: '0.3rem' }}
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
                 <a
@@ -103,7 +104,10 @@ const EpisodePreview: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="mb-2 text-xs text-gray-800 font-medium tracking-wide leading-relaxed line-clamp-1">
+        <div
+          className="text-xs md:text-sm text-gray-800 font-medium leading-relaxed line-clamp-1"
+          style={{ marginBottom: '0.2rem' }}
+        >
           {dense && episodeNumber(episode)}
           {episodeTime(episode, t)}
           {!dense && (
@@ -119,8 +123,8 @@ const EpisodePreview: React.FC<Props> = ({
         </div>
 
         <div
-          className="md:pr-2 text-xs text-gray-800 font-normal md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default"
-          style={{ hyphens: 'auto' }}
+          className="md:pr-2 text-xs text-gray-700 leading-snug md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default "
+          style={{ hyphens: 'auto', letterSpacing: '0.01em' }}
           dangerouslySetInnerHTML={{
             __html: episode.descriptionHighlighted || episode.summary,
           }}
