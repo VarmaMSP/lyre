@@ -1,7 +1,7 @@
 import Img from 'components/common/img'
 import { PodcastLink } from 'components/link'
 import { Podcast } from 'models'
-import React from 'react'
+import React, { useState } from 'react'
 import { getImageUrl } from 'utils/dom'
 
 export interface StateToProps {
@@ -9,29 +9,47 @@ export interface StateToProps {
 }
 
 const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
+  const [showAll, setShowAll] = useState<boolean>(false)
+  const count = subscriptions.length
+  const defaultListSize = 8
+
   if (subscriptions.length === 0) {
     return <></>
   }
 
   return (
-    <div className="py-3 rounded-xl bg-gray-150">
-      <h2 className="mb-3 px-3 text text-gray-900 tracking-wide">
-        {"You're subscribed to"}
-      </h2>
-      <div className="px-3 overflow-y-auto" style={{ height: '22rem' }}>
-        <div className="flex flex-wrap">
-          {subscriptions.map((podcast) => (
-            <PodcastLink podcastUrlParam={podcast.urlParam} key={podcast.id}>
+    <div className="rounded-xl bg-gray-100 border border-gray-300">
+      <h2 className="px-4 py-3 text-gray-800 tracking-wide">{'Podcasts'}</h2>
+      <div>
+        {(showAll
+          ? subscriptions
+          : subscriptions.slice(0, defaultListSize)
+        ).map((p) => (
+          <div id={p.id}>
+            <PodcastLink podcastUrlParam={p.urlParam}>
               <a
-                className="block flex-none xl:w-1/5 md:w-1/4 w-1/5 mb-4 cursor-pointer"
-                style={{ paddingLeft: '2px', paddingRight: '2px' }}
+                className="block flex hover:bg-gray-200 items-center text-gray-700 hover:text-gray-900"
+                style={{ padding: '0.3rem 1rem' }}
               >
-                <Img src={getImageUrl(podcast.urlParam)} />
+                <div className="flex-none w-9 h-9">
+                  <Img src={getImageUrl(p.urlParam)} className="rounded" />
+                </div>
+                <span className="w-7/10 truncate pl-3 text-sm">{p.title}</span>
               </a>
             </PodcastLink>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+      {count > defaultListSize && !showAll ? (
+        <button
+          onClick={() => setShowAll(true)}
+          className="w-full mt-2 py-2 text-center text-sm text-gray-700 hover:text-gray-900 font-semibold hover:bg-gray-200"
+        >
+          {`Show ${count - defaultListSize} more`}
+        </button>
+      ) : (
+        <div className="mb-3" />
+      )}
     </div>
   )
 }

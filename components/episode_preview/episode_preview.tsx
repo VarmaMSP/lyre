@@ -123,7 +123,7 @@ const EpisodePreview: React.FC<Props> = ({
         </div>
 
         <div
-          className="md:pr-2 text-xs text-gray-700 leading-snug md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default "
+          className="md:pr-2 text-xs text-gray-700 leading-snug md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default lowercase"
           style={{ hyphens: 'auto', letterSpacing: '0.01em' }}
           dangerouslySetInnerHTML={{
             __html: episode.descriptionHighlighted || episode.summary,
