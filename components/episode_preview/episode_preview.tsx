@@ -122,7 +122,7 @@ const EpisodePreview: React.FC<Props> = ({
         </div>
 
         <div
-          className="md:pr-2 text-teal-900 break-all md:line-clamp-2 line-clamp-3 cursor-default "
+          className="md:pr-2 text-teal-900 font-light break-all md:line-clamp-2 line-clamp-3 cursor-default "
           style={{
             fontSize: '0.8rem',
             hyphens: 'auto',
