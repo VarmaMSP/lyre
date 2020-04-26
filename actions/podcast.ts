@@ -58,6 +58,7 @@ export function getPodcastSearchPageData(
       }
 
       dispatch({ type: T.PODCAST_ADD, podcasts })
+      dispatch({ type: T.EPISODE_ADD, episodes: searchResults.episodes })
       dispatch({
         type: T.SEARCH_RESULT_ADD_PODCAST_SEARCH_RESULTS,
         params: searchParams,
@@ -143,6 +144,7 @@ export function getPodcastSearchResults(
         })}`,
       }),
     (dispatch, _, { searchResults }) => {
+      dispatch({ type: T.EPISODE_ADD, episodes: searchResults.episodes })
       dispatch({
         type: T.SEARCH_RESULT_ADD_PODCAST_SEARCH_RESULTS,
         params: searchParams,
@@ -154,8 +156,6 @@ export function getPodcastSearchResults(
         page: Math.floor((offset - 25) / limit) + 1,
         resultIds: searchResults.episodes.map((x) => x.id),
       })
-
-      console.log(searchResults.episodes.length, limit)
 
       if (searchResults.episodes.length < limit) {
         dispatch({

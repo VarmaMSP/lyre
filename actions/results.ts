@@ -93,8 +93,14 @@ export function getResultsPageData(searchParams: GlobalSearchParams) {
       }),
     (dispatch, _, { podcasts, episodes, searchResults }) => {
       // entities
-      dispatch({ type: T.PODCAST_ADD, podcasts })
-      dispatch({ type: T.EPISODE_ADD, episodes })
+      dispatch({
+        type: T.PODCAST_ADD,
+        podcasts: [...podcasts, ...searchResults.podcasts],
+      })
+      dispatch({
+        type: T.EPISODE_ADD,
+        episodes: [...episodes, ...searchResults.episodes],
+      })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
         params: searchParams,
@@ -168,8 +174,14 @@ export function getResults(
       }),
     (dispatch, _, { podcasts, episodes, searchResults }) => {
       // entities
-      dispatch({ type: T.PODCAST_ADD, podcasts })
-      dispatch({ type: T.EPISODE_ADD, episodes })
+      dispatch({
+        type: T.PODCAST_ADD,
+        podcasts: [...podcasts, ...searchResults.podcasts],
+      })
+      dispatch({
+        type: T.EPISODE_ADD,
+        episodes: [...episodes, ...searchResults.episodes],
+      })
       dispatch({
         type: T.SEARCH_RESULT_ADD_GLOBAL_SEARCH_RESULTS,
         params: searchParams,
