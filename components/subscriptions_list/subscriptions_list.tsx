@@ -11,7 +11,7 @@ export interface StateToProps {
 const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
   const [showAll, setShowAll] = useState<boolean>(false)
   const count = subscriptions.length
-  const defaultListSize = 8
+  const defaultListSize = 20
 
   if (subscriptions.length === 0) {
     return <></>
@@ -28,7 +28,7 @@ const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
           <div id={p.id}>
             <PodcastLink podcastUrlParam={p.urlParam}>
               <a
-                className="block flex hover:bg-gray-200 font-light items-center text-teal-900 hover:text-gray-900"
+                className="block flex hover:bg-gray-200 font-light items-center text-teal-800 hover:text-gray-900"
                 style={{ padding: '0.2rem 1rem' }}
               >
                 <div className="flex-none w-9 h-9">
