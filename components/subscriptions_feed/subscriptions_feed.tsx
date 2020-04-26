@@ -47,7 +47,7 @@ const SubscriptionsFeed: React.SFC<StateToProps & DispatchToProps> = ({
 
       {/* Feed */}
       {feed.map((episode) => (
-        <div key={episode.id} className="mb-5">
+        <div key={episode.id} className="mb-4">
           <EpisodePreview episodeId={episode.id} small />
         </div>
       ))}

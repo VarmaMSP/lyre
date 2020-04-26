@@ -72,9 +72,9 @@ const EpisodePreview: React.FC<Props> = ({
           <div className="flex-1">
             <div
               className={classnames(
-                '-mt-1 text-black text-sm md:text-lg font-medium md:font-semibold tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
+                '-mt-1 text-black hover:text-gray-700 text-sm md:text-lg font-medium md:font-normal tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
               )}
-              style={{ marginBottom: '0.3rem' }}
+              style={{ fontWeight: 400, marginBottom: '0rem' }}
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
                 <a
@@ -105,8 +105,8 @@ const EpisodePreview: React.FC<Props> = ({
         </div>
 
         <div
-          className="text-xs md:text-sm text-gray-800 font-medium leading-relaxed line-clamp-1"
-          style={{ marginBottom: '0.2rem' }}
+          className="md:pr-16 text-xs text-teal-900 leading-relaxed line-clamp-1"
+          style={{ marginBottom: '0.4rem' }}
         >
           {dense && episodeNumber(episode)}
           {episodeTime(episode, t)}
@@ -116,15 +116,20 @@ const EpisodePreview: React.FC<Props> = ({
                 &middot;
               </span>
               <PodcastLink podcastUrlParam={podcast.urlParam}>
-                <a className="hover:text-black">{podcast.title}</a>
+                <a className="hover:text-gray-900">{podcast.title}</a>
               </PodcastLink>
             </>
           )}
         </div>
 
         <div
-          className="md:pr-2 text-xs text-gray-700 leading-snug md:break-normal break-all md:line-clamp-2 line-clamp-3 cursor-default lowercase"
-          style={{ hyphens: 'auto', letterSpacing: '0.01em' }}
+          className="md:pr-2 text-teal-900 break-all md:line-clamp-2 line-clamp-3 cursor-default "
+          style={{
+            fontSize: '0.8rem',
+            hyphens: 'auto',
+            letterSpacing: '0.01em',
+            lineHeight: 1.45,
+          }}
           dangerouslySetInnerHTML={{
             __html: episode.descriptionHighlighted || episode.summary,
           }}
@@ -143,39 +148,34 @@ const EpisodePreview: React.FC<Props> = ({
 }
 
 const episodeNumber = (episode: Episode): JSX.Element | null => {
-  if (episode.type == 'FULL' && episode.episode > 0) {
-    if (episode.season > 0) {
-      return (
-        <span className="bg-orange-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
-          {`S${episode.season} E${episode.episode}`}
-        </span>
-      )
-    } else {
-      return (
-        <span className="bg-orange-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
-          {`E${episode.episode}`}
-        </span>
-      )
-    }
+  if (episode.type === 'FULL' && episode.episode === 0) {
+    return null
   }
 
-  if (episode.type == 'BONUS') {
-    return (
-      <span className="bg-orange-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
-        {'BONUS'}
+  var text: string
+  var color: string
+  if (episode.type === 'BONUS') {
+    text = `BONUS`
+    color = 'text-orange-900'
+  } else if (episode.type === 'TRAILER') {
+    text = `TRAILER`
+    color = 'text-red-900'
+  } else if (episode.season > 0) {
+    text = `S${episode.season}  E${episode.episode}`
+    color = 'text-teal-900'
+  } else {
+    text = `E${episode.episode}`
+    color = 'text-teal-900'
+  }
+
+  return (
+    <>
+      <span className={classnames('text-2xs font-medium', color)}>{text}</span>
+      <span className="font-extrabold" style={{ margin: '0 0.4rem' }}>
+        &middot;
       </span>
-    )
-  }
-
-  if (episode.type == 'TRAILER') {
-    return (
-      <span className="bg-red-600 text-white text-2xs px-2 mr-3 leading-loose font-semibold rounded-sm">
-        {'TRAILER'}
-      </span>
-    )
-  }
-
-  return null
+    </>
+  )
 }
 
 const episodeTime = (episode: Episode, t: string) => {

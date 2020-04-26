@@ -28,7 +28,7 @@ const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
           <div id={p.id}>
             <PodcastLink podcastUrlParam={p.urlParam}>
               <a
-                className="block flex hover:bg-gray-200 items-center text-gray-700 hover:text-gray-900"
+                className="block flex hover:bg-gray-200 font-light items-center text-teal-900 hover:text-gray-900"
                 style={{ padding: '0.2rem 1rem' }}
               >
                 <div className="flex-none w-9 h-9">
@@ -45,7 +45,7 @@ const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
       {count > defaultListSize && !showAll ? (
         <button
           onClick={() => setShowAll(true)}
-          className="w-full mt-2 py-2 text-center text-sm text-gray-700 hover:text-gray-900 font-semibold hover:bg-gray-200"
+          className="w-full mt-2 py-2 text-center text-sm text-gray-700 hover:text-gray-900 font-medium hover:bg-gray-200"
         >
           {`Show ${count - defaultListSize} more`}
         </button>

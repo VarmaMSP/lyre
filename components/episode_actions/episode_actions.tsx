@@ -16,13 +16,13 @@ const EpisodeActions: React.FC<DispatchToProps & OwnProps> = ({
 
   return (
     <div
-      className="w-56 py-1 bg-white rounded"
-      style={{
-        boxShadow: '0px 0px 5px -2px rgba(26,32,44,0.85)',
-      }}
+      className="w-56 py-1 bg-gray-100 border border-gray-400 rounded shadow"
+      // style={{
+      //   boxShadow: '0px 0px 5px -2px rgba(26,32,44,0.85)',
+      // }}
     >
       <div
-        className="flex items-center px-4 py-1 hover:bg-gray-100 cursor-pointer"
+        className="flex items-center px-4 py-1 hover:bg-gray-200 cursor-pointer"
         onClick={() => showAddToPlaylistModal()}
       >
         <div className="pr-3">

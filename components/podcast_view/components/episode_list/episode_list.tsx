@@ -49,7 +49,7 @@ const ListEpisodes: React.SFC<Props> = ({
   return (
     <div>
       {episodes.map((episode) => (
-        <div key={episode.id} className="mb-4">
+        <div key={episode.id} className="mb-3">
           <EpisodePreview episodeId={episode.id} small dense />
         </div>
       ))}
