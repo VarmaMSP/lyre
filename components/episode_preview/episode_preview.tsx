@@ -72,7 +72,7 @@ const EpisodePreview: React.FC<Props> = ({
           <div className="flex-1">
             <div
               className={classnames(
-                '-mt-1 text-black hover:text-gray-700 text-sm md:text-lg font-medium tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
+                '-mt-1 text-black hover:text-gray-700 md:text-lg font-medium tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
               )}
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
@@ -104,8 +104,8 @@ const EpisodePreview: React.FC<Props> = ({
         </div>
 
         <div
-          className="md:pr-16 text-xs text-teal-900 leading-relaxed line-clamp-1"
-          style={{ marginBottom: '0.4rem' }}
+          className="md:pr-16 text-teal-900 leading-relaxed line-clamp-1"
+          style={{ marginBottom: '0.4rem', fontSize: '14px' }}
         >
           {dense && episodeNumber(episode)}
           {episodeTime(episode, t)}
@@ -122,12 +122,11 @@ const EpisodePreview: React.FC<Props> = ({
         </div>
 
         <div
-          className="md:pr-2 text-teal-900 font-light break-all md:line-clamp-2 line-clamp-3 cursor-default "
+          className="md:pr-2 text-xs text-teal-700 leading-tight md:leading-snug break-all md:line-clamp-2 line-clamp-3 cursor-default "
           style={{
-            fontSize: '0.8rem',
+            fontSize: '14px',
             hyphens: 'auto',
             letterSpacing: '0.01em',
-            lineHeight: 1.45,
           }}
           dangerouslySetInnerHTML={{
             __html: episode.descriptionHighlighted || episode.summary,
