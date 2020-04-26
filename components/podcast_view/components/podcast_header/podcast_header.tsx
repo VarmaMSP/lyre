@@ -25,10 +25,10 @@ const PodcastHeader: React.SFC<OwnProps> = ({ podcast }) => {
           <h2 className="text-lg text-black font-medium md:font-semibold leading-tight tracking-wide line-clamp-2">
             {podcast.title}
           </h2>
-          <h3 className="text-sm text-gray-700 font-medium leading-loose tracking-wide line-clamp-1">
+          <h3 className="text-sm text-gray-700 leading-loose tracking-wide line-clamp-1">
             {podcast.author}
           </h3>
-          <h4 className="text-xs font-medium text-gray-700 leading-relaxed tracking-wide">
+          <h4 className="mt-1 text-xs text-gray-700 leading-relaxed tracking-wide">
             {`Since ${format(
               parseISO(`${podcast.earliestEpisodePubDate} +0000`),
               'MMM yyyy',

@@ -11,7 +11,7 @@ export interface StateToProps {
 const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
   const [showAll, setShowAll] = useState<boolean>(false)
   const count = subscriptions.length
-  const defaultListSize = 20
+  const defaultListSize = 10
 
   if (subscriptions.length === 0) {
     return <></>

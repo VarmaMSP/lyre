@@ -72,9 +72,8 @@ const EpisodePreview: React.FC<Props> = ({
           <div className="flex-1">
             <div
               className={classnames(
-                '-mt-1 text-black hover:text-gray-700 text-sm md:text-lg font-medium md:font-normal tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
+                '-mt-1 text-black hover:text-gray-700 text-sm md:text-lg font-medium tracking-wide leading-snug md:leading-relaxed line-clamp-2 md:line-clamp-1',
               )}
-              style={{ fontWeight: 400, marginBottom: '0rem' }}
             >
               <EpisodeLink episodeUrlParam={episode.urlParam}>
                 <a
