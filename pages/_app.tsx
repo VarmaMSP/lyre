@@ -2,10 +2,10 @@ import NProgress from 'accessible-nprogress'
 import { getCurrentUser } from 'actions/user'
 import AudioPlayer from 'components/audio_player'
 import ModalSelector from 'components/modal/modal_selector'
+import { DefaultSeo } from 'components/seo'
 import SideNavbar from 'components/side_navbar'
 import TopNavbar from 'components/top_navbar'
 import withRedux from 'next-redux-wrapper'
-import { DefaultSeo } from 'next-seo'
 import { AppProps } from 'next/app'
 import Router from 'next/router'
 import React, { Component } from 'react'
@@ -120,22 +120,7 @@ export default withRedux(makeStore)(
       const { Component, pageProps, store } = this.props
       return (
         <>
-          {/* Default seo that can be overidden by individual pages */}
-          <DefaultSeo
-            openGraph={{
-              site_name: 'Phenopod',
-            }}
-            twitter={{
-              handle: '@phenopod',
-              site: '@phenopod',
-              cardType: 'summary',
-            }}
-            facebook={{
-              appId: '526472207897979',
-            }}
-          />
-
-          {/* Order components by z-axis */}
+          <DefaultSeo />
           <Provider store={store}>
             <Component {...pageProps} />
             <TopNavbar />

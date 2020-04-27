@@ -1,5 +1,5 @@
 import { Category, Episode, Playlist, Podcast } from 'models'
-import { NextSeo, NextSeoProps } from 'next-seo'
+import { DefaultSeo as DefaultNextSeo, NextSeo, NextSeoProps } from 'next-seo'
 import React, { useEffect } from 'react'
 import { getImageUrl } from 'utils/dom'
 import { pageview } from 'utils/gtag'
@@ -11,6 +11,23 @@ const Seo: React.FC<NextSeoProps> = (props) => {
 
   return <NextSeo {...props} />
 }
+
+export const DefaultSeo: React.FC<{}> = () => (
+  <DefaultNextSeo
+    title="Phenopod"
+    openGraph={{
+      site_name: 'Phenopod',
+    }}
+    twitter={{
+      handle: '@phenopod',
+      site: '@phenopod',
+      cardType: 'summary',
+    }}
+    facebook={{
+      appId: '526472207897979',
+    }}
+  />
+)
 
 export const AboutPageSeo: React.FC<{}> = () => (
   <Seo
