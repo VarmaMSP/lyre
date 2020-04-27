@@ -1,6 +1,7 @@
 import { getPodcastPageData, getPodcastSearchPageData } from 'actions/podcast'
 import FeedDetails from 'components/feed_details'
 import PageLayout from 'components/page_layout'
+import PodcastCategories from 'components/podcast_categories'
 import PodcastView from 'components/podcast_view'
 import { PodcastPageSeo } from 'components/seo'
 import { Podcast } from 'models'
@@ -54,6 +55,7 @@ class PodcastPage extends Component<StateToProps & OwnProps> {
           <PodcastView podcast={podcast} activeTab={activeTab} query={query} />
           <div>
             <FeedDetails podcast={podcast} />
+            <PodcastCategories podcast={podcast} />
           </div>
         </PageLayout>
       </>

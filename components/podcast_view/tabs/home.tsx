@@ -1,6 +1,5 @@
 import { Podcast } from 'models'
 import React from 'react'
-import CategoryList from '../components/category_list'
 import EpisodeList from '../components/episode_list'
 import EpisodeListHeader from '../components/episode_list_header/episode_list_header'
 
@@ -12,13 +11,8 @@ const PodcastTab: React.FC<OwnProps> = ({ podcast }) => {
   return (
     <div>
       <div className="mt-6 cursor-default" style={{ hyphens: 'auto' }}>
-        <div className="text-gray-900 text-sm leading-relaxed">
-          {podcast.description}
-        </div>
-        <div className="mt-6">
-          <CategoryList
-            categoryIds={podcast.categories.map((x) => x.categoryId)}
-          />
+        <div className="text-gray-700 text-sm leading-relaxed">
+          {podcast.description.replace(/&nbsp;/g, ' ')}
         </div>
       </div>
 
