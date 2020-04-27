@@ -1,4 +1,9 @@
-import { mergeArray, mergeNumber, mergeString } from 'utils/utils'
+import {
+  mergeArray,
+  mergeNumber,
+  mergeString,
+  parseDatetime,
+} from 'utils/utils'
 
 export type PodcastType = 'SERIAL' | 'EPISODE'
 
@@ -22,12 +27,15 @@ export class Podcast {
   totalEpisodes: number
   type: PodcastType
   complete: boolean
+  link: string
   earliestEpisodePubDate: string
   copyright: string
   categories: PodcastCategory[]
   titleHighlighted: string
   authorHighlighted: string
   descriptionHighlighted: string
+  feedUrl: string
+  feedLastRefreshAt: string
 
   static merge(p1: Podcast, p2: Podcast): Podcast {
     return {
@@ -42,6 +50,7 @@ export class Podcast {
       totalEpisodes: mergeNumber(p1.totalEpisodes, p2.totalEpisodes),
       type: p2.type,
       complete: p2.complete,
+      link: mergeString(p1.link, p2.link),
       earliestEpisodePubDate: mergeString(
         p1.earliestEpisodePubDate,
         p2.earliestEpisodePubDate,
@@ -56,6 +65,11 @@ export class Podcast {
       descriptionHighlighted: mergeString(
         p1.descriptionHighlighted,
         p2.descriptionHighlighted,
+      ),
+      feedUrl: mergeString(p1.feedUrl, p2.feedUrl),
+      feedLastRefreshAt: mergeString(
+        p1.feedLastRefreshAt,
+        p2.feedLastRefreshAt,
       ),
     }
   }
@@ -72,6 +86,7 @@ export class Podcast {
     this.totalEpisodes = j['total_episodes'] || 0
     this.type = j['type'] || 'EPISODE'
     this.complete = j['complete'] || false
+    this.link = j['link'] || ''
     this.earliestEpisodePubDate = j['earliest_episode_pub_date'] || ''
     this.copyright = j['copyright'] || ''
     this.categories = (j['categories'] || []).map(
@@ -80,5 +95,7 @@ export class Podcast {
     this.titleHighlighted = j['title_highlighted'] || ''
     this.authorHighlighted = j['author_highlighted'] || ''
     this.descriptionHighlighted = j['description_highlighted'] || ''
+    this.feedUrl = j['feed_url'] || ''
+    this.feedLastRefreshAt = parseDatetime(j['feed_last_refresh_at'] || '')
   }
 }
