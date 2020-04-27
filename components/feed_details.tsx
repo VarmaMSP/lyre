@@ -18,7 +18,7 @@ const FeedDetails: React.FC<OwnProps> = ({ podcast }) => {
           RSS
         </a>
       </div>
-      <div className="mt-2 text-gray-800 text-xs">{`Feed refreshed ${formatDistanceToNow(
+      <div className="mt-2 text-gray-800 text-xs">{`Last updated ${formatDistanceToNow(
         parseISO(podcast.feedLastRefreshAt),
       )} ago`}</div>
 
