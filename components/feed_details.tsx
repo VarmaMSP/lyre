@@ -9,7 +9,7 @@ interface OwnProps {
 
 const FeedDetails: React.FC<OwnProps> = ({ podcast }) => {
   return (
-    <div className="mt-56 px-4 py-3 bg-100 border-2 border-gray-300 rounded-lg">
+    <div className="mt-56 px-4 py-3 border border-gray-400 rounded-lg">
       <div className="text-blue-700 text-xs underline">
         <a href={podcast.link} target="blank" className="mr-4">
           Website
@@ -22,7 +22,7 @@ const FeedDetails: React.FC<OwnProps> = ({ podcast }) => {
         parseISO(podcast.feedLastRefreshAt),
       )} ago`}</div>
 
-      <div className="mt-4 text-2xs text-teal-800 font-thin leading-tight">
+      <div className="mt-4 text-2xs text-teal-600 leading-tight">
         The podcast and artwork featured in this page are property of its owners
         and not affiliated to Phenopod.
       </div>
