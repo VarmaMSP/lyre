@@ -5,12 +5,14 @@ import React, { useEffect } from 'react'
 import { PodcastSearchParams } from 'types/ui/search'
 
 export interface StateToProps {
+  isUserSignedIn: boolean
   episodes: Episode[]
   receivedAll: boolean
   isLoadingMore: boolean
 }
 
 export interface DispatchToProps {
+  loadPlaybacks: (episodeIds: string[]) => void
   loadMore: (
     searchParams: PodcastSearchParams,
     offset: number,
@@ -25,9 +27,11 @@ export interface OwnProps {
 type Props = StateToProps & DispatchToProps & OwnProps
 
 const SearchResultsList: React.FC<Props> = ({
+  isUserSignedIn,
   episodes,
   receivedAll,
   isLoadingMore,
+  loadPlaybacks,
   loadMore,
   searchParams,
 }) => {
@@ -36,6 +40,10 @@ const SearchResultsList: React.FC<Props> = ({
   useEffect(() => {
     isVisible && loadMore(searchParams, episodes.length, 20)
   }, [isVisible])
+
+  useEffect(() => {
+    isUserSignedIn && loadPlaybacks(episodes.map((e) => e.id))
+  }, [isUserSignedIn])
 
   if (episodes.length === 0) {
     return isLoadingMore ? (

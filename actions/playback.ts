@@ -1,10 +1,10 @@
-import { doFetch } from 'utils/fetch'
 import { Dispatch } from 'redux'
 import { getEpisodeById } from 'selectors/entities/episodes'
 import { getIsUserSignedIn } from 'selectors/session'
 import { getPlayingEpisodeId } from 'selectors/ui/audio_player'
 import { AppState } from 'store'
 import * as T from 'types/actions'
+import { doFetch } from 'utils/fetch'
 import * as gtag from 'utils/gtag'
 import { requestAction } from './utils'
 
@@ -22,7 +22,12 @@ export function getEpisodePlaybacks(episodeIds: string[]) {
         playbacks,
       })
     },
-    { skip: { cond: 'USER_NOT_SIGNED_IN' } },
+    {
+      skip: [
+        { cond: 'USER_NOT_SIGNED_IN' },
+        { cond: 'CUSTOM', p: () => episodeIds.length === 0 },
+      ],
+    },
   )
 }
 

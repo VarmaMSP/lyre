@@ -19,7 +19,7 @@ const SubscriptionsList: React.FC<StateToProps> = ({ subscriptions }) => {
 
   return (
     <div className="bg-gray-100 rounded-lg border border-gray-400">
-      <h2 className="px-4 py-2 mb-2 bg-white  text-teal-800 tracking-wide border-b border-gray-400 rounded-t-lg">
+      <h2 className="px-4 py-2 mb-2 bg-white text-teal-800 tracking-wide border-b border-gray-400 rounded-t-lg">
         {'Podcasts'}
       </h2>
       <div>

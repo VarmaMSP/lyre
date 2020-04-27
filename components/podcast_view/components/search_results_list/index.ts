@@ -1,9 +1,11 @@
+import { getEpisodePlaybacks } from 'actions/playback'
 import { getPodcastSearchResults } from 'actions/podcast'
 import { Episode } from 'models'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { getByHashIds } from 'selectors/entities/search_results'
 import { getPodcastSearchResultsStatus } from 'selectors/request'
+import { getIsUserSignedIn } from 'selectors/session'
 import {
   getReceivedAll_,
   makeGetEpisodeHashIds_,
@@ -21,6 +23,7 @@ function makeMapStateToProps() {
 
   return (state: AppState, { searchParams }: OwnProps): StateToProps => {
     return {
+      isUserSignedIn: getIsUserSignedIn(state),
       episodes: getByHashIds(
         state,
         getEpisodeHashIds(state, searchParams),
@@ -35,6 +38,7 @@ function makeMapStateToProps() {
 
 function mapDispatchToProps(dispatch: Dispatch<AppActions>): DispatchToProps {
   return {
+    loadPlaybacks: bindActionCreators(getEpisodePlaybacks, dispatch),
     loadMore: bindActionCreators(getPodcastSearchResults, dispatch),
   }
 }

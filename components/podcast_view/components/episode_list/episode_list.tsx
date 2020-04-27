@@ -37,11 +37,7 @@ const ListEpisodes: React.SFC<Props> = ({
   }, [isVisible])
 
   useEffect(() => {
-    loadPlaybacks(episodes.map((e) => e.id))
-  }, [])
-
-  useEffect(() => {
-    loadPlaybacks(episodes.map((e) => e.id))
+    isUserSignedIn && loadPlaybacks(episodes.map((e) => e.id))
   }, [isUserSignedIn])
 
   // receivedAll = receivedAll && episodes.length >= podcast.totalEpisodes

@@ -44,29 +44,19 @@ const SearchResultsList: React.FC<Props> = ({
   const [reference, isVisible] = useVisible()
 
   useEffect(() => {
-    if (!isVisible) {
-      return
-    }
-
-    if (searchParams.type === 'podcast') {
+    if (isVisible && searchParams.type === 'podcast') {
       loadMore(searchParams, podcastSearchResults.length, 20)
       return
     }
 
-    if (searchParams.type === 'episode') {
+    if (isVisible && searchParams.type === 'episode') {
       loadMore(searchParams, episodeSearchResults.length, 20)
       return
     }
   }, [isVisible])
 
   useEffect(() => {
-    if (searchParams.type === 'episode') {
-      loadPlaybacks(episodeSearchResults.map((x) => x.id))
-    }
-  }, [])
-
-  useEffect(() => {
-    if (searchParams.type === 'episode') {
+    if (isUserSignedIn && searchParams.type === 'episode') {
       loadPlaybacks(episodeSearchResults.map((x) => x.id))
     }
   }, [

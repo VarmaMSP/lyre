@@ -15,7 +15,7 @@ type ProcessData<T> = (
 
 type RequestActionOpts = {
   requestId: string
-  skip: RequestActionSkipCond
+  skip: RequestActionSkipCond | RequestActionSkipCond[]
   notifyError: boolean
   preAction: AT.AppActions
 }
@@ -36,26 +36,22 @@ export function requestAction<T extends Promise<any>>(
   ) => {
     !!preAction && dispatch(preAction)
 
-    if (!!skip) {
-      switch (skip.cond) {
-        case 'REQUEST_ALREADY_MADE':
-          if (requestStatus(getState(), requestId!) === 'SUCCESS') {
-            return
-          }
-          break
+    const skipAction = (!!skip && !Array.isArray(skip) ? [skip] : []).some(
+      (s) => {
+        switch (s.cond) {
+          case 'REQUEST_ALREADY_MADE':
+            return requestStatus(getState(), requestId!) === 'SUCCESS'
 
-        case 'USER_NOT_SIGNED_IN':
-          if (!getIsUserSignedIn(getState())) {
-            return
-          }
-          break
+          case 'USER_NOT_SIGNED_IN':
+            return !getIsUserSignedIn(getState())
 
-        case 'CUSTOM':
-          if (skip.p(getState)) {
-            return
-          }
-          break
-      }
+          case 'CUSTOM':
+            return s.p(getState)
+        }
+      },
+    )
+    if (skipAction) {
+      return
     }
 
     !!requestId && dispatch({ type: AT.REQUEST_IN_PROGRESS, requestId })
