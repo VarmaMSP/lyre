@@ -15,7 +15,7 @@ const EpisodeActions: React.FC<DispatchToProps & OwnProps> = ({
   const AddToPlaylistIcon = iconMap['playlist-add']
 
   return (
-    <div className="w-56 py-1 bg-white border border-teal-400 rounded shadow">
+    <div className="w-56 py-1 bg-white border border-teal-400 rounded shadow-md">
       <div
         className="flex items-center px-4 py-1 hover:bg-gray-150 cursor-pointer"
         onClick={() => showAddToPlaylistModal()}

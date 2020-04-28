@@ -75,7 +75,7 @@ const SearchSuggestionsList: React.FC<StateToProps & DispatchToProps> = ({
   return suggestions.length > 1 ? (
     <div
       style={{ width: '32rem' }}
-      className="z-10 py-2 bg-white border border-gray-400 rounded shadow"
+      className="z-10 py-2 bg-white border border-teal-400 rounded shadow-md"
     >
       {suggestions
         .slice(1)

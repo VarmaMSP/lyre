@@ -11,7 +11,7 @@ const PodcastTab: React.FC<OwnProps> = ({ podcast }) => {
   return (
     <div>
       <div className="mt-6 cursor-default" style={{ hyphens: 'auto' }}>
-        <div className="text-gray-700 text-sm leading-relaxed">
+        <div className="text-gray-750 text-sm leading-relaxed">
           {podcast.description.replace(/&nbsp;/g, ' ')}
         </div>
       </div>
