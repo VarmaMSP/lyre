@@ -31,7 +31,7 @@ const NavTabs: React.FC<OwnProps> = ({ tabs, active, defaultTab }) => {
                 {
                   'cursor-default': t.name === active,
                   'cursor-pointer': t.name !== active,
-                  'text-green-800 font-semibold':
+                  'text-green-900 font-semibold':
                     (active !== undefined && t.name === active) ||
                     (active === undefined && t.name === defaultTab),
                   'text-gray-600 font-semibold':
