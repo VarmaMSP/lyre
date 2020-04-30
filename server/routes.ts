@@ -3,7 +3,14 @@ import Router from 'koa-router'
 import NextServer from 'next/dist/next-server/server/next-server'
 import { ParsedUrlQuery } from 'querystring'
 
-export function registerRoutes(app: NextServer, router: Router) {
+export function newRouter(app: NextServer): Router {
+  const router = new Router()
+  registerRoutes(app, router)
+
+  return router
+}
+
+function registerRoutes(app: NextServer, router: Router) {
   const servePage = makeServePage(app)
   const serveBuildFiles = makeServeBuildFiles(app)
 
