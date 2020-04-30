@@ -1,7 +1,7 @@
 import ModalContainer from 'components/modal/modal_container'
 import Overlay from 'components/modal/overlay'
 import { Formik } from 'formik'
-import useDisableScroll from 'hooks/useDisableScroll'
+import useDisableScroll from 'hooks/use_disable_scroll'
 import { PlaylistPrivacy } from 'models'
 import React from 'react'
 

@@ -1,4 +1,4 @@
-import searchEpic from 'epics/searchEpic'
+import searchEpic from 'epics/search_epic'
 import rootReducer from 'reducers'
 import { applyMiddleware, compose, createStore } from 'redux'
 import { createEpicMiddleware } from 'redux-observable'

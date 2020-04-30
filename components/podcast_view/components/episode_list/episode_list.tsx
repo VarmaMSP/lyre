@@ -1,5 +1,5 @@
 import EpisodePreview from 'components/episode_preview'
-import useVisible from 'hooks/useVisible'
+import useVisible from 'hooks/use_visible'
 import { Episode, Podcast } from 'models'
 import React, { useEffect } from 'react'
 

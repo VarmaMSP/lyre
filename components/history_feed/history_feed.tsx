@@ -1,6 +1,6 @@
 import EpisodePreview from 'components/episode_preview'
 import parseISO from 'date-fns/parseISO'
-import useVisible from 'hooks/useVisible'
+import useVisible from 'hooks/use_visible'
 import { Episode } from 'models'
 import React, { useEffect } from 'react'
 

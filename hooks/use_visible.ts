@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import useCallbackRef from './useCallbackRef'
+import useCallbackRef from './use_callback_ref'
 
 function useVisible(): [(elem: HTMLElement | null) => void, boolean] {
   const observerRef = useRef<IntersectionObserver>()

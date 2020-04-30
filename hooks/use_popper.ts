@@ -1,9 +1,9 @@
 import { createPopper } from '@popperjs/core'
 import * as PopperJS from '@popperjs/core/lib/types'
 import { useEffect, useRef, useState } from 'react'
-import useCallbackRef from './useCallbackRef'
-import useClickOutside from './useClickOutside'
-import useDisableScroll from './useDisableScroll'
+import useCallbackRef from './use_callback_ref'
+import useClickOutside from './use_click_outside'
+import useDisableScroll from './use_disable_scroll'
 
 function usePopper(
   options: PopperJS.Options,

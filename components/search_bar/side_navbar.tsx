@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import ButtonWithIcon from 'components/button_with_icon'
 import SearchSuggestions from 'components/search_suggestions_list'
-import usePopper from 'hooks/usePopper'
+import usePopper from 'hooks/use_popper'
 import React, { useRef } from 'react'
 import { Portal } from 'react-portal'
 import { stopEventPropagation } from 'utils/dom'

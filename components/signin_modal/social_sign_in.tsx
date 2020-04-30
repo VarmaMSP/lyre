@@ -1,5 +1,5 @@
 import { Icon, iconMap } from 'components/icon'
-import useDisableScroll from 'hooks/useDisableScroll'
+import useDisableScroll from 'hooks/use_disable_scroll'
 import React from 'react'
 
 interface Props {

@@ -1,5 +1,5 @@
 import EpisodePreview from 'components/episode_preview/highlighted'
-import useVisible from 'hooks/useVisible'
+import useVisible from 'hooks/use_visible'
 import { Episode } from 'models'
 import React, { useEffect } from 'react'
 import { PodcastSearchParams } from 'types/ui/search'
